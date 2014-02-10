@@ -1,7 +1,7 @@
-package info.coremodding.network.api.meu;
+package info.coremodding.api.meunet.meu;
 
 import info.coremodding.api.locations.Location;
-import info.coremodding.network.api.machine.IMachine;
+import info.coremodding.api.meunet.machine.IMachine;
 
 import java.util.ArrayList;
 import java.util.HashMap;

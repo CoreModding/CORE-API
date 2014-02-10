@@ -1,4 +1,4 @@
-package info.coremodding.network.api.essence;
+package info.coremodding.api.meunet.essence;
 
 /**
  * All essences implement this

@@ -1,7 +1,7 @@
-package info.coremodding.network.api.machine;
+package info.coremodding.api.meunet.machine;
 
-import info.coremodding.network.api.meu.MEUPacket;
-import info.coremodding.network.api.meu.MEUSystemManager;
+import info.coremodding.api.meunet.meu.MEUPacket;
+import info.coremodding.api.meunet.meu.MEUSystemManager;
 
 import java.util.List;
 

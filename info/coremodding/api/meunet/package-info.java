@@ -4,4 +4,4 @@
 /**
  * The infiniteEnergy API
  */
-package info.coremodding.network.api;
+package info.coremodding.api.meunet;

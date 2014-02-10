@@ -4,4 +4,4 @@
 /**
  * All essence API stuff
  */
-package info.coremodding.network.api.essence;
+package info.coremodding.api.meunet.essence;

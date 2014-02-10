@@ -4,4 +4,4 @@
 /**
  * The API for MEU
  */
-package info.coremodding.network.api.meu;
+package info.coremodding.api.meunet.meu;

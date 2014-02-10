@@ -1,4 +1,4 @@
-package info.coremodding.network.api.meu;
+package info.coremodding.api.meunet.meu;
 
 /**
  * The base for most packets

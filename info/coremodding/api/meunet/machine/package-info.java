@@ -4,4 +4,4 @@
 /**
  * The machine API
  */
-package info.coremodding.network.api.machine;
+package info.coremodding.api.meunet.machine;
