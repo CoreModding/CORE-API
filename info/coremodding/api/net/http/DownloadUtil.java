@@ -20,10 +20,10 @@ public class DownloadUtil {
 	{
 		try{
 			HashMap<Integer, String> data = new HashMap<>();
-			URL oracle = new URL(urlString);
+			URL url = new URL(urlString);
         	@SuppressWarnings("resource")
 			BufferedReader in = new BufferedReader(
-        		new InputStreamReader(oracle.openStream()));
+        		new InputStreamReader(url.openStream()));
 
         	String inputLine;
         	int i = 0;
