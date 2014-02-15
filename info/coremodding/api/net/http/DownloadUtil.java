@@ -7,32 +7,32 @@ import java.util.HashMap;
 
 /**
  * @author James
- *
+ * 
  */
 public class DownloadUtil {
-	
+
 	/**
-	 * @param urlString The URL
+	 * @param urlString
+	 *            The URL
 	 * @return The URL data
 	 */
 	@SuppressWarnings("boxing")
-	public static HashMap<Integer, String> saveUrl(String urlString)	
-	{
-		try{
+	public static HashMap<Integer, String> saveUrl(String urlString) {
+		try {
 			HashMap<Integer, String> data = new HashMap<>();
 			URL url = new URL(urlString);
-        	@SuppressWarnings("resource")
-			BufferedReader in = new BufferedReader(
-        		new InputStreamReader(url.openStream()));
+			@SuppressWarnings("resource")
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					url.openStream()));
 
-        	String inputLine;
-        	int i = 0;
-        	while ((inputLine = in.readLine()) != null){
-        		data.put(i, inputLine);
-        		i++;
-        	}
-        	in.close();
-        	return data;
+			String inputLine;
+			int i = 0;
+			while ((inputLine = in.readLine()) != null) {
+				data.put(i, inputLine);
+				i++;
+			}
+			in.close();
+			return data;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

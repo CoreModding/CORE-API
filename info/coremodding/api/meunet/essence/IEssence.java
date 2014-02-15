@@ -9,7 +9,7 @@ public interface IEssence {
 	 * @return The name of the essence
 	 */
 	public String getName();
-	
+
 	/**
 	 * @return The hex color of the essence
 	 */

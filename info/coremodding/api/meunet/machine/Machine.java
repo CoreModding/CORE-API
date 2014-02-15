@@ -10,9 +10,9 @@ import net.minecraft.tileentity.TileEntity;
 /**
  * The base machine
  */
-public class Machine extends TileEntity implements IMachine{
+public class Machine extends TileEntity implements IMachine {
 	List<MEUPacket> packets;
-	
+
 	@Override
 	public int depositEnergy(MEUPacket packet) {
 		this.packets.add(packet);
@@ -27,18 +27,19 @@ public class Machine extends TileEntity implements IMachine{
 		this.packets = MEUSystemManager.mergePackets(this.packets);
 		return -packet.getAmount();
 	}
-	
+
 	/**
 	 * @return These packets
 	 */
-	public List<MEUPacket> getPackets(){
+	public List<MEUPacket> getPackets() {
 		return this.packets;
 	}
-	
+
 	/**
-	 * @param packets The new packets
+	 * @param packets
+	 *            The new packets
 	 */
-	public void setPackets(List<MEUPacket> packets){
+	public void setPackets(List<MEUPacket> packets) {
 		this.packets = packets;
 	}
 }

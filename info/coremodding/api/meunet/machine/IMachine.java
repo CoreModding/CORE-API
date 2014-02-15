@@ -9,14 +9,18 @@ public interface IMachine {
 
 	/**
 	 * Put energy into the machine
-	 * @param amount The amount to try with
+	 * 
+	 * @param amount
+	 *            The amount to try with
 	 * @return How much worked
 	 */
 	public int depositEnergy(MEUPacket amount);
-	
+
 	/**
 	 * Remove energy from the machine
-	 * @param amount The amount to try with
+	 * 
+	 * @param amount
+	 *            The amount to try with
 	 * @return How much was removed
 	 */
 	public int removeEnergy(MEUPacket amount);

@@ -6,7 +6,7 @@ package info.coremodding.api.meunet.meu;
 public abstract class MEUPacketBase implements MEUPacket {
 
 	int amount = 0;
-	
+
 	@Override
 	public int getAmount() {
 		return this.amount;
