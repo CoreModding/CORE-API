@@ -1,7 +1,7 @@
 package info.coremodding.api.meunet.meu;
 
 import info.coremodding.api.locations.Location;
-import info.coremodding.api.meunet.machine.IMachine;
+import info.coremodding.api.meunet.machine.Machine;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,51 +15,51 @@ public class MEUSystemManager {
 	/**
 	 * @param loc
 	 *            The location
-	 * @return Touching machines
+	 * @return Gets the machine at the given location
 	 */
-	public static List<IMachine> getTouching(Location loc) {
-		if (loc.getWorld() != null) {
-			ArrayList<IMachine> touching = new ArrayList<>();
+	public static Machine getAt(Location loc) {
+		if (loc.getWorld() != null)
 			if (loc.getWorld()
-					.getTileEntity(loc.getX(), loc.getY(), loc.getZ()) instanceof IMachine)
-				touching.add((IMachine) loc.getWorld().getTileEntity(
-						loc.getX() + 1, loc.getY(), loc.getZ()));
-			if (loc.getWorld()
-					.getTileEntity(loc.getX(), loc.getY(), loc.getZ()) instanceof IMachine)
-				touching.add((IMachine) loc.getWorld().getTileEntity(
-						loc.getX() - 1, loc.getY(), loc.getZ()));
-			if (loc.getWorld()
-					.getTileEntity(loc.getX(), loc.getY(), loc.getZ()) instanceof IMachine)
-				touching.add((IMachine) loc.getWorld().getTileEntity(
-						loc.getX(), loc.getY() + 1, loc.getZ()));
-			if (loc.getWorld()
-					.getTileEntity(loc.getX(), loc.getY(), loc.getZ()) instanceof IMachine)
-				touching.add((IMachine) loc.getWorld().getTileEntity(
-						loc.getX(), loc.getY() - 1, loc.getZ()));
-			if (loc.getWorld()
-					.getTileEntity(loc.getX(), loc.getY(), loc.getZ()) instanceof IMachine)
-				touching.add((IMachine) loc.getWorld().getTileEntity(
-						loc.getX(), loc.getY(), loc.getZ() + 1));
-			if (loc.getWorld()
-					.getTileEntity(loc.getX(), loc.getY(), loc.getZ()) instanceof IMachine)
-				touching.add((IMachine) loc.getWorld().getTileEntity(
-						loc.getX(), loc.getY(), loc.getZ() - 1));
-			return touching;
-		}
+					.getTileEntity(loc.getX(), loc.getY(), loc.getZ()) instanceof Machine)
+				return ((Machine) loc.getWorld().getTileEntity(loc.getX(),
+						loc.getY(), loc.getZ()));
 		return null;
 	}
 
 	/**
 	 * @param loc
 	 *            The location
-	 * @return Gets the machine at the given location
+	 * @return Touching machines
 	 */
-	public static IMachine getAt(Location loc) {
-		if (loc.getWorld() != null)
+	public static List<Machine> getTouching(Location loc) {
+		if (loc.getWorld() != null) {
+			ArrayList<Machine> touching = new ArrayList<>();
 			if (loc.getWorld()
-					.getTileEntity(loc.getX(), loc.getY(), loc.getZ()) instanceof IMachine)
-				return ((IMachine) loc.getWorld().getTileEntity(loc.getX(),
-						loc.getY(), loc.getZ()));
+					.getTileEntity(loc.getX(), loc.getY(), loc.getZ()) instanceof Machine)
+				touching.add((Machine) loc.getWorld().getTileEntity(
+						loc.getX() + 1, loc.getY(), loc.getZ()));
+			if (loc.getWorld()
+					.getTileEntity(loc.getX(), loc.getY(), loc.getZ()) instanceof Machine)
+				touching.add((Machine) loc.getWorld().getTileEntity(
+						loc.getX() - 1, loc.getY(), loc.getZ()));
+			if (loc.getWorld()
+					.getTileEntity(loc.getX(), loc.getY(), loc.getZ()) instanceof Machine)
+				touching.add((Machine) loc.getWorld().getTileEntity(loc.getX(),
+						loc.getY() + 1, loc.getZ()));
+			if (loc.getWorld()
+					.getTileEntity(loc.getX(), loc.getY(), loc.getZ()) instanceof Machine)
+				touching.add((Machine) loc.getWorld().getTileEntity(loc.getX(),
+						loc.getY() - 1, loc.getZ()));
+			if (loc.getWorld()
+					.getTileEntity(loc.getX(), loc.getY(), loc.getZ()) instanceof Machine)
+				touching.add((Machine) loc.getWorld().getTileEntity(loc.getX(),
+						loc.getY(), loc.getZ() + 1));
+			if (loc.getWorld()
+					.getTileEntity(loc.getX(), loc.getY(), loc.getZ()) instanceof Machine)
+				touching.add((Machine) loc.getWorld().getTileEntity(loc.getX(),
+						loc.getY(), loc.getZ() - 1));
+			return touching;
+		}
 		return null;
 	}
 

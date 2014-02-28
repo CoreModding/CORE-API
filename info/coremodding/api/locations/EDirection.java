@@ -6,9 +6,9 @@ package info.coremodding.api.locations;
 public enum EDirection {
 
 	/**
-	 * The direction is above
+	 * An unset direction or all sides
 	 */
-	top,
+	all,
 
 	/**
 	 * The direction is below
@@ -16,14 +16,14 @@ public enum EDirection {
 	bottom,
 
 	/**
-	 * The direction is north
-	 */
-	north,
-
-	/**
 	 * The direction is east
 	 */
 	east,
+
+	/**
+	 * The direction is north
+	 */
+	north,
 
 	/**
 	 * The direction is south
@@ -31,12 +31,12 @@ public enum EDirection {
 	south,
 
 	/**
-	 * The direction is west
+	 * The direction is above
 	 */
-	west,
+	top,
 
 	/**
-	 * An unset direction or all sides
+	 * The direction is west
 	 */
-	all
+	west
 }

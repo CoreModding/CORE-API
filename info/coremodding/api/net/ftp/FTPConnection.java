@@ -50,21 +50,15 @@ public class FTPConnection {
 	}
 
 	/**
-	 * @param localFileFullName
-	 *            The file full name here
-	 * @param fileName
-	 *            The file name on the server
-	 * @param hostDir
-	 *            The host directory
-	 * 
-	 * @throws Exception
-	 *             Something screwed up!
+	 * Disconnect from the server
 	 */
-	public void uploadFile(String localFileFullName, String fileName,
-			String hostDir) throws Exception {
-		try (InputStream input = new FileInputStream(
-				new File(localFileFullName))) {
-			this.ftp.storeFile(hostDir + fileName, input);
+	public void disconnect() {
+		if (this.ftp.isConnected()) {
+			try {
+				this.ftp.logout();
+				this.ftp.disconnect();
+			} catch (IOException f) {
+			}
 		}
 	}
 
@@ -102,6 +96,25 @@ public class FTPConnection {
 	}
 
 	/**
+	 * @param localFileFullName
+	 *            The file full name here
+	 * @param fileName
+	 *            The file name on the server
+	 * @param hostDir
+	 *            The host directory
+	 * 
+	 * @throws Exception
+	 *             Something screwed up!
+	 */
+	public void uploadFile(String localFileFullName, String fileName,
+			String hostDir) throws Exception {
+		try (InputStream input = new FileInputStream(
+				new File(localFileFullName))) {
+			this.ftp.storeFile(hostDir + fileName, input);
+		}
+	}
+
+	/**
 	 * @param url
 	 *            The URL to put on the server
 	 * @param fileName
@@ -116,19 +129,6 @@ public class FTPConnection {
 			throws Exception {
 		try (InputStream input = new URL(url).openStream()) {
 			this.ftp.storeFile(hostDir + fileName, input);
-		}
-	}
-
-	/**
-	 * Disconnect from the server
-	 */
-	public void disconnect() {
-		if (this.ftp.isConnected()) {
-			try {
-				this.ftp.logout();
-				this.ftp.disconnect();
-			} catch (IOException f) {
-			}
 		}
 	}
 }

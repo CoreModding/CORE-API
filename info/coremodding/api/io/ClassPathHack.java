@@ -15,13 +15,15 @@ public class ClassPathHack {
 	private List<Class<?>> parameters;
 
 	/**
-	 * @param obj
-	 *            The parameter to add
-	 * @return The class (for stacked methods)
+	 * @param f
+	 *            The file to add
+	 * @param method
+	 *            The method name
+	 * @return The return value of the method
+	 * @throws IOException
 	 */
-	public ClassPathHack addParameter(Object obj) {
-		this.parameters.add((Class<?>) obj);
-		return this;
+	public Object addFile(File f, String method) throws IOException {
+		return addURL(f.toURI().toURL(), method);
 	}
 
 	/**
@@ -38,15 +40,13 @@ public class ClassPathHack {
 	}
 
 	/**
-	 * @param f
-	 *            The file to add
-	 * @param method
-	 *            The method name
-	 * @return The return value of the method
-	 * @throws IOException
+	 * @param obj
+	 *            The parameter to add
+	 * @return The class (for stacked methods)
 	 */
-	public Object addFile(File f, String method) throws IOException {
-		return addURL(f.toURI().toURL(), method);
+	public ClassPathHack addParameter(Object obj) {
+		this.parameters.add((Class<?>) obj);
+		return this;
 	}
 
 	/**

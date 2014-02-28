@@ -15,6 +15,14 @@ public class IOUtils {
 
 	/**
 	 * @param path
+	 *            The path of the file to delete
+	 */
+	public static void deleteFile(String path) {
+		new File(path).delete();
+	}
+
+	/**
+	 * @param path
 	 *            Where the file to be read is
 	 * @return The file lines in data
 	 */
@@ -38,28 +46,6 @@ public class IOUtils {
 
 	/**
 	 * @param path
-	 *            Where the file will be written to
-	 * @param Lines
-	 *            The lines to be written into the file
-	 */
-	@SuppressWarnings("resource")
-	public static void writeFile(String path, String[] Lines) {
-		File f = new File(path);
-		try {
-			FileWriter fw = new FileWriter(f);
-			BufferedWriter bw = new BufferedWriter(fw);
-			for (String Line : Lines) {
-				bw.write(Line);
-				bw.newLine();
-			}
-			bw.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
-	/**
-	 * @param path
 	 *            The path of the file to be written to
 	 * @param Input
 	 *            What to be written into the file
@@ -79,9 +65,23 @@ public class IOUtils {
 
 	/**
 	 * @param path
-	 *            The path of the file to delete
+	 *            Where the file will be written to
+	 * @param Lines
+	 *            The lines to be written into the file
 	 */
-	public static void deleteFile(String path) {
-		new File(path).delete();
+	@SuppressWarnings("resource")
+	public static void writeFile(String path, String[] Lines) {
+		File f = new File(path);
+		try {
+			FileWriter fw = new FileWriter(f);
+			BufferedWriter bw = new BufferedWriter(fw);
+			for (String Line : Lines) {
+				bw.write(Line);
+				bw.newLine();
+			}
+			bw.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

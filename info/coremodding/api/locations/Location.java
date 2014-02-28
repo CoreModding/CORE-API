@@ -8,6 +8,16 @@ import net.minecraft.world.World;
 public class Location {
 
 	/**
+	 * The direction
+	 */
+	public EDirection dir = EDirection.all;
+
+	/**
+	 * The world
+	 */
+	public World world = null;
+
+	/**
 	 * The x postion
 	 */
 	public int x = 0;
@@ -23,36 +33,12 @@ public class Location {
 	public int z = 0;
 
 	/**
-	 * The direction
-	 */
-	public EDirection dir = EDirection.all;
-
-	/**
-	 * The world
-	 */
-	public World world = null;
-
-	/**
 	 * @param x
 	 *            The x position
 	 * @param z
 	 *            The z position
 	 */
 	public Location(int x, int z) {
-		this.setZ(z);
-		this.setX(x);
-	}
-
-	/**
-	 * @param x
-	 *            The x position
-	 * @param y
-	 *            The y position
-	 * @param z
-	 *            The z position
-	 */
-	public Location(int x, int y, int z) {
-		this.setY(y);
 		this.setZ(z);
 		this.setX(x);
 	}
@@ -69,54 +55,6 @@ public class Location {
 		this.setZ(z);
 		this.setX(x);
 		this.setDir(dir);
-	}
-
-	/**
-	 * @param x
-	 *            The x position
-	 * @param y
-	 *            The y position
-	 * @param z
-	 *            The z position
-	 * @param dir
-	 *            The direction
-	 */
-	public Location(int x, int y, int z, EDirection dir) {
-		this.setY(y);
-		this.setZ(z);
-		this.setX(x);
-		this.setDir(dir);
-	}
-
-	/**
-	 * @param x
-	 *            The x position
-	 * @param z
-	 *            The z position
-	 * @param world
-	 *            The world
-	 */
-	public Location(int x, int z, World world) {
-		this.setZ(z);
-		this.setX(x);
-		this.setWorld(world);
-	}
-
-	/**
-	 * @param x
-	 *            The x position
-	 * @param y
-	 *            The y position
-	 * @param z
-	 *            The z position
-	 * @param world
-	 *            The world
-	 */
-	public Location(int x, int y, int z, World world) {
-		this.setY(y);
-		this.setZ(z);
-		this.setX(x);
-		this.setWorld(world);
 	}
 
 	/**
@@ -143,6 +81,37 @@ public class Location {
 	 *            The y position
 	 * @param z
 	 *            The z position
+	 */
+	public Location(int x, int y, int z) {
+		this.setY(y);
+		this.setZ(z);
+		this.setX(x);
+	}
+
+	/**
+	 * @param x
+	 *            The x position
+	 * @param y
+	 *            The y position
+	 * @param z
+	 *            The z position
+	 * @param dir
+	 *            The direction
+	 */
+	public Location(int x, int y, int z, EDirection dir) {
+		this.setY(y);
+		this.setZ(z);
+		this.setX(x);
+		this.setDir(dir);
+	}
+
+	/**
+	 * @param x
+	 *            The x position
+	 * @param y
+	 *            The y position
+	 * @param z
+	 *            The z position
 	 * @param dir
 	 *            The direction
 	 * @param world
@@ -157,18 +126,55 @@ public class Location {
 	}
 
 	/**
-	 * @return The x position
+	 * @param x
+	 *            The x position
+	 * @param y
+	 *            The y position
+	 * @param z
+	 *            The z position
+	 * @param world
+	 *            The world
 	 */
-	public int getX() {
-		return this.x;
+	public Location(int x, int y, int z, World world) {
+		this.setY(y);
+		this.setZ(z);
+		this.setX(x);
+		this.setWorld(world);
 	}
 
 	/**
 	 * @param x
 	 *            The x position
+	 * @param z
+	 *            The z position
+	 * @param world
+	 *            The world
 	 */
-	public void setX(int x) {
-		this.x = x;
+	public Location(int x, int z, World world) {
+		this.setZ(z);
+		this.setX(x);
+		this.setWorld(world);
+	}
+
+	/**
+	 * @return The direction
+	 */
+	public EDirection getDir() {
+		return this.dir;
+	}
+
+	/**
+	 * @return The world
+	 */
+	public World getWorld() {
+		return this.world;
+	}
+
+	/**
+	 * @return The x position
+	 */
+	public int getX() {
+		return this.x;
 	}
 
 	/**
@@ -179,33 +185,10 @@ public class Location {
 	}
 
 	/**
-	 * @param y
-	 *            The y position
-	 */
-	public void setY(int y) {
-		this.y = y;
-	}
-
-	/**
 	 * @return The z position
 	 */
 	public int getZ() {
 		return this.z;
-	}
-
-	/**
-	 * @param z
-	 *            The z position
-	 */
-	public void setZ(int z) {
-		this.z = z;
-	}
-
-	/**
-	 * @return The direction
-	 */
-	public EDirection getDir() {
-		return this.dir;
 	}
 
 	/**
@@ -217,17 +200,34 @@ public class Location {
 	}
 
 	/**
-	 * @return The world
-	 */
-	public World getWorld() {
-		return this.world;
-	}
-
-	/**
 	 * @param world
 	 *            The world
 	 */
 	public void setWorld(World world) {
 		this.world = world;
+	}
+
+	/**
+	 * @param x
+	 *            The x position
+	 */
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	/**
+	 * @param y
+	 *            The y position
+	 */
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	/**
+	 * @param z
+	 *            The z position
+	 */
+	public void setZ(int z) {
+		this.z = z;
 	}
 }

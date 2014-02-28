@@ -14,6 +14,35 @@ import org.apache.commons.mail.MultiPartEmail;
 public class EmailUtil {
 
 	/**
+	 * @param path
+	 *            The location of the file
+	 * @param desc
+	 *            The file description
+	 * @param name
+	 *            The file name
+	 * @param urlnotpath
+	 *            Is the path a URL not a path?
+	 * 
+	 * @return The email attachment generated
+	 * 
+	 * @throws MalformedURLException
+	 *             You gave a bad URL!
+	 */
+	public static EmailAttachment createAttachment(String path, String desc,
+			String name, boolean urlnotpath) throws MalformedURLException {
+		EmailAttachment attachment = new EmailAttachment();
+		if (urlnotpath) {
+			attachment.setURL(new URL(path));
+		} else {
+			attachment.setPath(path);
+		}
+		attachment.setDisposition(EmailAttachment.ATTACHMENT);
+		attachment.setDescription(desc);
+		attachment.setName(name);
+		return attachment;
+	}
+
+	/**
 	 * Send an email
 	 * 
 	 * @param host
@@ -50,34 +79,5 @@ public class EmailUtil {
 			email.attach(attach);
 		}
 		email.send();
-	}
-
-	/**
-	 * @param path
-	 *            The location of the file
-	 * @param desc
-	 *            The file description
-	 * @param name
-	 *            The file name
-	 * @param urlnotpath
-	 *            Is the path a URL not a path?
-	 * 
-	 * @return The email attachment generated
-	 * 
-	 * @throws MalformedURLException
-	 *             You gave a bad URL!
-	 */
-	public static EmailAttachment createAttachment(String path, String desc,
-			String name, boolean urlnotpath) throws MalformedURLException {
-		EmailAttachment attachment = new EmailAttachment();
-		if (urlnotpath) {
-			attachment.setURL(new URL(path));
-		} else {
-			attachment.setPath(path);
-		}
-		attachment.setDisposition(EmailAttachment.ATTACHMENT);
-		attachment.setDescription(desc);
-		attachment.setName(name);
-		return attachment;
 	}
 }

@@ -10,29 +10,6 @@ import java.util.List;
 public class DLLFM {
 
 	/**
-	 * Returns the output from Console.Writeline and the return (as well as the
-	 * equivalents in languages besides C#)
-	 * 
-	 * @param functArgs
-	 *            What the arguments of the called method is ex: bark(String
-	 *            soundFile) I am unsure of how to call more at this time-
-	 *            expect this to be updated in the future
-	 * @param dllPath
-	 *            The file path that the DLL is located at
-	 * @param functName
-	 *            The name of the method/function to be called from the DLL file
-	 * @return The output from Console.Writeline and the return from the method
-	 *         called
-	 */
-	@Deprecated
-	// deprecated as it most likely doesn't work
-	public static String[] runDLL(String functArgs, String dllPath,
-			String functName) {
-		BatchHandle.createDLLRunBatch(functArgs, dllPath, functName);
-		return BatchHandle.runDLLRunBatch();
-	}
-
-	/**
 	 * Creates a batch/cmd file at the given directory with the given commands.
 	 * 
 	 * @param path
@@ -62,5 +39,28 @@ public class DLLFM {
 		createBatch("..\\tmp.cmd", (String[]) commands.toArray());
 		runBatch("..\\tmp.cmd");
 		IOUtils.deleteFile("..\\tmp.cmd");
+	}
+
+	/**
+	 * Returns the output from Console.Writeline and the return (as well as the
+	 * equivalents in languages besides C#)
+	 * 
+	 * @param functArgs
+	 *            What the arguments of the called method is ex: bark(String
+	 *            soundFile) I am unsure of how to call more at this time-
+	 *            expect this to be updated in the future
+	 * @param dllPath
+	 *            The file path that the DLL is located at
+	 * @param functName
+	 *            The name of the method/function to be called from the DLL file
+	 * @return The output from Console.Writeline and the return from the method
+	 *         called
+	 */
+	@Deprecated
+	// deprecated as it most likely doesn't work
+	public static String[] runDLL(String functArgs, String dllPath,
+			String functName) {
+		BatchHandle.createDLLRunBatch(functArgs, dllPath, functName);
+		return BatchHandle.runDLLRunBatch();
 	}
 }

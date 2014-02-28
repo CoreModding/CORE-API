@@ -6,9 +6,11 @@ package info.coremodding.api.meunet.meu;
 public interface MEUPacket {
 
 	/**
-	 * @return The name of the packet
+	 * @param add
+	 *            How much to add
+	 * @return The new amount
 	 */
-	public String getName();
+	public int addAmount(int add);
 
 	/**
 	 * @return The amount the packet contains
@@ -16,9 +18,7 @@ public interface MEUPacket {
 	public int getAmount();
 
 	/**
-	 * @param add
-	 *            How much to add
-	 * @return The new amount
+	 * @return The name of the packet
 	 */
-	public int addAmount(int add);
+	public String getName();
 }

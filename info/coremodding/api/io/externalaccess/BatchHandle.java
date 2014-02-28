@@ -12,19 +12,6 @@ import java.io.IOException;
 public class BatchHandle {
 
 	/**
-	 * @return Returns the output of the writeline and return value of the DLL
-	 *         method being called via batch
-	 */
-	protected static String[] runDLLRunBatch() {
-		try {
-			Runtime.getRuntime().exec("cmd /c start C:/tmpcmd.cmd");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return IOUtils.readFile("C:\\tmpout.txt");
-	}
-
-	/**
 	 * @param args
 	 *            The arguments for the method to be called
 	 * @param dllPath
@@ -56,5 +43,18 @@ public class BatchHandle {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * @return Returns the output of the writeline and return value of the DLL
+	 *         method being called via batch
+	 */
+	protected static String[] runDLLRunBatch() {
+		try {
+			Runtime.getRuntime().exec("cmd /c start C:/tmpcmd.cmd");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return IOUtils.readFile("C:\\tmpout.txt");
 	}
 }
