@@ -1,0 +1,15 @@
+[
+{
+  "modid": "CoreModding_LIB",
+  "name": "CoreModding API",
+  "description": "CoreModding API",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url":  "",
+  "updateUrl": "",
+  "authors": ["CoreModding Team"],
+  "credits": "The Forge and FML guys, for making this mod possible",
+  "screenshots": [],
+  "requiredMods": ["Forge"],
+}
+]
