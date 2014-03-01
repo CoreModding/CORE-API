@@ -48,8 +48,8 @@ else if (env.BUILD_NUMBER)
 
 apply plugin: 'forge'
 
-// we want to build on 1.6
-targetCompatibility = JavaVersion.VERSION_1_6
+// we want to build on 1.7
+targetCompatibility = JavaVersion.VERSION_1_7
 
 version = "${config.minecraft_version}-${config.mod_version}.${buildNumber}"
 group = "info.coremodding.api"
@@ -82,10 +82,10 @@ processResources {
 
 // creates a javadoc jar
 // don't need jds right now
-//task javadocJar(type: Jar, dependsOn: javadoc) {
-//    from 'build/docs/javadoc'
-//    appendix = 'javadoc'
-//}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from 'build/docs/javadoc'
+    appendix = 'javadoc'
+}
 
 // creates an API jar
 // this basically is an api, so we don't need this
@@ -99,7 +99,7 @@ processResources {
 
 // add the javadoc and api jars
 // don't have either yet
-//artifacts {
-//      archives javadocJar
+artifacts {
+      archives javadocJar
 //      archives apiJar
-//}
+}
