@@ -17,7 +17,7 @@ public class LogHelper {
 	public static void log(String msg, Level lvl){
 		Date date = new Date();
 		String time = date.toString();
-		System.out.println("[" + time + "]" + " [" + lvl + "] "+" :" + msg);
+		System.out.println("[" + time + "]" + " [" + lvl + "] "+": " + msg);
 	}
 	
 	/**
@@ -31,7 +31,7 @@ public class LogHelper {
 		if (bdl == true){
 			Date date = new Date();
 			String time = date.toString();
-			System.out.println("[" + time + "]" + " [" + lvl + "] "+" :" + msg);
+			System.out.println("[" + time + "]" + " [" + lvl + "] "+":"  + msg);
 		}
 	}
 }
