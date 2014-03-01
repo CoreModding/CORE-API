@@ -15,8 +15,7 @@ public class LogHelper {
 	 * @param lvl The level of the log
 	 */
 	public static void log(String msg, Level lvl){
-		Date date = new Date();
-		String time = date.toString();
+		String time = new Date().toString();
 		System.out.println("[" + time + "]" + " [" + lvl + "] "+": " + msg);
 	}
 	
@@ -29,8 +28,7 @@ public class LogHelper {
 	 */
 	public static void log(String msg, Level lvl ,boolean bdl){
 		if (bdl == true){
-			Date date = new Date();
-			String time = date.toString();
+			String time = new Date().toString();
 			System.out.println("[" + time + "]" + " [" + lvl + "] "+":"  + msg);
 		}
 	}
