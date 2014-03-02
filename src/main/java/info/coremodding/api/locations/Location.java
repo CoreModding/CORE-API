@@ -10,27 +10,27 @@ public class Location {
     /**
      * The direction
      */
-    public EDirection dir = EDirection.all;
+    private EDirection dir = EDirection.all;
 
     /**
      * The world
      */
-    public World world = null;
+    private World world = null;
 
     /**
      * The x postion
      */
-    public int x = 0;
+    private int x = 0;
 
     /**
      * The y position
      */
-    public int y = -1;
+    private int y = -1;
 
     /**
      * The z position
      */
-    public int z = 0;
+    private int z = 0;
 
     /**
      * @param x The x position
@@ -166,35 +166,35 @@ public class Location {
     /**
      * @param dir The direction
      */
-    public void setDir(EDirection dir) {
+    void setDir(EDirection dir) {
         this.dir = dir;
     }
 
     /**
      * @param world The world
      */
-    public void setWorld(World world) {
+    void setWorld(World world) {
         this.world = world;
     }
 
     /**
      * @param x The x position
      */
-    public void setX(int x) {
+    void setX(int x) {
         this.x = x;
     }
 
     /**
      * @param y The y position
      */
-    public void setY(int y) {
+    void setY(int y) {
         this.y = y;
     }
 
     /**
      * @param z The z position
      */
-    public void setZ(int z) {
+    void setZ(int z) {
         this.z = z;
     }
 }

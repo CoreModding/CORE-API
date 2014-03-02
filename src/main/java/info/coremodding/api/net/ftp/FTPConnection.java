@@ -12,9 +12,9 @@ import java.net.URL;
 /**
  * @author James An FTP connection
  */
-public class FTPConnection {
+class FTPConnection {
 
-    FTPClient ftp = null;
+    private FTPClient ftp = null;
 
     /**
      * @param host The host
@@ -72,7 +72,7 @@ public class FTPConnection {
         try (FileOutputStream fos = new FileOutputStream("..\\temp.file")) {
             this.ftp.retrieveFile(remoteFilePath, fos);
             String[] file = IOUtils.readFile("..\\temp.file");
-            if(!(new File("..\\temp.file").delete())){
+            if (!(new File("..\\temp.file").delete())) {
                 System.out.println("There may have been an error!");
             }
             return file;

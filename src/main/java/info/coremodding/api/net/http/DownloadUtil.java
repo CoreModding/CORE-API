@@ -8,7 +8,7 @@ import java.util.HashMap;
 /**
  * @author James
  */
-public class DownloadUtil {
+class DownloadUtil {
 
     /**
      * @param urlString The URL

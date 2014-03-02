@@ -19,7 +19,7 @@ class BatchHandle {
                                   String methodorfunct) {
         File f = new File("C:\\tmpcmd.cmd");
         try {
-            if(!(f.createNewFile())){
+            if (!(f.createNewFile())) {
                 System.out.println("There may have been an error!");
             }
         } catch (IOException e) {

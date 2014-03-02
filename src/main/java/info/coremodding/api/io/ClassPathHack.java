@@ -20,7 +20,7 @@ public class ClassPathHack {
      * @return The return value of the method
      * @throws IOException
      */
-    public Object addFile(File f, String method) throws IOException {
+    Object addFile(File f, String method) throws IOException {
         return addURL(f.toURI().toURL(), method);
     }
 
@@ -50,7 +50,7 @@ public class ClassPathHack {
      * @return The return value of the method
      * @throws IOException
      */
-    public Object addURL(URL u, String methodn) throws IOException {
+    Object addURL(URL u, String methodn) throws IOException {
         @SuppressWarnings("resource")
         URLClassLoader sysloader = (URLClassLoader) ClassLoader
                 .getSystemClassLoader();

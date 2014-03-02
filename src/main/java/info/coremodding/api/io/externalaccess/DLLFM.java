@@ -7,34 +7,31 @@ import java.util.List;
 /**
  * @author minec_000 Wrapper for the rest of the library
  */
-public class DLLFM {
+class DLLFM {
 
     /**
      * Creates a batch/cmd file at the given directory with the given commands.
      *
-     * @param path Where the batch/cmd is to be created
      * @param cmds What commands (in order) the batch/cmd will run
      */
-    public static void createBatch(String path, String[] cmds) {
-        IOUtils.writeFile(path, cmds);
+    public static void createBatch(String[] cmds) {
+        IOUtils.writeFile("..\\tmp.cmd", cmds);
     }
 
     /**
      * Runs a already made batch/cmd file at a given directory
-     *
-     * @param path The directory of the batch file to run
      */
-    public static void runBatch(String path) {
-        BatchHandle.runBatch(path);
+    public static void runBatch() {
+        BatchHandle.runBatch("..\\tmp.cmd");
     }
 
     /**
      * @param commands Commands for the batch
      */
     public static void runCommands(List<String> commands) {
-        createBatch("..\\tmp.cmd", (String[]) commands.toArray());
-        runBatch("..\\tmp.cmd");
-        IOUtils.deleteFile("..\\tmp.cmd");
+        createBatch((String[]) commands.toArray());
+        runBatch();
+        IOUtils.deleteFile();
     }
 
     /**

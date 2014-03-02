@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author James The mail util
  */
-public class EmailUtil {
+class EmailUtil {
 
     /**
      * @param path       The location of the file

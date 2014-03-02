@@ -12,10 +12,9 @@ import java.io.*;
 public class IOUtils {
 
     /**
-     * @param path The path of the file to delete
      */
-    public static void deleteFile(String path) {
-        if(!new File(path).delete()){
+    public static void deleteFile() {
+        if (!new File("..\\tmp.cmd").delete()) {
             System.out.println("There may have been an error!");
         }
     }
