@@ -47,6 +47,7 @@ public class FTPConnection {
                 this.ftp.logout();
                 this.ftp.disconnect();
             } catch (IOException f) {
+                f.printStackTrace();
             }
         }
     }
