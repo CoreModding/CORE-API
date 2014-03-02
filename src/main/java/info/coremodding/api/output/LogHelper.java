@@ -8,28 +8,28 @@ import java.util.logging.Level;
  */
 public class LogHelper {
 
-	/**
-	 * logging functionality
-	 * 
-	 * @param msg The message
-	 * @param lvl The level of the log
-	 */
-	public static void log(String msg, Level lvl){
-		String time = new Date().toString();
-		System.out.println("[" + time + "]" + " [" + lvl + "] "+": " + msg);
-	}
-	
-	/**
-	 * logging functionality
-	 * 
-	 * @param msg The message
-	 * @param dbl The Debug Mode Booleans Location
-	 * @param lvl The level of the log
-	 */
-	public static void log(String msg, Level lvl ,boolean bdl){
-		if (bdl == true){
-			String time = new Date().toString();
-			System.out.println("[" + time + "]" + " [" + lvl + "] "+":"  + msg);
-		}
-	}
+    /**
+     * logging functionality
+     *
+     * @param msg The message
+     * @param lvl The level of the log
+     */
+    public static void log(String msg, Level lvl) {
+        String time = new Date().toString();
+        System.out.println("[" + time + "]" + " [" + lvl + "] " + ": " + msg);
+    }
+
+    /**
+     * logging functionality
+     *
+     * @param msg The message
+     * @param dbl The Debug Mode Booleans Location
+     * @param lvl The level of the log
+     */
+    public static void log(String msg, Level lvl, boolean bdl) {
+        if (bdl == true) {
+            String time = new Date().toString();
+            System.out.println("[" + time + "]" + " [" + lvl + "] " + ":" + msg);
+        }
+    }
 }

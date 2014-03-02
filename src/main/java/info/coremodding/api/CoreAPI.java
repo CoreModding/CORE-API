@@ -8,18 +8,18 @@ import cpw.mods.fml.common.Mod;
 @Mod(modid = "CoreModding_LIB", name = "CoreModding API", version = "0.0.1")
 public class CoreAPI {
 
-	/**
-	 * The mod ID
-	 */
-	public static final String ModID = "CoreModding_LIB";
+    /**
+     * The mod ID
+     */
+    public static final String ModID = "CoreModding_LIB";
 
-	/**
-	 * The mod name
-	 */
-	public static final String ModName = "CoreModding API";
+    /**
+     * The mod name
+     */
+    public static final String ModName = "CoreModding API";
 
-	/**
-	 * The mod version
-	 */
-	public static final String ModVer = "0.0.1";
+    /**
+     * The mod version
+     */
+    public static final String ModVer = "0.0.1";
 }
