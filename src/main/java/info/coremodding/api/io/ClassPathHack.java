@@ -60,7 +60,7 @@ public class ClassPathHack {
             Method method = sysclass.getDeclaredMethod(methodn,
                     (Class[]) this.parameters.toArray());
             method.setAccessible(true);
-            Object obj = method.invoke(sysloader, new Object[]{u});
+            Object obj = method.invoke(sysloader, u);
             sysloader.close();
             return obj;
         } catch (Throwable t) {

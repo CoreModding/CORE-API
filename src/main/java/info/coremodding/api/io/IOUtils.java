@@ -1,6 +1,7 @@
 package info.coremodding.api.io;
 
 import java.io.*;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * @author minec_000
@@ -27,9 +28,9 @@ public class IOUtils {
             File f = new File(path);
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
-            String sCurrentLine = "";
+            String sCurrentLine;
             while ((sCurrentLine = br.readLine()) != null) {
-                returnable = new String[]{returnable + sCurrentLine};
+                returnable = ArrayUtils.addAll(returnable, sCurrentLine);
             }
             br.close();
         } catch (Exception e) {
