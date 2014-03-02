@@ -72,7 +72,9 @@ public class FTPConnection {
         try (FileOutputStream fos = new FileOutputStream("..\\temp.file")) {
             this.ftp.retrieveFile(remoteFilePath, fos);
             String[] file = IOUtils.readFile("..\\temp.file");
-            new File("..\\temp.file").delete();
+            if(!(new File("..\\temp.file").delete())){
+                System.out.println("There may have been an error!");
+            }
             return file;
 
         } catch (IOException e) {
