@@ -1,11 +1,12 @@
 package info.coremodding.api.io;
 
-import java.io.*;
 import org.apache.commons.lang3.ArrayUtils;
+
+import java.io.*;
 
 /**
  * @author minec_000
- *         <p/>
+ *         <p>
  *         IO stuff
  */
 public class IOUtils {
