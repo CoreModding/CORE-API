@@ -35,6 +35,7 @@ public class ClassPathHack
      *            The method name
      * @return The return value of the method
      * @throws IOException
+     *             Something screwed up
      */
     public Object addFile(String s, String method) throws IOException
     {
