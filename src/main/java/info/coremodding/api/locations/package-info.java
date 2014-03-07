@@ -3,6 +3,6 @@
  */
 /**
  * @author James
- * Location APIs
+ *         Location APIs
  */
 package info.coremodding.api.locations;

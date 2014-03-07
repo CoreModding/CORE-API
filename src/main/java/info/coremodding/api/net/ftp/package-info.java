@@ -3,6 +3,6 @@
  */
 /**
  * @author James
- * Ftp utils
+ *         Ftp utils
  */
 package info.coremodding.api.net.ftp;

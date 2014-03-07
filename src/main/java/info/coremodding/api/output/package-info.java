@@ -3,6 +3,6 @@
  */
 /**
  * @author James
- * The logging utils
+ *         The logging utils
  */
 package info.coremodding.api.output;

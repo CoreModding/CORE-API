@@ -3,6 +3,6 @@
  */
 /**
  * @author James
- * Email utils
+ *         Email utils
  */
 package info.coremodding.api.net.smtp.email;

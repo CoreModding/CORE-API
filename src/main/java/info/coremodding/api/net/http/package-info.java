@@ -3,6 +3,6 @@
  */
 /**
  * @author James
- * Http network utils
+ *         Http network utils
  */
 package info.coremodding.api.net.http;

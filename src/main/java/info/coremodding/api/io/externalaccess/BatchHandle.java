@@ -8,48 +8,63 @@ import java.io.IOException;
 /**
  * @author minec_000
  */
-class BatchHandle {
-
+class BatchHandle
+{
+    
     /**
-     * @param args          The arguments for the method to be called
-     * @param dllPath       The location of the DLL to be called
-     * @param methodorfunct The function or method to be called from the DLL
+     * @param args
+     *            The arguments for the method to be called
+     * @param dllPath
+     *            The location of the DLL to be called
+     * @param methodorfunct
+     *            The function or method to be called from the DLL
      */
     static void createDLLRunBatch(String args, String dllPath,
-                                  String methodorfunct) {
+            String methodorfunct)
+    {
         File f = new File("C:\\tmpcmd.cmd");
-        try {
-            if (!(f.createNewFile())) {
+        try
+        {
+            if (!(f.createNewFile()))
+            {
                 System.out.println("There may have been an error!");
             }
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
-        IOUtils.writeFile("C:\\tmpcmd.cmd", new String[]{
+        IOUtils.writeFile("C:\\tmpcmd.cmd", new String[] {
                 "@ECHO OFF",
                 "rundll32 " + dllPath + "," + methodorfunct + " \"" + args
-                        + "\" > tmpout.txt"});
+                        + "\" > tmpout.txt" });
     }
-
+    
     /**
-     * @param path Where the batch to be run is located
+     * @param path
+     *            Where the batch to be run is located
      */
-    static void runBatch(String path) {
-        try {
+    static void runBatch(String path)
+    {
+        try
+        {
             Runtime.getRuntime().exec("cmd /c start " + path);
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
-
+    
     /**
      * @return Returns the output of the writeline and return value of the DLL
-     * method being called via batch
+     *         method being called via batch
      */
-    static String[] runDLLRunBatch() {
-        try {
+    static String[] runDLLRunBatch()
+    {
+        try
+        {
             Runtime.getRuntime().exec("cmd /c start C:/tmpcmd.cmd");
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
         return IOUtils.readFile("C:\\tmpout.txt");

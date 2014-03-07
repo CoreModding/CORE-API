@@ -3,6 +3,6 @@
  */
 /**
  * @author James
- * Irc utils
+ *         Irc utils
  */
 package info.coremodding.api.net.irc;

@@ -3,6 +3,6 @@
  */
 /**
  * @author James
- * Network API stuff
+ *         Network API stuff
  */
 package info.coremodding.api.net;
