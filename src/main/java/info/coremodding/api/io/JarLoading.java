@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author James Load jars at runtime
  */
-public class ClassPathHack
+public class JarLoading
 {
     
     private List<Class<?>> parameters;
@@ -22,8 +22,9 @@ public class ClassPathHack
      *            The method name
      * @return The return value of the method
      * @throws IOException
+     *             Something screwed up.
      */
-    Object addFile(File f, String method) throws IOException
+    public Object addFile(File f, String method) throws IOException
     {
         return addURL(f.toURI().toURL(), method);
     }
@@ -48,7 +49,7 @@ public class ClassPathHack
      *            The parameter to add
      * @return The class (for stacked methods)
      */
-    public ClassPathHack addParameter(Object obj)
+    public JarLoading addParameter(Object obj)
     {
         this.parameters.add((Class<?>) obj);
         return this;
@@ -61,8 +62,9 @@ public class ClassPathHack
      *            The method name
      * @return The return value of the method
      * @throws IOException
+     *             Something screwed up.
      */
-    Object addURL(URL u, String methodn) throws IOException
+    public Object addURL(URL u, String methodn) throws IOException
     {
         @SuppressWarnings("resource")
         URLClassLoader sysloader = (URLClassLoader) ClassLoader
