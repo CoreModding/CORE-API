@@ -1,4 +1,4 @@
-package info.coremodding.api.output;
+package info.coremodding.api.logging;
 
 import java.util.Date;
 import java.util.logging.Level;
