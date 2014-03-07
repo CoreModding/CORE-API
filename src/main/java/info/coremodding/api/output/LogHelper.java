@@ -6,7 +6,7 @@ import java.util.logging.Level;
 /**
  * Logging utils
  */
-class LogHelper {
+public class LogHelper {
 
     /**
      * logging functionality
