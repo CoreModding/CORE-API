@@ -1,13 +1,16 @@
 package info.coremodding.api.io.externalaccess;
 
-import info.coremodding.api.io.IOUtils;
-
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
+
+import org.apache.commons.io.FileUtils;
 
 /**
  * @author minec_000 Wrapper for the rest of the library
  */
-class DLLFM
+public class DLLFM
 {
     
     /**
@@ -18,7 +21,13 @@ class DLLFM
      */
     public static void createBatch(String[] cmds)
     {
-        IOUtils.writeFile("..\\tmp.cmd", cmds);
+        try
+        {
+            FileUtils.writeLines(new File("..\\tmp.cmd"), Arrays.asList(cmds));
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
     
     /**
@@ -37,7 +46,7 @@ class DLLFM
     {
         createBatch((String[]) commands.toArray());
         runBatch();
-        IOUtils.deleteFile();
+        new File("..\\tmp.cmd").delete();
     }
     
     /**
@@ -56,7 +65,6 @@ class DLLFM
      *         called
      */
     @Deprecated
-    // deprecated as it most likely doesn't work
     public static String[] runDLL(String functArgs, String dllPath,
             String functName)
     {

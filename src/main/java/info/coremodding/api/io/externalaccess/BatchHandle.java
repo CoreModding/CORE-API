@@ -1,9 +1,10 @@
 package info.coremodding.api.io.externalaccess;
 
-import info.coremodding.api.io.IOUtils;
-
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+
+import org.apache.commons.io.FileUtils;
 
 /**
  * @author minec_000
@@ -19,31 +20,33 @@ class BatchHandle
      * @param methodorfunct
      *            The function or method to be called from the DLL
      */
-    static void createDLLRunBatch(String args, String dllPath,
+    public static void createDLLRunBatch(String args, String dllPath,
             String methodorfunct)
     {
-        File f = new File("C:\\tmpcmd.cmd");
+        File f = new File("..\\tmp.cmd");
         try
         {
             if (!(f.createNewFile()))
             {
                 System.out.println("There may have been an error!");
             }
+            FileUtils.writeLines(
+                    new File("..\\tmp.cmd"),
+                    Arrays.asList(new String[] {
+                            "@ECHO OFF",
+                            "rundll32 " + dllPath + "," + methodorfunct + " \""
+                                    + args + "\" > tmpout.txt" }));
         } catch (IOException e)
         {
             e.printStackTrace();
         }
-        IOUtils.writeFile("C:\\tmpcmd.cmd", new String[] {
-                "@ECHO OFF",
-                "rundll32 " + dllPath + "," + methodorfunct + " \"" + args
-                        + "\" > tmpout.txt" });
     }
     
     /**
      * @param path
      *            Where the batch to be run is located
      */
-    static void runBatch(String path)
+    public static void runBatch(String path)
     {
         try
         {
@@ -58,15 +61,23 @@ class BatchHandle
      * @return Returns the output of the writeline and return value of the DLL
      *         method being called via batch
      */
-    static String[] runDLLRunBatch()
+    public static String[] runDLLRunBatch()
     {
         try
         {
-            Runtime.getRuntime().exec("cmd /c start C:/tmpcmd.cmd");
+            Runtime.getRuntime().exec("cmd /c start ..\\tmp.cmd");
         } catch (IOException e)
         {
             e.printStackTrace();
         }
-        return IOUtils.readFile("C:\\tmpout.txt");
+        try
+        {
+            return FileUtils.readLines(new File("..\\tmp.cmd")).toArray(
+                    new String[] {});
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
