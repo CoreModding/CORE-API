@@ -5,10 +5,10 @@
   "description": "CoreModding API",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url":  "",
-  "updateUrl": "",
+  "url":  "coremodding.info",
+  "updateUrl": "coremodding.info",
   "authors": ["CoreModding Team"],
-  "credits": "The Forge and FML guys, for making this mod possible",
+  "credits": "",
   "screenshots": [],
   "requiredMods": ["Forge"],
 }
