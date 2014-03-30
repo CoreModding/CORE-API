@@ -1,4 +1,4 @@
-package info.coremodding.api.net;
+package info.coremodding.api.energynet;
 
 import java.util.Set;
 

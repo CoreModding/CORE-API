@@ -1,4 +1,4 @@
-package info.coremodding.api.net;
+package info.coremodding.api.energynet;
 
 import net.minecraftforge.common.util.ForgeDirection;
 

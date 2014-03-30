@@ -1,4 +1,4 @@
-package info.coremodding.api.net;
+package info.coremodding.api.energynet;
 
 import info.coremodding.api.energy.IEnergyNetwork;
 import cpw.mods.fml.common.eventhandler.Cancelable;
