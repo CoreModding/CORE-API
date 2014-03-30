@@ -66,6 +66,7 @@ public class JarLoading
      */
     public Object addURL(URL u, String methodn) throws IOException
     {
+        @SuppressWarnings("resource")
         URLClassLoader sysloader = (URLClassLoader) ClassLoader
                 .getSystemClassLoader();
         Class<URLClassLoader> sysclass = URLClassLoader.class;
