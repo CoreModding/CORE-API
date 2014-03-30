@@ -1,7 +1,7 @@
 package info.coremodding.api.energy;
 
-import info.coremodding.api.net.INodeNetwork;
-import info.coremodding.api.net.IUpdate;
+import info.coremodding.api.energynet.INodeNetwork;
+import info.coremodding.api.energynet.IUpdate;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /**

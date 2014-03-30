@@ -1,6 +1,6 @@
 package info.coremodding.api.vector;
 
-import info.coremodding.api.net.IConnector;
+import info.coremodding.api.energynet.IConnector;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;

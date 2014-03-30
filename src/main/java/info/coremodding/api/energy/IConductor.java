@@ -1,6 +1,6 @@
 package info.coremodding.api.energy;
 
-import info.coremodding.api.net.IConnector;
+import info.coremodding.api.energynet.IConnector;
 
 /**
  * A connector for {EnergyNetwork}.

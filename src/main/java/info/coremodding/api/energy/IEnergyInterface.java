@@ -1,6 +1,6 @@
 package info.coremodding.api.energy;
 
-import info.coremodding.api.net.IConnectable;
+import info.coremodding.api.energynet.IConnectable;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /**
