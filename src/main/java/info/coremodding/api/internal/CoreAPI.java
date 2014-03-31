@@ -1,4 +1,4 @@
-package info.coremodding.api;
+package info.coremodding.api.internal;
 
 import info.coremodding.api.research.internal.BlockResearchTable;
 import info.coremodding.api.research.internal.TileEntityResearchTable;
