@@ -1,4 +1,4 @@
-package info.coremodding.api.net.exception;
+package info.coremodding.api.net.ftp.exception;
 
 /**
  * @author James
