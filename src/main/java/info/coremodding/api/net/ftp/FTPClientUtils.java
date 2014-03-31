@@ -1,6 +1,5 @@
 package info.coremodding.api.net.ftp;
 
-import info.coremodding.api.net.ftp.exception.BadFTPReplyException;
 import info.coremodding.api.net.ftp.exception.FTPError;
 
 import java.io.BufferedOutputStream;
@@ -41,8 +40,6 @@ public class FTPClientUtils
      *             Something screwed up
      * @throws FTPError
      *             Something screwed up
-     * @throws BadFTPReplyException
-     *             Something screwed up
      */
     public static FTPClient generateFTPClient(String host, String username,
             String password, String startdir) throws SocketException,
@@ -53,8 +50,10 @@ public class FTPClientUtils
         client.configure(config);
         client.connect(host);
         client.login(username, password);
-        if (!FTPReply.isPositiveCompletion(client.getReply())) { throw new BadFTPReplyException(); }
-        if (!client.changeWorkingDirectory(startdir)) { throw new FTPError(); }
+        if (!FTPReply.isPositiveCompletion(client.getReply())) { throw new FTPError(
+                "Error connecting to server and logging in!"); }
+        if (!client.changeWorkingDirectory(startdir)) { throw new FTPError(
+                "Error changing directory!"); }
         return client;
     }
     
@@ -70,19 +69,19 @@ public class FTPClientUtils
      *             Something screwed up
      * @throws SocketException
      *             Something screwed up
-     * @throws BadFTPReplyException
+     * @throws FTPError
      *             Something screwed up
      */
     public static FTPClient generateFTPClient(String host, String username,
-            String password) throws SocketException, IOException,
-            BadFTPReplyException
+            String password) throws SocketException, IOException, FTPError
     {
         FTPClient client = new FTPClient();
         FTPClientConfig config = new FTPClientConfig();
         client.configure(config);
         client.connect(host);
         client.login(username, password);
-        if (!FTPReply.isPositiveCompletion(client.getReply())) { throw new BadFTPReplyException(); }
+        if (!FTPReply.isPositiveCompletion(client.getReply())) { throw new FTPError(
+                "Error connecting to server and logging in!"); }
         return client;
     }
     
@@ -100,7 +99,8 @@ public class FTPClientUtils
             IOException
     {
         ftp.changeWorkingDirectory("/");
-        if (!ftp.changeWorkingDirectory(dir)) { throw new FTPError(); }
+        if (!ftp.changeWorkingDirectory(dir)) { throw new FTPError(
+                "Error changing directory!"); }
     }
     
     /**
@@ -177,7 +177,6 @@ public class FTPClientUtils
                 String currentFileName = aFile.getName();
                 if (currentFileName.equals(".") || currentFileName.equals(".."))
                 {
-                    // skip parent directory and the directory itself
                     continue;
                 }
                 String filePath = parentDir + "/" + currentDir + "/"
@@ -197,35 +196,13 @@ public class FTPClientUtils
                 
                 if (aFile.isDirectory())
                 {
-                    // create the directory in saveDir
                     File newDir = new File(newDirPath);
-                    boolean created = newDir.mkdirs();
-                    if (created)
-                    {
-                        System.out.println("CREATED the directory: "
-                                + newDirPath);
-                    } else
-                    {
-                        System.out.println("COULD NOT create the directory: "
-                                + newDirPath);
-                    }
-                    
-                    // download the sub directory
+                    newDir.mkdirs();
                     downloadDirectory(ftpClient, dirToList, currentFileName,
                             saveDir);
                 } else
                 {
-                    // download the file
-                    boolean success = downloadSingleFile(ftpClient, filePath,
-                            newDirPath);
-                    if (success)
-                    {
-                        System.out.println("DOWNLOADED the file: " + filePath);
-                    } else
-                    {
-                        System.out.println("COULD NOT download the file: "
-                                + filePath);
-                    }
+                    downloadSingleFile(ftpClient, filePath, newDirPath);
                 }
             }
         }
@@ -252,7 +229,6 @@ public class FTPClientUtils
             throws IOException
     {
         String localParentDir = _localParentDir;
-        System.out.println("LISTING directory: " + localParentDir);
         
         File localDir = new File(localParentDir);
         File[] subFiles = localDir.listFiles();
@@ -266,40 +242,15 @@ public class FTPClientUtils
                 {
                     remoteFilePath = remoteDirPath + "/" + item.getName();
                 }
-                
                 if (item.isFile())
                 {
-                    // upload the file
                     String localFilePath = item.getAbsolutePath();
-                    System.out.println("About to upload the file: "
-                            + localFilePath);
-                    boolean uploaded = uploadSingleFile(ftpClient,
-                            localFilePath, remoteFilePath);
-                    if (uploaded)
-                    {
-                        System.out.println("UPLOADED a file to: "
-                                + remoteFilePath);
-                    } else
-                    {
-                        System.out.println("COULD NOT upload the file: "
-                                + localFilePath);
-                    }
+                    uploadSingleFile(ftpClient, localFilePath, remoteFilePath);
                 } else
                 {
-                    // create directory on the server
-                    boolean created = ftpClient.makeDirectory(remoteFilePath);
-                    if (created)
-                    {
-                        System.out.println("CREATED the directory: "
-                                + remoteFilePath);
-                    } else
-                    {
-                        System.out.println("COULD NOT create the directory: "
-                                + remoteFilePath);
-                    }
-                    
-                    // upload the sub directory
+                    ftpClient.makeDirectory(remoteFilePath);
                     String parent = remoteParentDir + "/" + item.getName();
+                    
                     if (remoteParentDir.equals(""))
                     {
                         parent = item.getName();
