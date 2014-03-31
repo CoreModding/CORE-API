@@ -12,9 +12,20 @@ public class FTPError extends Exception
      */
     private static final long serialVersionUID = 602472895511263908L;
     
+    private String            message          = "Something went wrong during an FTP transfer!";
+    
+    /**
+     * @param message
+     *            The error message
+     */
+    public FTPError(String message)
+    {
+        this.message = message;
+    }
+    
     @Override
     public String getMessage()
     {
-        return "Something went wrong during an FTP transfer!";
+        return this.message;
     }
 }
