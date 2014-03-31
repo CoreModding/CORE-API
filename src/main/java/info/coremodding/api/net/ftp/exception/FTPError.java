@@ -23,6 +23,13 @@ public class FTPError extends Exception
         this.message = message;
     }
     
+    /**
+     * Default message
+     */
+    public FTPError()
+    {
+    }
+    
     @Override
     public String getMessage()
     {
