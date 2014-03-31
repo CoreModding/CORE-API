@@ -1,7 +1,7 @@
 package info.coremodding.api.net.ftp;
 
-import info.coremodding.api.net.exception.BadFTPReplyException;
-import info.coremodding.api.net.exception.FTPError;
+import info.coremodding.api.net.ftp.exception.BadFTPReplyException;
+import info.coremodding.api.net.ftp.exception.FTPError;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
