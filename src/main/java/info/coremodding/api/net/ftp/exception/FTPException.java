@@ -4,7 +4,7 @@ package info.coremodding.api.net.ftp.exception;
  * @author James
  *         A general FTP error
  */
-public class FTPError extends Exception
+public class FTPException extends Exception
 {
     
     /**
@@ -18,7 +18,7 @@ public class FTPError extends Exception
      * @param message
      *            The error message
      */
-    public FTPError(String message)
+    public FTPException(String message)
     {
         this.message = message;
     }
@@ -26,7 +26,7 @@ public class FTPError extends Exception
     /**
      * Default message
      */
-    public FTPError()
+    public FTPException()
     {
     }
     
