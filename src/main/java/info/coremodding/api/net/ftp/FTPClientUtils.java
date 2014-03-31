@@ -1,6 +1,6 @@
 package info.coremodding.api.net.ftp;
 
-import info.coremodding.api.net.ftp.exception.FTPError;
+import info.coremodding.api.net.ftp.exception.FTPException;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -38,21 +38,21 @@ public class FTPClientUtils
      *             Something screwed up
      * @throws SocketException
      *             Something screwed up
-     * @throws FTPError
+     * @throws FTPException
      *             Something screwed up
      */
     public static FTPClient generateFTPClient(String host, String username,
             String password, String startdir) throws SocketException,
-            IOException, FTPError
+            IOException, FTPException
     {
         FTPClient client = new FTPClient();
         FTPClientConfig config = new FTPClientConfig();
         client.configure(config);
         client.connect(host);
         client.login(username, password);
-        if (!FTPReply.isPositiveCompletion(client.getReply())) { throw new FTPError(
+        if (!FTPReply.isPositiveCompletion(client.getReply())) { throw new FTPException(
                 "Error connecting to server and logging in!"); }
-        if (!client.changeWorkingDirectory(startdir)) { throw new FTPError(
+        if (!client.changeWorkingDirectory(startdir)) { throw new FTPException(
                 "Error changing directory!"); }
         return client;
     }
@@ -69,18 +69,18 @@ public class FTPClientUtils
      *             Something screwed up
      * @throws SocketException
      *             Something screwed up
-     * @throws FTPError
+     * @throws FTPException
      *             Something screwed up
      */
     public static FTPClient generateFTPClient(String host, String username,
-            String password) throws SocketException, IOException, FTPError
+            String password) throws SocketException, IOException, FTPException
     {
         FTPClient client = new FTPClient();
         FTPClientConfig config = new FTPClientConfig();
         client.configure(config);
         client.connect(host);
         client.login(username, password);
-        if (!FTPReply.isPositiveCompletion(client.getReply())) { throw new FTPError(
+        if (!FTPReply.isPositiveCompletion(client.getReply())) { throw new FTPException(
                 "Error connecting to server and logging in!"); }
         return client;
     }
@@ -90,16 +90,16 @@ public class FTPClientUtils
      *            The FTP client to change the directory on
      * @param dir
      *            The directory to go to
-     * @throws FTPError
+     * @throws FTPException
      *             Something went wrong!
      * @throws IOException
      *             Something went wrong!
      */
-    public static void gotoDir(FTPClient ftp, String dir) throws FTPError,
+    public static void gotoDir(FTPClient ftp, String dir) throws FTPException,
             IOException
     {
         ftp.changeWorkingDirectory("/");
-        if (!ftp.changeWorkingDirectory(dir)) { throw new FTPError(
+        if (!ftp.changeWorkingDirectory(dir)) { throw new FTPException(
                 "Error changing directory!"); }
     }
     
