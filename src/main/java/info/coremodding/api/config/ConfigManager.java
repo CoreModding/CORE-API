@@ -37,6 +37,7 @@ public class ConfigManager
     /**
      * Gets a value
      */
+    @SuppressWarnings("javadoc")
     public static void get(String category, String key, String defaultValue,
             String comment)
     {
@@ -46,6 +47,7 @@ public class ConfigManager
     /**
      * Gets a value
      */
+    @SuppressWarnings("javadoc")
     public static void get(String category, String key, boolean[] defaultValue,
             String comment)
     {
