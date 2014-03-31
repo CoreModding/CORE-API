@@ -1,11 +1,13 @@
 package info.coremodding.api.research.internal;
 
+import info.coremodding.api.internal.CoreAPI;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 
 /**
  * @author James
@@ -40,7 +42,7 @@ public class BlockResearchTable extends BlockContainer
     {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity == null || player.isSneaking()) { return false; }
-        // TODO player.openGui(CoreAPI.instance, modGuiId, world, x, y, z);
+        FMLNetworkHandler.openGui(player, CoreAPI.instance, 0, world, x, y, z);
         return true;
     }
 }
