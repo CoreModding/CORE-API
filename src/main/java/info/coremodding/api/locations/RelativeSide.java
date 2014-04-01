@@ -30,12 +30,12 @@ public enum RelativeSide
     left("Left"),
     
     /**
-     * The side is right
+     * The side is above
      */
     up("Up", new String[] { "Above" }),
     
     /**
-     * The side is left
+     * The side is below
      */
     down("Down", new String[] { "Below" }),
     
