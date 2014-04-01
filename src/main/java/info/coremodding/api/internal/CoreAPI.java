@@ -1,5 +1,6 @@
 package info.coremodding.api.internal;
 
+import info.coremodding.api.internal.downloader.GPSDownloader;
 import info.coremodding.api.research.internal.BlockResearchTable;
 import info.coremodding.api.research.internal.TileEntityResearchTable;
 import cpw.mods.fml.common.Mod;
@@ -52,6 +53,17 @@ public class CoreAPI
     public static void enableResearch(FMLPreInitializationEvent evt)
     {
         EnableResearch = true;
+    }
+    
+    /**
+     * @param evt
+     *            The event that triggered the method
+     */
+    @SuppressWarnings("static-method")
+    @EventHandler
+    public void preinit(FMLPreInitializationEvent evt)
+    {
+        GPSDownloader.doUpdate();
     }
     
     /**
