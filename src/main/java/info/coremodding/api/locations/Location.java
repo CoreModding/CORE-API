@@ -11,7 +11,7 @@ public class Location
     /**
      * The direction
      */
-    private EDirection dir   = EDirection.none;
+    private Direction dir   = Direction.none;
     
     /**
      * The world
@@ -53,7 +53,7 @@ public class Location
      * @param dir
      *            The direction
      */
-    public Location(int x, int z, EDirection dir)
+    public Location(int x, int z, Direction dir)
     {
         this.setZ(z);
         this.setX(x);
@@ -70,7 +70,7 @@ public class Location
      * @param world
      *            The world
      */
-    public Location(int x, int z, EDirection dir, World world)
+    public Location(int x, int z, Direction dir, World world)
     {
         this.setZ(z);
         this.setX(x);
@@ -103,7 +103,7 @@ public class Location
      * @param dir
      *            The direction
      */
-    public Location(int x, int y, int z, EDirection dir)
+    public Location(int x, int y, int z, Direction dir)
     {
         this.setY(y);
         this.setZ(z);
@@ -123,7 +123,7 @@ public class Location
      * @param world
      *            The world
      */
-    public Location(int x, int y, int z, EDirection dir, World world)
+    public Location(int x, int y, int z, Direction dir, World world)
     {
         this.setY(y);
         this.setZ(z);
@@ -168,7 +168,7 @@ public class Location
     /**
      * @return The direction
      */
-    public EDirection getDir()
+    public Direction getDir()
     {
         return this.dir;
     }
@@ -209,7 +209,7 @@ public class Location
      * @param dir
      *            The direction
      */
-    void setDir(EDirection dir)
+    void setDir(Direction dir)
     {
         this.dir = dir;
     }

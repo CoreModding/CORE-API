@@ -12,7 +12,7 @@ import net.minecraft.item.Item;
 public class ResearchHandler
 {
     
-    private static final ArrayList<AResearch>                      research = new ArrayList<>();
+    private static final ArrayList<Research>                      research = new ArrayList<>();
     private static final HashMap<Item, ArrayList<ItemWithInteger>> similar  = new HashMap<>();
     
     private static final class ItemWithInteger
@@ -31,7 +31,7 @@ public class ResearchHandler
      * @param researchitem
      *            The research item to add
      */
-    public static final void addResearch(AResearch researchitem)
+    public static final void addResearch(Research researchitem)
     {
         ResearchHandler.research.add(researchitem);
     }
@@ -39,7 +39,7 @@ public class ResearchHandler
     /**
      * @return The research registered
      */
-    public static final ArrayList<AResearch> getResearch()
+    public static final ArrayList<Research> getResearch()
     {
         return ResearchHandler.research;
     }
