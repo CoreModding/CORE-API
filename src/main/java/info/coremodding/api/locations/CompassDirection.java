@@ -40,8 +40,8 @@ public enum CompassDirection
      */
     west("West");
     
-    private String                              StringValue;
-    private final ArrayList<String>             alts        = new ArrayList<>();
+    private String                             StringValue;
+    private final ArrayList<String>            alts        = new ArrayList<>();
     private static ArrayList<CompassDirection> edirections = new ArrayList<>();
     
     private CompassDirection(String name)
