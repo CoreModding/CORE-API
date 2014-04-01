@@ -11,7 +11,7 @@ public class Location
     /**
      * The direction
      */
-    private EDirection dir   = EDirection.all;
+    private EDirection dir   = EDirection.none;
     
     /**
      * The world
