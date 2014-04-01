@@ -5,9 +5,9 @@ import info.coremodding.api.locations.exceptions.InvalidDirectionException;
 import java.util.ArrayList;
 
 /**
- * @author James Compass directions
+ * @author James The sides of things
  */
-public enum ECompassDirection
+public enum Direction
 {
     
     /**
@@ -19,6 +19,11 @@ public enum ECompassDirection
      * No side
      */
     none("None", new String[] { "Null", "NA", "N/A", "Invalid" }),
+    
+    /**
+     * The direction is below
+     */
+    bottom("Bottom"),
     
     /**
      * The direction is east
@@ -36,21 +41,26 @@ public enum ECompassDirection
     south("South"),
     
     /**
+     * The direction is above
+     */
+    top("Top"),
+    
+    /**
      * The direction is west
      */
     west("West");
     
-    private String                              StringValue;
-    private final ArrayList<String>             alts        = new ArrayList<>();
-    private static ArrayList<ECompassDirection> edirections = new ArrayList<>();
+    private String                       StringValue;
+    private final ArrayList<String>      alts        = new ArrayList<>();
+    private static ArrayList<Direction> edirections = new ArrayList<>();
     
-    private ECompassDirection(String name)
+    private Direction(String name)
     {
         this.StringValue = name;
         addEDirection();
     }
     
-    private ECompassDirection(String name, String[] alts)
+    private Direction(String name, String[] alts)
     {
         this.StringValue = name;
         for (String alt : alts)
@@ -62,7 +72,7 @@ public enum ECompassDirection
     
     private void addEDirection()
     {
-        ECompassDirection.edirections.add(this);
+        Direction.edirections.add(this);
     }
     
     @Override
@@ -81,8 +91,9 @@ public enum ECompassDirection
     
     /**
      * @param name
-     *            The name of the CompassDirection. Valid:
+     *            The name of the EDirction. Valid:
      *            all
+     *            bottom
      *            east
      *            invalid
      *            none
@@ -91,12 +102,16 @@ public enum ECompassDirection
      *            na
      *            n/a
      *            south
+     *            top
      *            west
-     * @return The ECompassDirection with that name. Defaults to none.
+     * @return The EDirection with that name.
+     * @throws InvalidDirectionException
+     *             The given name is invalid
      */
-    public static ECompassDirection getFromName(String name)
+    public static Direction getFromName(String name)
+            throws InvalidDirectionException
     {
-        for (ECompassDirection edirection : edirections)
+        for (Direction edirection : edirections)
         {
             if (edirection.toString().equalsIgnoreCase(name)) return edirection;
             ArrayList<String> alts = edirection.getAlts();
@@ -105,25 +120,20 @@ public enum ECompassDirection
                 if (alt.equalsIgnoreCase(name)) return edirection;
             }
         }
-        return ECompassDirection.none;
+        throw new InvalidDirectionException();
     }
     
     /**
      * @param direction
-     *            The e direction
-     * @return The compass direction equivalent to that direction
-     * @throws InvalidDirectionException
-     *             The given direction is not valid
-     *             Does not throw for all and none, those both return none.
+     *            The compass direction
+     * @return The EDirection equivalent to that compassdirection
      */
-    public static ECompassDirection getFromCompass(EDirection direction)
-            throws InvalidDirectionException
+    public static Direction getFromCompass(CompassDirection direction)
     {
-        if (direction == EDirection.north) { return ECompassDirection.north; }
-        if (direction == EDirection.east) { return ECompassDirection.east; }
-        if (direction == EDirection.south) { return ECompassDirection.south; }
-        if (direction == EDirection.west) { return ECompassDirection.west; }
-        if (direction == EDirection.none || direction == EDirection.all) { return ECompassDirection.none; }
-        throw new InvalidDirectionException();
+        if (direction == CompassDirection.north) { return Direction.north; }
+        if (direction == CompassDirection.east) { return Direction.east; }
+        if (direction == CompassDirection.south) { return Direction.south; }
+        if (direction == CompassDirection.west) { return Direction.west; }
+        return Direction.none;
     }
 }

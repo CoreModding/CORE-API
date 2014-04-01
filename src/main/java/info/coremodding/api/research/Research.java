@@ -6,13 +6,13 @@ import net.minecraft.item.Item;
  * @author James
  *         All research combonations have this
  */
-public abstract class AResearch
+public abstract class Research
 {
     
     /**
      * The constructor
      */
-    public AResearch()
+    public Research()
     {
         ResearchHandler.addResearch(this);
     }
