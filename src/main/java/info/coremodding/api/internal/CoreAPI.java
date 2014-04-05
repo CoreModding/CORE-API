@@ -21,7 +21,7 @@ public class CoreAPI
      * The instance of this mod forge uses
      */
     @Instance(CoreAPI.ModID)
-    public static final CoreAPI instance = null;
+    public static CoreAPI instance = null;
     
     /**
      * The mod ID
