@@ -50,8 +50,8 @@ public enum Direction
      */
     west("West");
     
-    private String                       StringValue;
-    private final ArrayList<String>      alts        = new ArrayList<>();
+    private String                      StringValue;
+    private final ArrayList<String>     alts        = new ArrayList<>();
     private static ArrayList<Direction> edirections = new ArrayList<>();
     
     private Direction(String name)

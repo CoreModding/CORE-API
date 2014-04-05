@@ -16,22 +16,22 @@ public class Location
     /**
      * The world
      */
-    private World      world = null;
+    private World     world = null;
     
     /**
      * The x postion
      */
-    private int        x     = 0;
+    private int       x     = 0;
     
     /**
      * The y position
      */
-    private int        y     = -1;
+    private int       y     = -1;
     
     /**
      * The z position
      */
-    private int        z     = 0;
+    private int       z     = 0;
     
     /**
      * @param x
