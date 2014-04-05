@@ -2,6 +2,8 @@ package info.coremodding.api.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * @author James, based on ChickenBones's
@@ -9,6 +11,7 @@ import net.minecraft.client.gui.FontRenderer;
  * 
  *         Some font utilities
  */
+@SideOnly(Side.CLIENT)
 public class FontUtils
 {
     
