@@ -1,6 +1,6 @@
 package info.coremodding.api.asm;
 
-import info.coremodding.api.asm.internal.ASMManager;
+import java.util.ArrayList;
 
 import org.objectweb.asm.tree.AbstractInsnNode;
 
@@ -12,46 +12,51 @@ public class ASMItem
 {
     
     /**
+     * All ASM items
+     */
+    public static ArrayList<ASMItem> items = new ArrayList<>();
+    
+    /**
      * The obfuscated class name
      */
-    public String             obfuscatedClass;
+    public String                    obfuscatedClass;
     
     /**
      * The normal class name
      */
-    public String             workspaceClass;
+    public String                    workspaceClass;
     
     /**
      * The obfuscated method name
      */
-    public String             obfuscatedMethod;
+    public String                    obfuscatedMethod;
     
     /**
      * The normal method name
      */
-    public String             workspaceMethod;
+    public String                    workspaceMethod;
     
     /**
      * The description of the method to patch
      */
-    public String             itemDescription;
+    public String                    itemDescription;
     
     /**
      * The instruction to start patching at
      */
-    public int                startInstruction;
+    public int                       startInstruction;
     
     /**
      * The number of instructions to remove
      */
-    public int                removeNumber;
+    public int                       removeNumber;
     
     /**
      * The instructions to insert
      */
-    public AbstractInsnNode[] newInstructions;
+    public AbstractInsnNode[]        newInstructions;
     
-    private final String      submitMod;
+    private final String             submitMod;
     
     /**
      * @param obfclass
@@ -87,7 +92,7 @@ public class ASMItem
         this.removeNumber = remNum;
         this.newInstructions = newInsts;
         this.submitMod = modname;
-        ASMManager.registerItem(this);
+        items.add(this);
     }
     
     @Override

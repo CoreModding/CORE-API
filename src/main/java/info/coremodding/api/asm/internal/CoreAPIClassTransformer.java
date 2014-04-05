@@ -23,7 +23,7 @@ public class CoreAPIClassTransformer implements IClassTransformer
     public byte[] transform(String name, String transformedName,
             byte[] basicClass)
     {
-        for (ASMItem item : ASMManager.items)
+        for (ASMItem item : ASMItem.items)
         {
             if (item.obfuscatedClass.equals(name)) return patchClassASM(name,
                     basicClass, item, false);
