@@ -26,14 +26,14 @@ public class FTPClientUtils
     
     /**
      * @param host
-     *            The host to connect to
+     *            The host to connect to (www.example.com, 127.0.0.1)
      * @param username
-     *            The username to logon with
+     *            The username to login with (noobguy)
      * @param password
-     *            The password to logon with
+     *            The password to login with (1234)
      * @param startdir
-     *            The directory to start at
-     * @return The FTP client
+     *            The directory to start at (/data/blorg/)
+     * @return The FTP client that was generated
      * @throws IOException
      *             Something screwed up
      * @throws SocketException
@@ -59,12 +59,12 @@ public class FTPClientUtils
     
     /**
      * @param host
-     *            The host to connect to
+     *            The host to connect to (www.example.com, 127.0.0.1)
      * @param username
-     *            The username to logon with
+     *            The username to login with (noobguy)
      * @param password
-     *            The password to logon with
-     * @return The FTP client
+     *            The password to login with (1234)
+     * @return The FTP client that was generated
      * @throws IOException
      *             Something screwed up
      * @throws SocketException
@@ -116,7 +116,7 @@ public class FTPClientUtils
      * @throws IOException
      *             if any network or IO error occurred.
      */
-    public static boolean downloadSingleFile(FTPClient ftpClient,
+    public static boolean downloadFile(FTPClient ftpClient,
             String remoteFilePath, String savePath) throws IOException
     {
         File downloadFile = new File(savePath);
@@ -202,7 +202,7 @@ public class FTPClientUtils
                             saveDir);
                 } else
                 {
-                    downloadSingleFile(ftpClient, filePath, newDirPath);
+                    downloadFile(ftpClient, filePath, newDirPath);
                 }
             }
         }
@@ -245,7 +245,7 @@ public class FTPClientUtils
                 if (item.isFile())
                 {
                     String localFilePath = item.getAbsolutePath();
-                    uploadSingleFile(ftpClient, localFilePath, remoteFilePath);
+                    uploadFile(ftpClient, localFilePath, remoteFilePath);
                 } else
                 {
                     ftpClient.makeDirectory(remoteFilePath);
@@ -277,8 +277,8 @@ public class FTPClientUtils
      * @throws IOException
      *             if any network or IO error occurred.
      */
-    public static boolean uploadSingleFile(FTPClient ftpClient,
-            String localFilePath, String remoteFilePath) throws IOException
+    public static boolean uploadFile(FTPClient ftpClient, String localFilePath,
+            String remoteFilePath) throws IOException
     {
         File localFile = new File(localFilePath);
         

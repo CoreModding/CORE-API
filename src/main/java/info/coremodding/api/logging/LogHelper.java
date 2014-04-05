@@ -4,18 +4,19 @@ import java.util.Date;
 import java.util.logging.Level;
 
 /**
- * Logging utils
+ * Logging utils. It's advised to import static so that you dont have to always
+ * call LogHelper.*
  */
 public class LogHelper
 {
     
     /**
-     * logging functionality
+     * Logs a message
      * 
      * @param msg
-     *            The message
+     *            The message to log
      * @param lvl
-     *            The level of the log
+     *            The severity level
      */
     public static void log(String msg, Level lvl)
     {
@@ -28,11 +29,13 @@ public class LogHelper
      * logging functionality
      * 
      * @param msg
-     *            The message
+     *            The message to log
      * @param bdl
-     *            The Debug Mode Booleans Location
+     *            Used for having 1 log instance but only having things activate
+     *            if debug is on. Just pass if debug is on here and it will auto
+     *            do/not do the log. No huge if stacks. Yay!
      * @param lvl
-     *            The level of the log
+     *            The serverity level
      */
     public static void log(String msg, Level lvl, boolean bdl)
     {

@@ -1,8 +1,8 @@
 package info.coremodding.api.internal;
 
 import info.coremodding.api.internal.downloader.GPSDownloader;
-import info.coremodding.api.research.internal.BlockResearchTable;
-import info.coremodding.api.research.internal.TileEntityResearchTable;
+import info.coremodding.api.internal.research.BlockResearchTable;
+import info.coremodding.api.internal.research.TileEntityResearchTable;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;

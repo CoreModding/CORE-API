@@ -1,4 +1,4 @@
-package info.coremodding.api.research.internal;
+package info.coremodding.api.internal.research;
 
 import info.coremodding.api.internal.CoreAPI;
 import net.minecraft.block.BlockContainer;

@@ -4,7 +4,7 @@ import net.minecraft.item.Item;
 
 /**
  * @author James
- *         All research combonations have this
+ *         All research combinations extend this
  */
 public abstract class Research
 {

@@ -8,7 +8,7 @@ import java.net.URLClassLoader;
 import java.util.List;
 
 /**
- * @author James Load jars at runtime
+ * @author James Load jars at runtime using this class
  */
 public class JarLoading
 {

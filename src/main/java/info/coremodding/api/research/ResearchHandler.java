@@ -7,12 +7,12 @@ import net.minecraft.item.Item;
 
 /**
  * @author James
- *         Handles research
+ *         Handles the registry and managing of research.
  */
 public class ResearchHandler
 {
     
-    private static final ArrayList<Research>                      research = new ArrayList<>();
+    private static final ArrayList<Research>                       research = new ArrayList<>();
     private static final HashMap<Item, ArrayList<ItemWithInteger>> similar  = new HashMap<>();
     
     private static final class ItemWithInteger

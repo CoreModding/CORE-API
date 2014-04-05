@@ -16,7 +16,7 @@ public class FTPException extends Exception
     
     /**
      * @param message
-     *            The error message
+     *            The error message for display
      */
     public FTPException(String message)
     {
@@ -24,7 +24,7 @@ public class FTPException extends Exception
     }
     
     /**
-     * Default message
+     * A constructor. Uses the default message.
      */
     public FTPException()
     {

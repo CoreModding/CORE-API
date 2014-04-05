@@ -1,4 +1,4 @@
-package info.coremodding.api.research.internal;
+package info.coremodding.api.internal.research;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

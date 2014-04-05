@@ -1,8 +1,8 @@
 /**
- * Location APIs
+ * Location related classes
  */
 /**
  * @author James
- *         Location APIs
+ *         Location related classes
  */
 package info.coremodding.api.locations;

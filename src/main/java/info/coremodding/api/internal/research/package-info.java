@@ -5,4 +5,4 @@
  * @author James
  *         The internal research stuff. Shouldn't be touched.
  */
-package info.coremodding.api.research.internal;
+package info.coremodding.api.internal.research;

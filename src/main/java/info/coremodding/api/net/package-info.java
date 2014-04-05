@@ -1,8 +1,8 @@
 /**
- * Network IO utils
+ * Internet network IO utilities
  */
 /**
  * @author James
- *         Network IO utils
+ *         Internet Network IO utilities
  */
 package info.coremodding.api.net;

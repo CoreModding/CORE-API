@@ -1,4 +1,4 @@
-package info.coremodding.api.asm.internal;
+package info.coremodding.api.internal.asm;
 
 import java.util.Arrays;
 

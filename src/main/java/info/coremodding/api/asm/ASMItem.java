@@ -6,7 +6,10 @@ import org.objectweb.asm.tree.AbstractInsnNode;
 
 /**
  * @author James
- *         An ASM modification item
+ *         An ASM modification item. This is passed to the various loaders to
+ *         patch classes.
+ *         ALL ASM ITEMS SHOULD BE STATIC, AUTOMATICALLY CONSTRUCTED VARIABLES
+ *         OR THEY MAY NOT PATCH.
  */
 public class ASMItem
 {
