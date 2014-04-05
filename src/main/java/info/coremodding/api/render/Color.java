@@ -28,37 +28,12 @@ public class Color
      * 
      *             All values must be 1 or less and 0 or more.
      */
-    public Color(double r, double g, double b, double a)
-            throws InvalidValueException
+    public Color(double r, double g, double b, double a) throws InvalidValueException
     {
         setRed(r);
         setGreen(g);
         setBlue(b);
         setAlpha(a);
-    }
-    
-    /**
-     * @return The value of the red
-     */
-    public double getRed()
-    {
-        return this.red;
-    }
-    
-    /**
-     * @return The value of the green
-     */
-    public double getGreen()
-    {
-        return this.green;
-    }
-    
-    /**
-     * @return The value of the blue
-     */
-    public double getBlue()
-    {
-        return this.blue;
     }
     
     /**
@@ -70,42 +45,27 @@ public class Color
     }
     
     /**
-     * @param r
-     *            The red to set to
-     * @throws InvalidValueException
-     *             The number value was incorrect
+     * @return The value of the blue
      */
-    public void setRed(double r) throws InvalidValueException
+    public double getBlue()
     {
-        if (r > 1 || r < 0) throw new InvalidValueException(
-                "Invalid color value. Must be between (or exactly) 0 or 1.");
-        this.red = r;
+        return this.blue;
     }
     
     /**
-     * @param g
-     *            The green to set to
-     * @throws InvalidValueException
-     *             The number value was incorrect
+     * @return The value of the green
      */
-    public void setGreen(double g) throws InvalidValueException
+    public double getGreen()
     {
-        if (g > 1 || g < 0) throw new InvalidValueException(
-                "Invalid color value. Must be between (or exactly) 0 or 1.");
-        this.green = g;
+        return this.green;
     }
     
     /**
-     * @param b
-     *            The blue to set to
-     * @throws InvalidValueException
-     *             The number value was incorrect
+     * @return The value of the red
      */
-    public void setBlue(double b) throws InvalidValueException
+    public double getRed()
     {
-        if (b > 1 || b < 0) throw new InvalidValueException(
-                "Invalid color value. Must be between (or exactly) 0 or 1.");
-        this.blue = b;
+        return this.red;
     }
     
     /**
@@ -116,8 +76,43 @@ public class Color
      */
     public void setAlpha(double a) throws InvalidValueException
     {
-        if (a > 1 || a < 0) throw new InvalidValueException(
-                "Invalid color value. Must be between (or exactly) 0 or 1.");
+        if (a > 1 || a < 0) throw new InvalidValueException("Invalid color value. Must be between (or exactly) 0 or 1.");
         this.alpha = a;
+    }
+    
+    /**
+     * @param b
+     *            The blue to set to
+     * @throws InvalidValueException
+     *             The number value was incorrect
+     */
+    public void setBlue(double b) throws InvalidValueException
+    {
+        if (b > 1 || b < 0) throw new InvalidValueException("Invalid color value. Must be between (or exactly) 0 or 1.");
+        this.blue = b;
+    }
+    
+    /**
+     * @param g
+     *            The green to set to
+     * @throws InvalidValueException
+     *             The number value was incorrect
+     */
+    public void setGreen(double g) throws InvalidValueException
+    {
+        if (g > 1 || g < 0) throw new InvalidValueException("Invalid color value. Must be between (or exactly) 0 or 1.");
+        this.green = g;
+    }
+    
+    /**
+     * @param r
+     *            The red to set to
+     * @throws InvalidValueException
+     *             The number value was incorrect
+     */
+    public void setRed(double r) throws InvalidValueException
+    {
+        if (r > 1 || r < 0) throw new InvalidValueException("Invalid color value. Must be between (or exactly) 0 or 1.");
+        this.red = r;
     }
 }

@@ -53,41 +53,6 @@ public enum RelativeSide
     private final ArrayList<String>        alts        = new ArrayList<>();
     private static ArrayList<RelativeSide> edirections = new ArrayList<>();
     
-    private RelativeSide(String name)
-    {
-        this.StringValue = name;
-        addEDirection();
-    }
-    
-    private RelativeSide(String name, String[] alts)
-    {
-        this.StringValue = name;
-        for (String alt : alts)
-        {
-            this.alts.add(alt);
-        }
-        addEDirection();
-    }
-    
-    private void addEDirection()
-    {
-        RelativeSide.edirections.add(this);
-    }
-    
-    @Override
-    public String toString()
-    {
-        return this.StringValue;
-    }
-    
-    /**
-     * @return The alternate names of this
-     */
-    public ArrayList<String> getAlts()
-    {
-        return this.alts;
-    }
-    
     /**
      * @param name
      *            The name of the CompassDirection. Valid:
@@ -118,5 +83,40 @@ public enum RelativeSide
             }
         }
         return RelativeSide.none;
+    }
+    
+    private RelativeSide(String name)
+    {
+        this.StringValue = name;
+        addEDirection();
+    }
+    
+    private RelativeSide(String name, String[] alts)
+    {
+        this.StringValue = name;
+        for (String alt : alts)
+        {
+            this.alts.add(alt);
+        }
+        addEDirection();
+    }
+    
+    private void addEDirection()
+    {
+        RelativeSide.edirections.add(this);
+    }
+    
+    /**
+     * @return The alternate names of this
+     */
+    public ArrayList<String> getAlts()
+    {
+        return this.alts;
+    }
+    
+    @Override
+    public String toString()
+    {
+        return this.StringValue;
     }
 }

@@ -15,19 +15,19 @@ public class FTPException extends Exception
     private String            message          = "Something went wrong during an FTP transfer!";
     
     /**
+     * A constructor. Uses the default message.
+     */
+    public FTPException()
+    {
+    }
+    
+    /**
      * @param message
      *            The error message for display
      */
     public FTPException(String message)
     {
         this.message = message;
-    }
-    
-    /**
-     * A constructor. Uses the default message.
-     */
-    public FTPException()
-    {
     }
     
     @Override

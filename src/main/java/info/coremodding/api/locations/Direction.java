@@ -54,39 +54,18 @@ public enum Direction
     private final ArrayList<String>     alts        = new ArrayList<>();
     private static ArrayList<Direction> edirections = new ArrayList<>();
     
-    private Direction(String name)
-    {
-        this.StringValue = name;
-        addEDirection();
-    }
-    
-    private Direction(String name, String[] alts)
-    {
-        this.StringValue = name;
-        for (String alt : alts)
-        {
-            this.alts.add(alt);
-        }
-        addEDirection();
-    }
-    
-    private void addEDirection()
-    {
-        Direction.edirections.add(this);
-    }
-    
-    @Override
-    public String toString()
-    {
-        return this.StringValue;
-    }
-    
     /**
-     * @return The alternate names of this
+     * @param direction
+     *            The compass direction
+     * @return The EDirection equivalent to that compassdirection
      */
-    public ArrayList<String> getAlts()
+    public static Direction getFromCompass(CompassDirection direction)
     {
-        return this.alts;
+        if (direction == CompassDirection.north) { return Direction.north; }
+        if (direction == CompassDirection.east) { return Direction.east; }
+        if (direction == CompassDirection.south) { return Direction.south; }
+        if (direction == CompassDirection.west) { return Direction.west; }
+        return Direction.none;
     }
     
     /**
@@ -108,8 +87,7 @@ public enum Direction
      * @throws InvalidDirectionException
      *             The given name is invalid
      */
-    public static Direction getFromName(String name)
-            throws InvalidDirectionException
+    public static Direction getFromName(String name) throws InvalidDirectionException
     {
         for (Direction edirection : edirections)
         {
@@ -123,17 +101,38 @@ public enum Direction
         throw new InvalidDirectionException();
     }
     
-    /**
-     * @param direction
-     *            The compass direction
-     * @return The EDirection equivalent to that compassdirection
-     */
-    public static Direction getFromCompass(CompassDirection direction)
+    private Direction(String name)
     {
-        if (direction == CompassDirection.north) { return Direction.north; }
-        if (direction == CompassDirection.east) { return Direction.east; }
-        if (direction == CompassDirection.south) { return Direction.south; }
-        if (direction == CompassDirection.west) { return Direction.west; }
-        return Direction.none;
+        this.StringValue = name;
+        addEDirection();
+    }
+    
+    private Direction(String name, String[] alts)
+    {
+        this.StringValue = name;
+        for (String alt : alts)
+        {
+            this.alts.add(alt);
+        }
+        addEDirection();
+    }
+    
+    private void addEDirection()
+    {
+        Direction.edirections.add(this);
+    }
+    
+    /**
+     * @return The alternate names of this
+     */
+    public ArrayList<String> getAlts()
+    {
+        return this.alts;
+    }
+    
+    @Override
+    public String toString()
+    {
+        return this.StringValue;
     }
 }

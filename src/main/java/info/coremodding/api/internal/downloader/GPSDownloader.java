@@ -25,12 +25,9 @@ public class GPSDownloader
             {
                 if (file.getName().startsWith("GPS")) file.delete();
             }
-            FileUtils
-                    .copyURLToFile(
-                            new URL(
-                                    "https://github.com/CoreModding/GodlyEnergySystems/raw/master/dls/APIDist1_7.jar"),
-                            new File(".\\GPS_Automatic.jar"));
-        } catch (IOException e)
+            FileUtils.copyURLToFile(new URL("https://github.com/CoreModding/GodlyEnergySystems/raw/master/dls/APIDist1_7.jar"), new File(".\\GPS_Automatic.jar"));
+        }
+        catch (IOException e)
         {
             e.printStackTrace();
         }

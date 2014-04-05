@@ -12,6 +12,12 @@ public class CoreAPIFMLLoadingPlugin implements IFMLLoadingPlugin
 {
     
     @Override
+    public String getAccessTransformerClass()
+    {
+        return null;
+    }
+    
+    @Override
     public String[] getASMTransformerClass()
     {
         return new String[] { CoreAPIClassTransformer.class.getName() };
@@ -33,12 +39,6 @@ public class CoreAPIFMLLoadingPlugin implements IFMLLoadingPlugin
     public void injectData(Map<String, Object> data)
     {
         return;
-    }
-    
-    @Override
-    public String getAccessTransformerClass()
-    {
-        return null;
     }
     
 }

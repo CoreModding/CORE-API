@@ -14,6 +14,22 @@ public class Serializer
 {
     
     /**
+     * @param bytes
+     *            The bytes to deserialize
+     * @return The object from the bytes
+     * @throws IOException
+     *             Something screwed up
+     * @throws ClassNotFoundException
+     *             Something screwed up
+     */
+    public static Object deserialize(byte[] bytes) throws IOException, ClassNotFoundException
+    {
+        ByteArrayInputStream b = new ByteArrayInputStream(bytes);
+        ObjectInputStream o = new ObjectInputStream(b);
+        return o.readObject();
+    }
+    
+    /**
      * @param obj
      *            The object to serialize
      * @return The bytes from the object
@@ -26,22 +42,5 @@ public class Serializer
         ObjectOutputStream o = new ObjectOutputStream(b);
         o.writeObject(obj);
         return b.toByteArray();
-    }
-    
-    /**
-     * @param bytes
-     *            The bytes to deserialize
-     * @return The object from the bytes
-     * @throws IOException
-     *             Something screwed up
-     * @throws ClassNotFoundException
-     *             Something screwed up
-     */
-    public static Object deserialize(byte[] bytes) throws IOException,
-            ClassNotFoundException
-    {
-        ByteArrayInputStream b = new ByteArrayInputStream(bytes);
-        ObjectInputStream o = new ObjectInputStream(b);
-        return o.readObject();
     }
 }

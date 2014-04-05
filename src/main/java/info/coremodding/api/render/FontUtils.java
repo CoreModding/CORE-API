@@ -32,11 +32,9 @@ public class FontUtils
      * @param color
      *            The text color
      */
-    public static void drawCenteredString(String s, int xCenter, int y,
-            int color)
+    public static void drawCenteredString(String s, int xCenter, int y, int color)
     {
-        fontRenderer.drawString(s,
-                xCenter - fontRenderer.getStringWidth(s) / 2, y, color);
+        fontRenderer.drawString(s, xCenter - fontRenderer.getStringWidth(s) / 2, y, color);
     }
     
     /**
@@ -53,7 +51,6 @@ public class FontUtils
      */
     public static void drawRightString(String s, int xRight, int y, int color)
     {
-        fontRenderer.drawString(s, xRight - fontRenderer.getStringWidth(s), y,
-                color);
+        fontRenderer.drawString(s, xRight - fontRenderer.getStringWidth(s), y, color);
     }
 }

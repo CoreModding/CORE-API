@@ -25,125 +25,6 @@ public class FTPClientUtils
 {
     
     /**
-     * @param host
-     *            The host to connect to (www.example.com, 127.0.0.1)
-     * @param username
-     *            The username to login with (noobguy)
-     * @param password
-     *            The password to login with (1234)
-     * @param startdir
-     *            The directory to start at (/data/blorg/)
-     * @return The FTP client that was generated
-     * @throws IOException
-     *             Something screwed up
-     * @throws SocketException
-     *             Something screwed up
-     * @throws FTPException
-     *             Something screwed up
-     */
-    public static FTPClient generateFTPClient(String host, String username,
-            String password, String startdir) throws SocketException,
-            IOException, FTPException
-    {
-        FTPClient client = new FTPClient();
-        FTPClientConfig config = new FTPClientConfig();
-        client.configure(config);
-        client.connect(host);
-        client.login(username, password);
-        if (!FTPReply.isPositiveCompletion(client.getReply())) { throw new FTPException(
-                "Error connecting to server and logging in!"); }
-        if (!client.changeWorkingDirectory(startdir)) { throw new FTPException(
-                "Error changing directory!"); }
-        return client;
-    }
-    
-    /**
-     * @param host
-     *            The host to connect to (www.example.com, 127.0.0.1)
-     * @param username
-     *            The username to login with (noobguy)
-     * @param password
-     *            The password to login with (1234)
-     * @return The FTP client that was generated
-     * @throws IOException
-     *             Something screwed up
-     * @throws SocketException
-     *             Something screwed up
-     * @throws FTPException
-     *             Something screwed up
-     */
-    public static FTPClient generateFTPClient(String host, String username,
-            String password) throws SocketException, IOException, FTPException
-    {
-        FTPClient client = new FTPClient();
-        FTPClientConfig config = new FTPClientConfig();
-        client.configure(config);
-        client.connect(host);
-        client.login(username, password);
-        if (!FTPReply.isPositiveCompletion(client.getReply())) { throw new FTPException(
-                "Error connecting to server and logging in!"); }
-        return client;
-    }
-    
-    /**
-     * @param ftp
-     *            The FTP client to change the directory on
-     * @param dir
-     *            The directory to go to
-     * @throws FTPException
-     *             Something went wrong!
-     * @throws IOException
-     *             Something went wrong!
-     */
-    public static void gotoDir(FTPClient ftp, String dir) throws FTPException,
-            IOException
-    {
-        ftp.changeWorkingDirectory("/");
-        if (!ftp.changeWorkingDirectory(dir)) { throw new FTPException(
-                "Error changing directory!"); }
-    }
-    
-    /**
-     * Download a single file from the FTP server
-     * 
-     * @param ftpClient
-     *            an instance of org.apache.commons.net.ftp.FTPClient class.
-     * @param remoteFilePath
-     *            path of the file on the server
-     * @param savePath
-     *            path of directory where the file will be stored
-     * @return true if the file was downloaded successfully, false otherwise
-     * @throws IOException
-     *             if any network or IO error occurred.
-     */
-    public static boolean downloadFile(FTPClient ftpClient,
-            String remoteFilePath, String savePath) throws IOException
-    {
-        File downloadFile = new File(savePath);
-        
-        File parentDir = downloadFile.getParentFile();
-        if (!parentDir.exists())
-        {
-            parentDir.mkdir();
-        }
-        
-        @SuppressWarnings("resource")
-        OutputStream outputStream = new BufferedOutputStream(
-                new FileOutputStream(downloadFile));
-        try
-        {
-            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-            return ftpClient.retrieveFile(remoteFilePath, outputStream);
-        } catch (IOException ex)
-        {
-            throw ex;
-        } finally
-        {
-            outputStream.close();
-        }
-    }
-    
-    /**
      * Download a whole directory from a FTP server.
      * 
      * @param ftpClient
@@ -159,8 +40,7 @@ public class FTPClientUtils
      * @throws IOException
      *             if any network or IO error occurred.
      */
-    public static void downloadDirectory(FTPClient ftpClient, String parentDir,
-            String currentDir, String saveDir) throws IOException
+    public static void downloadDirectory(FTPClient ftpClient, String parentDir, String currentDir, String saveDir) throws IOException
     {
         String dirToList = parentDir;
         if (!currentDir.equals(""))
@@ -179,33 +59,141 @@ public class FTPClientUtils
                 {
                     continue;
                 }
-                String filePath = parentDir + "/" + currentDir + "/"
-                        + currentFileName;
+                String filePath = parentDir + "/" + currentDir + "/" + currentFileName;
                 if (currentDir.equals(""))
                 {
                     filePath = parentDir + "/" + currentFileName;
                 }
                 
-                String newDirPath = saveDir + parentDir + File.separator
-                        + currentDir + File.separator + currentFileName;
+                String newDirPath = saveDir + parentDir + File.separator + currentDir + File.separator + currentFileName;
                 if (currentDir.equals(""))
                 {
-                    newDirPath = saveDir + parentDir + File.separator
-                            + currentFileName;
+                    newDirPath = saveDir + parentDir + File.separator + currentFileName;
                 }
                 
                 if (aFile.isDirectory())
                 {
                     File newDir = new File(newDirPath);
                     newDir.mkdirs();
-                    downloadDirectory(ftpClient, dirToList, currentFileName,
-                            saveDir);
-                } else
+                    downloadDirectory(ftpClient, dirToList, currentFileName, saveDir);
+                }
+                else
                 {
                     downloadFile(ftpClient, filePath, newDirPath);
                 }
             }
         }
+    }
+    
+    /**
+     * Download a single file from the FTP server
+     * 
+     * @param ftpClient
+     *            an instance of org.apache.commons.net.ftp.FTPClient class.
+     * @param remoteFilePath
+     *            path of the file on the server
+     * @param savePath
+     *            path of directory where the file will be stored
+     * @return true if the file was downloaded successfully, false otherwise
+     * @throws IOException
+     *             if any network or IO error occurred.
+     */
+    public static boolean downloadFile(FTPClient ftpClient, String remoteFilePath, String savePath) throws IOException
+    {
+        File downloadFile = new File(savePath);
+        
+        File parentDir = downloadFile.getParentFile();
+        if (!parentDir.exists())
+        {
+            parentDir.mkdir();
+        }
+        
+        @SuppressWarnings("resource")
+        OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(downloadFile));
+        try
+        {
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+            return ftpClient.retrieveFile(remoteFilePath, outputStream);
+        }
+        catch (IOException ex)
+        {
+            throw ex;
+        }
+        finally
+        {
+            outputStream.close();
+        }
+    }
+    
+    /**
+     * @param host
+     *            The host to connect to (www.example.com, 127.0.0.1)
+     * @param username
+     *            The username to login with (noobguy)
+     * @param password
+     *            The password to login with (1234)
+     * @return The FTP client that was generated
+     * @throws IOException
+     *             Something screwed up
+     * @throws SocketException
+     *             Something screwed up
+     * @throws FTPException
+     *             Something screwed up
+     */
+    public static FTPClient generateFTPClient(String host, String username, String password) throws SocketException, IOException, FTPException
+    {
+        FTPClient client = new FTPClient();
+        FTPClientConfig config = new FTPClientConfig();
+        client.configure(config);
+        client.connect(host);
+        client.login(username, password);
+        if (!FTPReply.isPositiveCompletion(client.getReply())) { throw new FTPException("Error connecting to server and logging in!"); }
+        return client;
+    }
+    
+    /**
+     * @param host
+     *            The host to connect to (www.example.com, 127.0.0.1)
+     * @param username
+     *            The username to login with (noobguy)
+     * @param password
+     *            The password to login with (1234)
+     * @param startdir
+     *            The directory to start at (/data/blorg/)
+     * @return The FTP client that was generated
+     * @throws IOException
+     *             Something screwed up
+     * @throws SocketException
+     *             Something screwed up
+     * @throws FTPException
+     *             Something screwed up
+     */
+    public static FTPClient generateFTPClient(String host, String username, String password, String startdir) throws SocketException, IOException, FTPException
+    {
+        FTPClient client = new FTPClient();
+        FTPClientConfig config = new FTPClientConfig();
+        client.configure(config);
+        client.connect(host);
+        client.login(username, password);
+        if (!FTPReply.isPositiveCompletion(client.getReply())) { throw new FTPException("Error connecting to server and logging in!"); }
+        if (!client.changeWorkingDirectory(startdir)) { throw new FTPException("Error changing directory!"); }
+        return client;
+    }
+    
+    /**
+     * @param ftp
+     *            The FTP client to change the directory on
+     * @param dir
+     *            The directory to go to
+     * @throws FTPException
+     *             Something went wrong!
+     * @throws IOException
+     *             Something went wrong!
+     */
+    public static void gotoDir(FTPClient ftp, String dir) throws FTPException, IOException
+    {
+        ftp.changeWorkingDirectory("/");
+        if (!ftp.changeWorkingDirectory(dir)) { throw new FTPException("Error changing directory!"); }
     }
     
     /**
@@ -224,9 +212,7 @@ public class FTPClientUtils
      * @throws IOException
      *             if any network or IO error occurred.
      */
-    public static void uploadDirectory(FTPClient ftpClient,
-            String remoteDirPath, String _localParentDir, String remoteParentDir)
-            throws IOException
+    public static void uploadDirectory(FTPClient ftpClient, String remoteDirPath, String _localParentDir, String remoteParentDir) throws IOException
     {
         String localParentDir = _localParentDir;
         
@@ -236,8 +222,7 @@ public class FTPClientUtils
         {
             for (File item : subFiles)
             {
-                String remoteFilePath = remoteDirPath + "/" + remoteParentDir
-                        + "/" + item.getName();
+                String remoteFilePath = remoteDirPath + "/" + remoteParentDir + "/" + item.getName();
                 if (remoteParentDir.equals(""))
                 {
                     remoteFilePath = remoteDirPath + "/" + item.getName();
@@ -246,7 +231,8 @@ public class FTPClientUtils
                 {
                     String localFilePath = item.getAbsolutePath();
                     uploadFile(ftpClient, localFilePath, remoteFilePath);
-                } else
+                }
+                else
                 {
                     ftpClient.makeDirectory(remoteFilePath);
                     String parent = remoteParentDir + "/" + item.getName();
@@ -257,8 +243,7 @@ public class FTPClientUtils
                     }
                     
                     localParentDir = item.getAbsolutePath();
-                    uploadDirectory(ftpClient, remoteDirPath, localParentDir,
-                            parent);
+                    uploadDirectory(ftpClient, remoteDirPath, localParentDir, parent);
                 }
             }
         }
@@ -277,8 +262,7 @@ public class FTPClientUtils
      * @throws IOException
      *             if any network or IO error occurred.
      */
-    public static boolean uploadFile(FTPClient ftpClient, String localFilePath,
-            String remoteFilePath) throws IOException
+    public static boolean uploadFile(FTPClient ftpClient, String localFilePath, String remoteFilePath) throws IOException
     {
         File localFile = new File(localFilePath);
         
@@ -288,7 +272,8 @@ public class FTPClientUtils
         {
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
             return ftpClient.storeFile(remoteFilePath, inputStream);
-        } finally
+        }
+        finally
         {
             inputStream.close();
         }

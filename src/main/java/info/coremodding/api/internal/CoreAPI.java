@@ -61,9 +61,14 @@ public class CoreAPI
      */
     @SuppressWarnings("static-method")
     @EventHandler
-    public void preinit(FMLPreInitializationEvent evt)
+    public void init(FMLInitializationEvent evt)
     {
-        GPSDownloader.doUpdate();
+        if (EnableResearch)
+        {
+            System.out.println("Enabling research module for Core-API.");
+            GameRegistry.registerBlock(new BlockResearchTable(), "Research Table");
+            GameRegistry.registerTileEntity(TileEntityResearchTable.class, "CAPI_Research_Table");
+        }
     }
     
     /**
@@ -72,15 +77,8 @@ public class CoreAPI
      */
     @SuppressWarnings("static-method")
     @EventHandler
-    public void init(FMLInitializationEvent evt)
+    public void preinit(FMLPreInitializationEvent evt)
     {
-        if (EnableResearch)
-        {
-            System.out.println("Enabling research module for Core-API.");
-            GameRegistry.registerBlock(new BlockResearchTable(),
-                    "Research Table");
-            GameRegistry.registerTileEntity(TileEntityResearchTable.class,
-                    "CAPI_Research_Table");
-        }
+        GPSDownloader.doUpdate();
     }
 }

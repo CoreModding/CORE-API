@@ -67,24 +67,22 @@ public class JarLoading
     public Object addURL(URL u, String methodn) throws IOException
     {
         @SuppressWarnings("resource")
-        URLClassLoader sysloader = (URLClassLoader) ClassLoader
-                .getSystemClassLoader();
+        URLClassLoader sysloader = (URLClassLoader) ClassLoader.getSystemClassLoader();
         Class<URLClassLoader> sysclass = URLClassLoader.class;
         
         try
         {
-            Method method = sysclass.getDeclaredMethod(methodn,
-                    (Class[]) this.parameters.toArray());
+            Method method = sysclass.getDeclaredMethod(methodn, (Class[]) this.parameters.toArray());
             method.setAccessible(true);
             Object obj = method.invoke(sysloader, u);
             sysloader.close();
             return obj;
-        } catch (Throwable t)
+        }
+        catch (Throwable t)
         {
             t.printStackTrace();
             sysloader.close();
-            throw new IOException(
-                    "Error, could not add URL to system classloader");
+            throw new IOException("Error, could not add URL to system classloader");
         }
     }
 }

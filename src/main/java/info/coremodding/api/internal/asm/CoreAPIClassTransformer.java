@@ -19,20 +19,6 @@ import org.objectweb.asm.tree.MethodNode;
 public class CoreAPIClassTransformer implements IClassTransformer
 {
     
-    @Override
-    public byte[] transform(String name, String transformedName,
-            byte[] basicClass)
-    {
-        for (ASMItem item : ASMItem.items)
-        {
-            if (item.obfuscatedClass.equals(name)) return patchClassASM(name,
-                    basicClass, item, false);
-            if (item.workspaceClass.equals(name)) return patchClassASM(name,
-                    basicClass, item, true);
-        }
-        return basicClass;
-    }
-    
     /**
      * Patches an ASM class
      * 
@@ -47,8 +33,7 @@ public class CoreAPIClassTransformer implements IClassTransformer
      *            obfuscated?
      * @return The new class after patching
      */
-    public static byte[] patchClassASM(String name, byte[] bytes, ASMItem item,
-            boolean inWorkspace)
+    public static byte[] patchClassASM(String name, byte[] bytes, ASMItem item, boolean inWorkspace)
     {
         
         ClassNode classNode = new ClassNode();
@@ -63,9 +48,7 @@ public class CoreAPIClassTransformer implements IClassTransformer
             int fdiv_index = -1;
             
             // Checks if method is the one we want to patch
-            if ((m.name.equals(inWorkspace ? item.workspaceMethod
-                    : item.obfuscatedMethod) && m.desc
-                    .equals(item.itemDescription)))
+            if ((m.name.equals(inWorkspace ? item.workspaceMethod : item.obfuscatedMethod) && m.desc.equals(item.itemDescription)))
             {
                 AbstractInsnNode currentNode = null;
                 AbstractInsnNode targetNode = null;
@@ -109,9 +92,19 @@ public class CoreAPIClassTransformer implements IClassTransformer
         
         // ASM specific for cleaning up and returning the final bytes for JVM
         // processing.
-        ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS
-                | ClassWriter.COMPUTE_FRAMES);
+        ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
         classNode.accept(writer);
         return writer.toByteArray();
+    }
+    
+    @Override
+    public byte[] transform(String name, String transformedName, byte[] basicClass)
+    {
+        for (ASMItem item : ASMItem.items)
+        {
+            if (item.obfuscatedClass.equals(name)) return patchClassASM(name, basicClass, item, false);
+            if (item.workspaceClass.equals(name)) return patchClassASM(name, basicClass, item, true);
+        }
+        return basicClass;
     }
 }

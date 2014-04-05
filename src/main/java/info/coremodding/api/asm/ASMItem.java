@@ -82,9 +82,7 @@ public class ASMItem
      * @param modname
      *            The name of the mod that registered this for debug
      */
-    public ASMItem(String obfclass, String wrkclass, String obfmethod,
-            String wrkmethod, String desc, int startInst, int remNum,
-            AbstractInsnNode[] newInsts, String modname)
+    public ASMItem(String obfclass, String wrkclass, String obfmethod, String wrkmethod, String desc, int startInst, int remNum, AbstractInsnNode[] newInsts, String modname)
     {
         this.obfuscatedClass = obfclass;
         this.workspaceClass = wrkclass;
@@ -101,7 +99,6 @@ public class ASMItem
     @Override
     public String toString()
     {
-        return "MOD ERROR: " + this.submitMod + " WHILE PATCHING "
-                + this.workspaceClass + " M" + this.workspaceMethod;
+        return "MOD ERROR: " + this.submitMod + " WHILE PATCHING " + this.workspaceClass + " M" + this.workspaceMethod;
     }
 }

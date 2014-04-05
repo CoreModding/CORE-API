@@ -44,39 +44,22 @@ public enum CompassDirection
     private final ArrayList<String>            alts        = new ArrayList<>();
     private static ArrayList<CompassDirection> edirections = new ArrayList<>();
     
-    private CompassDirection(String name)
-    {
-        this.StringValue = name;
-        addEDirection();
-    }
-    
-    private CompassDirection(String name, String[] alts)
-    {
-        this.StringValue = name;
-        for (String alt : alts)
-        {
-            this.alts.add(alt);
-        }
-        addEDirection();
-    }
-    
-    private void addEDirection()
-    {
-        CompassDirection.edirections.add(this);
-    }
-    
-    @Override
-    public String toString()
-    {
-        return this.StringValue;
-    }
-    
     /**
-     * @return The alternate names of this
+     * @param direction
+     *            The e direction
+     * @return The compass direction equivalent to that direction
+     * @throws InvalidDirectionException
+     *             The given direction is not valid
+     *             Does not throw for all and none, those both return none.
      */
-    public ArrayList<String> getAlts()
+    public static CompassDirection getFromCompass(Direction direction) throws InvalidDirectionException
     {
-        return this.alts;
+        if (direction == Direction.north) { return CompassDirection.north; }
+        if (direction == Direction.east) { return CompassDirection.east; }
+        if (direction == Direction.south) { return CompassDirection.south; }
+        if (direction == Direction.west) { return CompassDirection.west; }
+        if (direction == Direction.none || direction == Direction.all) { return CompassDirection.none; }
+        throw new InvalidDirectionException();
     }
     
     /**
@@ -108,22 +91,38 @@ public enum CompassDirection
         return CompassDirection.none;
     }
     
-    /**
-     * @param direction
-     *            The e direction
-     * @return The compass direction equivalent to that direction
-     * @throws InvalidDirectionException
-     *             The given direction is not valid
-     *             Does not throw for all and none, those both return none.
-     */
-    public static CompassDirection getFromCompass(Direction direction)
-            throws InvalidDirectionException
+    private CompassDirection(String name)
     {
-        if (direction == Direction.north) { return CompassDirection.north; }
-        if (direction == Direction.east) { return CompassDirection.east; }
-        if (direction == Direction.south) { return CompassDirection.south; }
-        if (direction == Direction.west) { return CompassDirection.west; }
-        if (direction == Direction.none || direction == Direction.all) { return CompassDirection.none; }
-        throw new InvalidDirectionException();
+        this.StringValue = name;
+        addEDirection();
+    }
+    
+    private CompassDirection(String name, String[] alts)
+    {
+        this.StringValue = name;
+        for (String alt : alts)
+        {
+            this.alts.add(alt);
+        }
+        addEDirection();
+    }
+    
+    private void addEDirection()
+    {
+        CompassDirection.edirections.add(this);
+    }
+    
+    /**
+     * @return The alternate names of this
+     */
+    public ArrayList<String> getAlts()
+    {
+        return this.alts;
+    }
+    
+    @Override
+    public String toString()
+    {
+        return this.StringValue;
     }
 }

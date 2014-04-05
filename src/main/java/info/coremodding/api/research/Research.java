@@ -18,9 +18,42 @@ public abstract class Research
     }
     
     /**
+     * @return What level of similarity the research accepts.
+     * 
+     *         Example for stone:
+     *         1. Would accept ores
+     *         2. Would accept end stone
+     *         3. Would accept nether rack
+     *         4. Accepts anything with the same material
+     */
+    @SuppressWarnings("static-method")
+    public int acceptSimilar()
+    {
+        return 2;
+    }
+    
+    /**
+     * @return The chance out of 100 that an item will break in research
+     */
+    @SuppressWarnings("static-method")
+    public int chanceItemBreak()
+    {
+        return 100;
+    }
+    
+    /**
      * @return The first item needed
      */
     public abstract Item i1();
+    
+    /**
+     * @return The tenth item needed
+     */
+    @SuppressWarnings("static-method")
+    public Item i10()
+    {
+        return null;
+    }
     
     /**
      * @return The second item needed
@@ -88,38 +121,5 @@ public abstract class Research
     public Item i9()
     {
         return null;
-    }
-    
-    /**
-     * @return The tenth item needed
-     */
-    @SuppressWarnings("static-method")
-    public Item i10()
-    {
-        return null;
-    }
-    
-    /**
-     * @return The chance out of 100 that an item will break in research
-     */
-    @SuppressWarnings("static-method")
-    public int chanceItemBreak()
-    {
-        return 100;
-    }
-    
-    /**
-     * @return What level of similarity the research accepts.
-     * 
-     *         Example for stone:
-     *         1. Would accept ores
-     *         2. Would accept end stone
-     *         3. Would accept nether rack
-     *         4. Accepts anything with the same material
-     */
-    @SuppressWarnings("static-method")
-    public int acceptSimilar()
-    {
-        return 2;
     }
 }

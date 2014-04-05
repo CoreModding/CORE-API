@@ -26,20 +26,16 @@ public class ConfigManager
      * @param modidName
      *            The mod id to name the config
      */
-    public static void CreateConfig(FMLPreInitializationEvent event,
-            String dir, String modidName)
+    public static void CreateConfig(FMLPreInitializationEvent event, String dir, String modidName)
     {
-        config = new Configuration(new File(event
-                .getModConfigurationDirectory().getAbsolutePath()
-                + File.separator + dir + File.separator + modidName + ".cfg"));
+        config = new Configuration(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + dir + File.separator + modidName + ".cfg"));
     }
     
     /**
      * Gets a value
      */
     @SuppressWarnings("javadoc")
-    public static void get(String category, String key, String defaultValue,
-            String comment)
+    public static void get(String category, String key, boolean[] defaultValue, String comment)
     {
         config.get(category, key, defaultValue, comment);
     }
@@ -48,8 +44,7 @@ public class ConfigManager
      * Gets a value
      */
     @SuppressWarnings("javadoc")
-    public static void get(String category, String key, boolean[] defaultValue,
-            String comment)
+    public static void get(String category, String key, String defaultValue, String comment)
     {
         config.get(category, key, defaultValue, comment);
     }

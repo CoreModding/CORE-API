@@ -23,14 +23,12 @@ public class ShapeUtils
      * @param length
      *            The length of the rectangle
      */
-    public static void drawRectangle(Color color, double x, double y,
-            int height, int length)
+    public static void drawRectangle(Color color, double x, double y, int height, int length)
     {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glPushMatrix();
-        GL11.glColor4d(color.getRed(), color.getGreen(), color.getBlue(),
-                color.getAlpha());
+        GL11.glColor4d(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
         GL11.glBegin(GL11.GL_QUADS);
         GL11.glVertex2d(x, y);
         GL11.glVertex2d(x + length, y);
