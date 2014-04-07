@@ -3,6 +3,10 @@ package info.coremodding.api.internal;
 import info.coremodding.api.internal.downloader.GPSDownloader;
 import info.coremodding.api.internal.research.BlockResearchTable;
 import info.coremodding.api.internal.research.TileEntityResearchTable;
+import info.coremodding.api.plugin.Loader;
+import info.coremodding.api.plugin.PluginLoader;
+import info.coremodding.api.plugin.PluginMetadata;
+import info.coremodding.api.plugin.main.CoreAPIPlugin;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -13,7 +17,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 /**
  * The main mod class
  */
-@Mod(modid = CoreAPI.ModID, name = CoreAPI.ModName, version = CoreAPI.ModVer)
+@Mod(modid = CoreAPI.ModID, name = CoreAPI.ModName, version = CoreAPI.ModVer, guiFactory = "info.coremodding.api.gui.ModGuiFactoryHandler")
 public class CoreAPI
 {
     
@@ -26,7 +30,7 @@ public class CoreAPI
     /**
      * The mod ID
      */
-    public static final String  ModID    = "CoreModding_LIB";
+    public static final String  ModID    = "Core-API";
     
     /**
      * The mod name
@@ -61,24 +65,37 @@ public class CoreAPI
      */
     @SuppressWarnings("static-method")
     @EventHandler
-    public void init(FMLInitializationEvent evt)
+    public void preinit(FMLPreInitializationEvent evt)
     {
-        if (EnableResearch)
-        {
-            System.out.println("Enabling research module for Core-API.");
-            GameRegistry.registerBlock(new BlockResearchTable(), "Research Table");
-            GameRegistry.registerTileEntity(TileEntityResearchTable.class, "CAPI_Research_Table");
-        }
+    	//To Make the Plugin list work
+        PluginLoader.addPlugin(new CoreAPIPlugin());
+        
+        GPSDownloader.doUpdate();
     }
-    
     /**
      * @param evt
      *            The event that triggered the method
      */
     @SuppressWarnings("static-method")
     @EventHandler
-    public void preinit(FMLPreInitializationEvent evt)
+    public void init(FMLInitializationEvent evt)
     {
-        GPSDownloader.doUpdate();
+    	 /**
+         * for the new PluginLoader
+         * TODO MAke Automatic
+         */
+        PluginMetadata.init();
+        Loader.instance().loadPlugins();
+        Loader.instance().initializePlugins();
+        
+        if (EnableResearch)
+        {
+            System.out.println("Enabling research module for Core-API.");
+            GameRegistry.registerBlock(new BlockResearchTable(), "Research Table");
+            GameRegistry.registerTileEntity(TileEntityResearchTable.class, "CAPI_Research_Table");           
+        }
+       
     }
+    
+   
 }

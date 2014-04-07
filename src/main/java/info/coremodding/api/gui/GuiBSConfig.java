@@ -1,0 +1,174 @@
+package info.coremodding.api.gui;
+
+import info.coremodding.api.gui.slot.GuiSlotMod;
+import info.coremodding.api.plugin.Loader;
+import info.coremodding.api.plugin.ModPlugin;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiMainMenu;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
+
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.client.GuiModList;
+
+public class GuiBSConfig extends GuiScreen
+{
+    String                        guiTitle;
+    public GuiScreen             parent;
+    private int listWidth;
+    private GuiSlotMod modList;
+	private int selected = -1;
+	private ModPlugin selectedMod;
+	private GuiButton about, Done;
+	public GuiBSConfig(GuiScreen parent)
+    {
+        this.parent = parent;
+        guiTitle = "test";
+    }
+    
+    /**
+     * Adds the buttons (and other controls) to the screen in question.
+     */
+   
+
+    @SuppressWarnings({ "unchecked", "static-access" })
+	@Override
+    public void initGui()
+    {
+        buttonList.clear();
+        
+        /*this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height - 38, I18n.format("gui.done")));
+        this.buttonList.add(new GuiButton(2, this.width / 1 + 75, i + 72 + 12, "About"));
+       */
+        about=new GuiButton(2, this.width / 2 - 100, this.height - 38, 98, 20, "About");
+        Done=new GuiButton(1, this.width / 2 + 2, this.height - 38 , 98, 20, I18n.format("gui.done", new Object[0]));
+        
+        buttonList.add(about);
+        buttonList.add(Done);
+        
+        
+        for (ModPlugin mod : Loader.mods) {
+            listWidth= Math.max(listWidth,getFontRenderer().getStringWidth(mod.getMeta().name) + 10);
+            listWidth = Math.max(listWidth,getFontRenderer().getStringWidth(mod.getMeta().version) + 10);
+        }
+        
+        listWidth =Math.min(listWidth, 150);
+        this.modList = new GuiSlotMod(this, Loader.mods, listWidth);
+        
+        
+    }
+    
+    public FontRenderer getFontRenderer() {
+       
+        return fontRendererObj;
+    }
+	
+    @Override
+    protected void actionPerformed(GuiButton par1GuiButton)
+    {
+        switch (par1GuiButton.id)
+        {
+            case 1:
+                
+                MinecraftHelper.displayGuiScreen(Minecraft.getMinecraft(), new GuiModList(new GuiMainMenu()));
+                break;
+            
+            case 2:
+            	//this.mc.displayGuiScreen(new GuiAbout(this));
+            	this.updateScreen();
+            	MinecraftHelper.displayGuiScreen(Minecraft.getMinecraft(), new GuiAbout(this));
+               
+                break;
+        }
+    }
+    
+    public Minecraft getMinecraftInstance() {
+       
+        return mc;
+    }
+
+    @Override
+    protected void keyTyped(char c, int i)
+    {
+       
+    }
+    
+    @Override
+    protected void mouseClicked(int par1, int par2, int par3)
+    {
+        super.mouseClicked(par1, par2, par3);
+        
+    }
+    
+   
+    @Override
+    public void updateScreen()
+    {
+        super.updateScreen();
+        //updateTimeoutMillisecondsTextBox.updateCursorCounter();
+    }
+    
+    public int drawLine(String line, int offset, int shifty)
+    {
+        this.fontRendererObj.drawString(line, offset, shifty, 0xd7edea);
+        return shifty + 10;
+    }
+
+    @SuppressWarnings("static-access")
+	@Override
+    public void drawScreen(int par1, int par2, float par3)
+    {
+    	 this.modList.drawScreen(par1, par2, par3);
+         this.drawCenteredString(this.fontRendererObj, "Plugin List", this.width / 2, 16, 0xFFFFFF);
+         int offset = this.listWidth  + 20;
+         int shifty = 35;
+         if (selectedMod != null) {
+             GL11.glEnable(GL11.GL_BLEND);
+             
+                 this.fontRendererObj.drawStringWithShadow(selectedMod.meta().name, offset, shifty, 0xFFFFFF);
+                 shifty += 12;
+
+                 shifty = drawLine(String.format("Version: %s (%s)", selectedMod.meta().name, selectedMod.meta().version), offset, shifty);
+                 shifty = drawLine(String.format("Mod ID: '%s' ", selectedMod.meta().name), offset, shifty);
+              
+                 int rightSide = this.width - offset - 20;
+                 if (rightSide > 20)
+                 {
+                	 this.getFontRenderer().drawSplitString(selectedMod.meta().description, offset, shifty + 10, rightSide, 0xDDDDDD);
+                 }
+                shifty = drawLine(String.format("Description: %s", selectedMod.meta().description), offset, shifty);
+                
+              //   offset = ( this.listWidth + this.width ) / 2;
+                 //this.drawCenteredString(this.fontRendererObj, selectedMod.name(), offset, 35, 0xFFFFFF);
+                 //this.drawCenteredString(this.fontRendererObj, String.format("Version: %s",selectedMod.version()), offset, 45, 0xFFFFFF);
+                 
+                //this.drawCenteredString(this.fontRendererObj, String.format("Mod State: %s",ModPlugin.getModState()), offset, 55, 0xFFFFFF);
+                 //this.drawCenteredString(this.fontRendererObj, "No mod information found", offset, 65, 0xDDDDDD);
+                 // this.drawCenteredString(this.fontRendererObj, "Ask your mod author to provide a mod mcmod.info file", offset, 75, 0xDDDDDD);
+                
+              }
+             GL11.glDisable(GL11.GL_BLEND);
+        
+         super.drawScreen(par1, par2,par3);
+     }
+    
+   
+    public void selectModIndex(int var1)
+    {
+        this.selected=var1;
+        if (var1>=0 && var1<=Loader.mods.size()) {
+            this.selectedMod=Loader.mods.get(selected);
+        } else {
+            this.selectedMod=null;
+        }
+    }
+
+    public boolean modIndexSelected(int var1)
+    {
+        return var1==selected;
+    }
+    
+}  
