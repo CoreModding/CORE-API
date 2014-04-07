@@ -9,7 +9,7 @@ import net.minecraft.client.resources.I18n;
 import org.lwjgl.opengl.GL11;
 
 /**
- * @author Roborave
+ * @author cpw, Roborave
  * 
  */
 public class GuiAbout extends GuiScreen
