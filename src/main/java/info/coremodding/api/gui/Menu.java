@@ -8,10 +8,11 @@ import net.minecraft.client.resources.I18n;
 
 public class Menu extends GuiScreen
 {
-    String                        guiTitle;
-    private GuiScreen             parent;
-    private GuiButton             plugins, Done;
-	public Menu(GuiScreen parent)
+    String                  guiTitle;
+    private final GuiScreen parent;
+    private GuiButton       plugins, Done;
+    
+    public Menu(GuiScreen parent)
     {
         this.parent = parent;
     }
@@ -19,26 +20,25 @@ public class Menu extends GuiScreen
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    @SuppressWarnings("unchecked")
-	@Override
+    @Override
     public void initGui()
     {
-        buttonList.clear();
+        this.buttonList.clear();
         
-        plugins=new GuiButton(2, this.width / 2 - 100, this.height / 2 , 98, 20, "Plugins");
-        Done=new GuiButton(1, this.width / 2 + 2, this.height / 2 , 98, 20, I18n.format("gui.done", new Object[0]));
+        this.plugins = new GuiButton(2, this.width / 2 - 100, this.height / 2, 98, 20, "Plugins");
+        this.Done = new GuiButton(1, this.width / 2 + 2, this.height / 2, 98, 20, I18n.format("gui.done", new Object[0]));
         
-        buttonList.add(plugins);
-        buttonList.add(Done);
-        
+        this.buttonList.add(this.plugins);
+        this.buttonList.add(this.Done);
         
     }
     
-    public FontRenderer getFontRenderer() {
-       
-        return fontRendererObj;
+    public FontRenderer getFontRenderer()
+    {
+        
+        return this.fontRendererObj;
     }
-	
+    
     @Override
     protected void actionPerformed(GuiButton par1GuiButton)
     {
@@ -46,26 +46,29 @@ public class Menu extends GuiScreen
         {
             case 1:
                 
-                MinecraftHelper.displayGuiScreen(Minecraft.getMinecraft(), parent);
+                MinecraftHelper.displayGuiScreen(Minecraft.getMinecraft(), this.parent);
                 break;
             
             case 2:
-            	this.updateScreen();
-            	MinecraftHelper.displayGuiScreen(Minecraft.getMinecraft(), new GuiBSConfig(this));
-               
+                this.updateScreen();
+                MinecraftHelper.displayGuiScreen(Minecraft.getMinecraft(), new GuiBSConfig(this));
+                
+                break;
+            default:
                 break;
         }
     }
     
-    public Minecraft getMinecraftInstance() {
-       
-        return mc;
+    public Minecraft getMinecraftInstance()
+    {
+        
+        return this.mc;
     }
-
+    
     @Override
     protected void keyTyped(char c, int i)
     {
-       
+        
     }
     
     @Override
@@ -75,7 +78,6 @@ public class Menu extends GuiScreen
         
     }
     
-   
     @Override
     public void updateScreen()
     {
@@ -87,13 +89,13 @@ public class Menu extends GuiScreen
         this.fontRendererObj.drawString(line, offset, shifty, 0xd7edea);
         return shifty + 10;
     }
-
+    
     @Override
     public void drawScreen(int par1, int par2, float par3)
     {
-    	this.drawBackground(0);
-         this.drawCenteredString(this.fontRendererObj, "Menu", this.width / 2, 16, 0xFFFFFF);
-         super.drawScreen(par1, par2,par3);
-     }
+        this.drawBackground(0);
+        this.drawCenteredString(this.fontRendererObj, "Menu", this.width / 2, 16, 0xFFFFFF);
+        super.drawScreen(par1, par2, par3);
+    }
     
-}  
+}
