@@ -8,16 +8,16 @@ import java.util.List;
 public class CAPluginContainer implements ModPlugin
 {
     
+    public static ModPlugin buildFor(Class<?> clazz)
+    {
+        return new CAPluginContainer(clazz);
+    }
     public Info            modDescriptor;
     public Object          modInstance;
     private File           source;
     private PluginMetadata meta;
-    private ModState       state;
     
-    public CAPluginContainer(String dummy)
-    {
-        this(new File(dummy));
-    }
+    private ModState       state;
     
     public CAPluginContainer(Class<?> clazz)
     {
@@ -41,92 +41,19 @@ public class CAPluginContainer implements ModPlugin
         this.source = source;
     }
     
-    @Override
-    public PluginMetadata meta()
+    public CAPluginContainer(String dummy)
     {
-        return this.meta;
+        this(new File(dummy));
+    }
+    
+    @Override
+    public List<String> getDependencies()
+    {
+        return null;
     }
     
     @Override
     public PluginMetadata getMeta()
-    {
-        return null;
-    }
-    
-    @Override
-    public PluginMetadata setMeta(PluginMetadata meta)
-    {
-        return null;
-    }
-    
-    @Override
-    public boolean wantsPreInit()
-    {
-        return false;
-    }
-    
-    @Override
-    public boolean wantsPostInit()
-    {
-        return false;
-    }
-    
-    @Override
-    public void preInit()
-    {
-        
-    }
-    
-    @Override
-    public void init()
-    {
-        
-    }
-    
-    @Override
-    public void postInit()
-    {
-        
-    }
-    
-    @Override
-    public ModState getModState()
-    {
-        return this.state;
-    }
-    
-    @Override
-    public void nextState()
-    {
-        
-    }
-    
-    @Override
-    public void tickStart(TickType tick, Object... data)
-    {
-        
-    }
-    
-    @Override
-    public void tickEnd(TickType tick, Object... data)
-    {
-        
-    }
-    
-    @Override
-    public boolean matches(Object mod)
-    {
-        return true;
-    }
-    
-    @Override
-    public File getSource()
-    {
-        return this.source;
-    }
-    
-    @Override
-    public String getSortingRules()
     {
         return null;
     }
@@ -138,7 +65,13 @@ public class CAPluginContainer implements ModPlugin
     }
     
     @Override
-    public List<String> getDependencies()
+    public ModState getModState()
+    {
+        return this.state;
+    }
+    
+    @Override
+    public List<String> getPostDepends()
     {
         return null;
     }
@@ -150,14 +83,81 @@ public class CAPluginContainer implements ModPlugin
     }
     
     @Override
-    public List<String> getPostDepends()
+    public String getSortingRules()
     {
         return null;
     }
     
-    public static ModPlugin buildFor(Class<?> clazz)
+    @Override
+    public File getSource()
     {
-        return new CAPluginContainer(clazz);
+        return this.source;
+    }
+    
+    @Override
+    public void init()
+    {
+        
+    }
+    
+    @Override
+    public boolean matches(Object mod)
+    {
+        return true;
+    }
+    
+    @Override
+    public PluginMetadata meta()
+    {
+        return this.meta;
+    }
+    
+    @Override
+    public void nextState()
+    {
+        
+    }
+    
+    @Override
+    public void postInit()
+    {
+        
+    }
+    
+    @Override
+    public void preInit()
+    {
+        
+    }
+    
+    @Override
+    public PluginMetadata setMeta(PluginMetadata meta)
+    {
+        return null;
+    }
+    
+    @Override
+    public void tickEnd(TickType tick, Object... data)
+    {
+        
+    }
+    
+    @Override
+    public void tickStart(TickType tick, Object... data)
+    {
+        
+    }
+    
+    @Override
+    public boolean wantsPostInit()
+    {
+        return false;
+    }
+    
+    @Override
+    public boolean wantsPreInit()
+    {
+        return false;
     }
     
 }

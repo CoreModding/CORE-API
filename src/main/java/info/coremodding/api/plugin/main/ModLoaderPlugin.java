@@ -15,76 +15,17 @@ public class ModLoaderPlugin implements ModPlugin
     private PluginMetadata meta;
     
     @Override
-    public boolean wantsPreInit()
+    public List<String> getDependencies()
     {
-        return true;
+        ArrayList<String> depends = new ArrayList<>();
+        depends.add("*");
+        return depends;
     }
     
     @Override
-    public boolean wantsPostInit()
+    public PluginMetadata getMeta()
     {
-        return true;
-    }
-    
-    @Override
-    public void preInit()
-    {
-        setMeta(new PluginMetadata(CoreAPIPlugin.class));
-    }
-    
-    @Override
-    public void init()
-    {
-        
-    }
-    
-    @Override
-    public void postInit()
-    {
-        
-    }
-    
-    @Override
-    public ModState getModState()
-    {
-        return null;
-    }
-    
-    @Override
-    public void nextState()
-    {
-        
-    }
-    
-    @Override
-    public void tickStart(TickType tick, Object... data)
-    {
-        
-    }
-    
-    @Override
-    public void tickEnd(TickType tick, Object... data)
-    {
-        
-    }
-    
-    @Override
-    public boolean matches(Object mod)
-    {
-        return true;
-    }
-    
-    @Override
-    public File getSource()
-    {
-        return getSource();
-    }
-    
-    @Override
-    public String getSortingRules()
-    {
-        
-        return null;
+        return meta;
     }
     
     @Override
@@ -94,11 +35,15 @@ public class ModLoaderPlugin implements ModPlugin
     }
     
     @Override
-    public List<String> getDependencies()
+    public ModState getModState()
     {
-        ArrayList<String> depends = new ArrayList<>();
-        depends.add("*");
-        return depends;
+        return null;
+    }
+    
+    @Override
+    public List<String> getPostDepends()
+    {
+        return null;
     }
     
     @Override
@@ -110,9 +55,28 @@ public class ModLoaderPlugin implements ModPlugin
     }
     
     @Override
-    public List<String> getPostDepends()
+    public String getSortingRules()
     {
+        
         return null;
+    }
+    
+    @Override
+    public File getSource()
+    {
+        return getSource();
+    }
+    
+    @Override
+    public void init()
+    {
+        
+    }
+    
+    @Override
+    public boolean matches(Object mod)
+    {
+        return true;
     }
     
     @Override
@@ -122,9 +86,21 @@ public class ModLoaderPlugin implements ModPlugin
     }
     
     @Override
-    public PluginMetadata getMeta()
+    public void nextState()
     {
-        return meta;
+        
+    }
+    
+    @Override
+    public void postInit()
+    {
+        
+    }
+    
+    @Override
+    public void preInit()
+    {
+        setMeta(new PluginMetadata(CoreAPIPlugin.class));
     }
     
     @Override
@@ -132,6 +108,30 @@ public class ModLoaderPlugin implements ModPlugin
     {
         this.meta = meta;
         return meta;
+    }
+    
+    @Override
+    public void tickEnd(TickType tick, Object... data)
+    {
+        
+    }
+    
+    @Override
+    public void tickStart(TickType tick, Object... data)
+    {
+        
+    }
+    
+    @Override
+    public boolean wantsPostInit()
+    {
+        return true;
+    }
+    
+    @Override
+    public boolean wantsPreInit()
+    {
+        return true;
     }
     
 }

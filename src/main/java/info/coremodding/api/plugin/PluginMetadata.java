@@ -16,16 +16,16 @@ public class PluginMetadata
     
     private static Class<? extends ModPlugin> clazz;
     
-    public PluginMetadata(Class<? extends ModPlugin> clazz)
-    {
-        PluginMetadata.clazz = clazz;
-        modDescriptor = clazz.getAnnotation(Info.class);
-    }
-    
     public static void init()
     {
         
         name = clazz.getAnnotation(Info.class).name();
         version = clazz.getAnnotation(Info.class).version();
+    }
+    
+    public PluginMetadata(Class<? extends ModPlugin> clazz)
+    {
+        PluginMetadata.clazz = clazz;
+        modDescriptor = clazz.getAnnotation(Info.class);
     }
 }

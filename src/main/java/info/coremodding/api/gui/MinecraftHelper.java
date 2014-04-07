@@ -1,4 +1,3 @@
-
 package info.coremodding.api.gui;
 
 import net.minecraft.client.Minecraft;

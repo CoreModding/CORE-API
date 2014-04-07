@@ -16,22 +16,51 @@ public class CoreAPIPlugin implements ModPlugin
     private ModState       state;
     
     @Override
-    public boolean wantsPreInit()
+    public List<String> getDependencies()
     {
-        return true;
+        return null;
     }
     
     @Override
-    public boolean wantsPostInit()
+    public PluginMetadata getMeta()
     {
-        return true;
+        return this.meta;
     }
     
     @Override
-    public void preInit()
+    public Object getMod()
     {
-        setMeta(new PluginMetadata(CoreAPIPlugin.class));
-        getMeta().description = "Test";
+        return this;
+    }
+    
+    @Override
+    public ModState getModState()
+    {
+        return null;
+    }
+    
+    @Override
+    public List<String> getPostDepends()
+    {
+        return null;
+    }
+    
+    @Override
+    public List<String> getPreDepends()
+    {
+        return null;
+    }
+    
+    @Override
+    public String getSortingRules()
+    {
+        return "*";
+    }
+    
+    @Override
+    public File getSource()
+    {
+        return getSource();
     }
     
     @Override
@@ -41,15 +70,15 @@ public class CoreAPIPlugin implements ModPlugin
     }
     
     @Override
-    public void postInit()
+    public boolean matches(Object mod)
     {
-        
+        return true;
     }
     
     @Override
-    public ModState getModState()
+    public PluginMetadata meta()
     {
-        return null;
+        return setMeta(new PluginMetadata(CoreAPIPlugin.class));
     }
     
     @Override
@@ -68,9 +97,23 @@ public class CoreAPIPlugin implements ModPlugin
     }
     
     @Override
-    public void tickStart(TickType tick, Object... data)
+    public void postInit()
     {
         
+    }
+    
+    @Override
+    public void preInit()
+    {
+        setMeta(new PluginMetadata(CoreAPIPlugin.class));
+        getMeta().description = "Test";
+    }
+    
+    @Override
+    public PluginMetadata setMeta(PluginMetadata meta)
+    {
+        this.meta = meta;
+        return meta;
     }
     
     @Override
@@ -80,64 +123,21 @@ public class CoreAPIPlugin implements ModPlugin
     }
     
     @Override
-    public boolean matches(Object mod)
+    public void tickStart(TickType tick, Object... data)
+    {
+        
+    }
+    
+    @Override
+    public boolean wantsPostInit()
     {
         return true;
     }
     
     @Override
-    public File getSource()
+    public boolean wantsPreInit()
     {
-        return getSource();
-    }
-    
-    @Override
-    public String getSortingRules()
-    {
-        return "*";
-    }
-    
-    @Override
-    public Object getMod()
-    {
-        return this;
-    }
-    
-    @Override
-    public List<String> getDependencies()
-    {
-        return null;
-    }
-    
-    @Override
-    public List<String> getPreDepends()
-    {
-        return null;
-    }
-    
-    @Override
-    public List<String> getPostDepends()
-    {
-        return null;
-    }
-    
-    @Override
-    public PluginMetadata meta()
-    {
-        return setMeta(new PluginMetadata(CoreAPIPlugin.class));
-    }
-    
-    @Override
-    public PluginMetadata getMeta()
-    {
-        return this.meta;
-    }
-    
-    @Override
-    public PluginMetadata setMeta(PluginMetadata meta)
-    {
-        this.meta = meta;
-        return meta;
+        return true;
     }
     
 }

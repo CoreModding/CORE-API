@@ -41,6 +41,12 @@ public class CoreGUI extends GuiScreen
     }
     
     @Override
+    public boolean doesGuiPauseGame()
+    {
+        return false;
+    }
+    
+    @Override
     public void drawScreen(int par1, int _par2, float par3)
     {
         int par2 = _par2;
@@ -48,11 +54,5 @@ public class CoreGUI extends GuiScreen
         par2 = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize - 30) / 2;
         drawTexturedModalRect(par2, j, 0, 0, this.xSize, this.ySize);
-    }
-    
-    @Override
-    public boolean doesGuiPauseGame()
-    {
-        return false;
     }
 }

@@ -25,9 +25,6 @@ import cpw.mods.fml.common.toposort.TopologicalSort;
 
 public class Loader
 {
-    private static Pattern zipJar   = Pattern.compile("(.+).(zip|jar)$");
-    static Pattern         modClass = Pattern.compile("(.+/|)(\\_[^\\s$]+).class$");
-    
     /**
      * The state enum used to help track state progression for the loader
      * 
@@ -38,6 +35,9 @@ public class Loader
     {
         NOINIT, LOADING, PREINIT, INIT, POSTINIT, UP, ERRORED
     }
+    private static Pattern zipJar   = Pattern.compile("(.+).(zip|jar)$");
+    
+    static Pattern         modClass = Pattern.compile("(.+/|)(\\_[^\\s$]+).class$");
     
     /**
      * The singleton instance
@@ -58,6 +58,16 @@ public class Loader
     private static String          build;
     private static String          mcversion;
     
+    public static Loader instance()
+    {
+        if (instance == null)
+        {
+            instance = new Loader();
+            
+        }
+        
+        return instance;
+    }
     /**
      * The {@link State} of the loader
      */
@@ -70,25 +80,31 @@ public class Loader
      * The sorted list of mods.
      */
     public static List<ModPlugin>  mods;
+    public static List<ModPlugin> getModList()
+    {
+        return Loader.mods;
+    }
+    
+    /**
+     * Query if we know of a mod named modname
+     * 
+     * @param modname
+     * @return
+     */
+    public static boolean isModLoaded(String modname)
+    {
+        return instance().namedMods.containsKey(modname);
+    }
+    
     /**
      * A named list of mods
      */
     private Map<String, ModPlugin> namedMods;
+    
     /**
      * The canonical configuration directory
      */
     private File                   canonicalConfigDir;
-    
-    public static Loader instance()
-    {
-        if (instance == null)
-        {
-            instance = new Loader();
-            
-        }
-        
-        return instance;
-    }
     
     private Loader()
     {
@@ -106,107 +122,118 @@ public class Loader
         log.info(String.format("Forge Mod Loader version %s.%s.%s.%s for Minecraft %s loading", major, minor, rev, build, mcversion));
     }
     
-    /**
-     * Sort the mods into a sorted list, using dependency information from the
-     * containers. The sorting is performed
-     * using a {@link TopologicalSort} based on the pre- and post- dependency
-     * information provided by the mods.
-     */
-    @SuppressWarnings("static-access")
-    private void sortModList()
+    private boolean attemptDirLoad(File modDir, String path)
     {
-        log.fine("Verifying mod dependencies are satisfied");
-        
-        for (ModPlugin mod : mods)
+        if (path.length() == 0)
         {
-            if (!this.namedMods.keySet().containsAll(mod.getDependencies()))
+            extendClassLoader(modDir);
+        }
+        boolean foundAModClass = false;
+        File[] content = modDir.listFiles(new FileFilter()
+        {
+            @Override
+            public boolean accept(File file)
             {
-                log.severe(String.format("The mod %s requires mods %s to be available, one or more are not", mod.meta().name, mod.getDependencies()));
-                LoaderException le = new LoaderException();
-                log.throwing("Loader", "sortModList", le);
-                throw new LoaderException();
+                return (file.isFile() && modClass.matcher(file.getName()).find()) || file.isDirectory();
             }
+        });
+        
+        // Always sort our content
+        Arrays.sort(content);
+        for (File file : content)
+        {
+            if (file.isDirectory())
+            {
+                log.finest(String.format("Recursing into package %s", path + file.getName()));
+                foundAModClass |= attemptDirLoad(file, path + file.getName() + ".");
+                continue;
+            }
+            Matcher fname = modClass.matcher(file.getName());
+            if (!fname.find())
+            {
+                continue;
+            }
+            String clazzName = path + fname.group(2);
+            log.fine(String.format("Found a mod class %s in directory %s, attempting to load it", clazzName, modDir.getName()));
+            loadModClass(modDir, file.getName(), clazzName);
+            log.fine(String.format("Successfully loaded mod class %s", file.getName()));
+            foundAModClass = true;
         }
         
-        log.fine("All dependencies are satisfied");
-        PluginSorter sorter = new PluginSorter(mods, this.namedMods);
+        return foundAModClass;
+    }
+    
+    @SuppressWarnings("resource")
+    private boolean attemptFileLoad(File modFile)
+    {
+        extendClassLoader(modFile);
+        boolean foundAModClass = false;
         
         try
         {
-            log.fine("Sorting mods into an ordered list");
-            mods = sorter.sort();
-            log.fine("Sorted mod list:");
-            for (ModPlugin mod : mods)
+            ZipFile jar = new ZipFile(modFile);
+            
+            for (ZipEntry ze : Collections.list(jar.entries()))
             {
-                log.fine(String.format("\t%s: %s (%s)", mod.meta().name, mod.getSource().getName(), mod.getSortingRules()));
+                Matcher match = modClass.matcher(ze.getName());
+                
+                if (match.matches())
+                {
+                    String pkg = match.group(1).replace('/', '.');
+                    String clazzName = pkg + match.group(2);
+                    log.fine(String.format("Found a mod class %s in file %s, attempting to load it", clazzName, modFile.getName()));
+                    loadModClass(modFile, ze.getName(), clazzName);
+                    log.fine(String.format("Mod class %s loaded successfully", clazzName, modFile.getName()));
+                    foundAModClass = true;
+                }
             }
         }
-        catch (IllegalArgumentException iae)
+        catch (Exception e)
         {
-            log.severe("A dependency cycle was detected in the input mod set so they cannot be loaded in order");
-            log.throwing("Loader", "sortModList", iae);
-            throw new LoaderException(iae);
+            log.warning(String.format("Zip file %s failed to read properly", modFile.getName()));
+            log.throwing("fml.server.Loader", "attemptFileLoad", e);
+            this.state = State.ERRORED;
+        }
+        
+        return foundAModClass;
+    }
+    
+    private void extendClassLoader(File file)
+    {
+        try
+        {
+            this.modClassLoader.addFile(file);
+        }
+        catch (MalformedURLException e)
+        {
+            throw new LoaderException(e);
         }
     }
     
     /**
-     * The first mod initialization stage, performed immediately after the jar
-     * files and mod classes are loaded, {@link State#PREINIT}. The mods are
-     * configured from their configuration data and instantiated (for BaseMod
-     * mods).
+     * @return
      */
-    @SuppressWarnings("static-access")
-    private void preModInit()
+    public File getConfigDir()
     {
-        this.state = State.PREINIT;
-        log.fine("Beginning mod pre-initialization");
-        
-        for (ModPlugin mod : mods)
-        {
-            log.finer(String.format("Pre-initializing %s", mod.getSource()));
-            mod.preInit();
-            this.namedMods.put(mod.meta().name, mod);
-            mod.nextState();
-        }
-        
-        log.fine("Mod pre-initialization complete");
+        return this.canonicalConfigDir;
     }
     
     /**
-     * The main mod initialization stage, performed on the sorted mod list.
+     * Complete the initialization of the mods {@link #initializeMods()} and
+     * {@link #postModInit()} and mark ourselves up and ready to run.
      */
-    @SuppressWarnings("static-access")
-    private void modInit()
+    public void initializePlugins()
     {
+        modInit();
+        postModInit();
         
-        this.state = State.INIT;
-        log.fine("Beginning mod initialization");
-        
-        for (ModPlugin mod : mods)
+        for (ModPlugin mod : getModList())
         {
-            log.finer(String.format("Initializing %s", mod.meta().name));
-            mod.init();
             mod.nextState();
         }
+        this.state = State.UP;
+        log.info(String.format("Core API Loader load complete, %d plugins loaded", mods.size()));
         
-        log.fine("Mod initialization complete");
-    }
-    
-    @SuppressWarnings("static-access")
-    private void postModInit()
-    {
-        this.state = State.POSTINIT;
-        log.fine("Beginning mod post-initialization");
-        
-        for (ModPlugin mod : mods)
-        {
-            
-            log.finer(String.format("Post-initializing %s", mod.meta().name));
-            mod.postInit();
-            mod.nextState();
-        }
-        
-        log.fine("Mod post-initialization complete");
     }
     
     /**
@@ -355,47 +382,6 @@ public class Loader
         log.info(String.format("Forge Mod Loader has loaded %d mods", mods.size()));
     }
     
-    private boolean attemptDirLoad(File modDir, String path)
-    {
-        if (path.length() == 0)
-        {
-            extendClassLoader(modDir);
-        }
-        boolean foundAModClass = false;
-        File[] content = modDir.listFiles(new FileFilter()
-        {
-            @Override
-            public boolean accept(File file)
-            {
-                return (file.isFile() && modClass.matcher(file.getName()).find()) || file.isDirectory();
-            }
-        });
-        
-        // Always sort our content
-        Arrays.sort(content);
-        for (File file : content)
-        {
-            if (file.isDirectory())
-            {
-                log.finest(String.format("Recursing into package %s", path + file.getName()));
-                foundAModClass |= attemptDirLoad(file, path + file.getName() + ".");
-                continue;
-            }
-            Matcher fname = modClass.matcher(file.getName());
-            if (!fname.find())
-            {
-                continue;
-            }
-            String clazzName = path + fname.group(2);
-            log.fine(String.format("Found a mod class %s in directory %s, attempting to load it", clazzName, modDir.getName()));
-            loadModClass(modDir, file.getName(), clazzName);
-            log.fine(String.format("Successfully loaded mod class %s", file.getName()));
-            foundAModClass = true;
-        }
-        
-        return foundAModClass;
-    }
-    
     private void loadModClass(File classSource, String classFileName, String clazzName)
     {
         try
@@ -429,58 +415,6 @@ public class Loader
         }
     }
     
-    private void extendClassLoader(File file)
-    {
-        try
-        {
-            this.modClassLoader.addFile(file);
-        }
-        catch (MalformedURLException e)
-        {
-            throw new LoaderException(e);
-        }
-    }
-    
-    @SuppressWarnings("resource")
-    private boolean attemptFileLoad(File modFile)
-    {
-        extendClassLoader(modFile);
-        boolean foundAModClass = false;
-        
-        try
-        {
-            ZipFile jar = new ZipFile(modFile);
-            
-            for (ZipEntry ze : Collections.list(jar.entries()))
-            {
-                Matcher match = modClass.matcher(ze.getName());
-                
-                if (match.matches())
-                {
-                    String pkg = match.group(1).replace('/', '.');
-                    String clazzName = pkg + match.group(2);
-                    log.fine(String.format("Found a mod class %s in file %s, attempting to load it", clazzName, modFile.getName()));
-                    loadModClass(modFile, ze.getName(), clazzName);
-                    log.fine(String.format("Mod class %s loaded successfully", clazzName, modFile.getName()));
-                    foundAModClass = true;
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            log.warning(String.format("Zip file %s failed to read properly", modFile.getName()));
-            log.throwing("fml.server.Loader", "attemptFileLoad", e);
-            this.state = State.ERRORED;
-        }
-        
-        return foundAModClass;
-    }
-    
-    public static List<ModPlugin> getModList()
-    {
-        return Loader.mods;
-    }
-    
     /**
      * Called from the hook to start Plugin loading. We trigger the
      * {@link #load()} and {@link #preModInit()} phases here.
@@ -502,40 +436,106 @@ public class Loader
     }
     
     /**
-     * Complete the initialization of the mods {@link #initializeMods()} and
-     * {@link #postModInit()} and mark ourselves up and ready to run.
+     * The main mod initialization stage, performed on the sorted mod list.
      */
-    public void initializePlugins()
+    @SuppressWarnings("static-access")
+    private void modInit()
     {
-        modInit();
-        postModInit();
         
-        for (ModPlugin mod : getModList())
+        this.state = State.INIT;
+        log.fine("Beginning mod initialization");
+        
+        for (ModPlugin mod : mods)
         {
+            log.finer(String.format("Initializing %s", mod.meta().name));
+            mod.init();
             mod.nextState();
         }
-        this.state = State.UP;
-        log.info(String.format("Core API Loader load complete, %d plugins loaded", mods.size()));
         
+        log.fine("Mod initialization complete");
+    }
+    
+    @SuppressWarnings("static-access")
+    private void postModInit()
+    {
+        this.state = State.POSTINIT;
+        log.fine("Beginning mod post-initialization");
+        
+        for (ModPlugin mod : mods)
+        {
+            
+            log.finer(String.format("Post-initializing %s", mod.meta().name));
+            mod.postInit();
+            mod.nextState();
+        }
+        
+        log.fine("Mod post-initialization complete");
     }
     
     /**
-     * Query if we know of a mod named modname
-     * 
-     * @param modname
-     * @return
+     * The first mod initialization stage, performed immediately after the jar
+     * files and mod classes are loaded, {@link State#PREINIT}. The mods are
+     * configured from their configuration data and instantiated (for BaseMod
+     * mods).
      */
-    public static boolean isModLoaded(String modname)
+    @SuppressWarnings("static-access")
+    private void preModInit()
     {
-        return instance().namedMods.containsKey(modname);
+        this.state = State.PREINIT;
+        log.fine("Beginning mod pre-initialization");
+        
+        for (ModPlugin mod : mods)
+        {
+            log.finer(String.format("Pre-initializing %s", mod.getSource()));
+            mod.preInit();
+            this.namedMods.put(mod.meta().name, mod);
+            mod.nextState();
+        }
+        
+        log.fine("Mod pre-initialization complete");
     }
     
     /**
-     * @return
+     * Sort the mods into a sorted list, using dependency information from the
+     * containers. The sorting is performed
+     * using a {@link TopologicalSort} based on the pre- and post- dependency
+     * information provided by the mods.
      */
-    public File getConfigDir()
+    @SuppressWarnings("static-access")
+    private void sortModList()
     {
-        return this.canonicalConfigDir;
+        log.fine("Verifying mod dependencies are satisfied");
+        
+        for (ModPlugin mod : mods)
+        {
+            if (!this.namedMods.keySet().containsAll(mod.getDependencies()))
+            {
+                log.severe(String.format("The mod %s requires mods %s to be available, one or more are not", mod.meta().name, mod.getDependencies()));
+                LoaderException le = new LoaderException();
+                log.throwing("Loader", "sortModList", le);
+                throw new LoaderException();
+            }
+        }
+        
+        log.fine("All dependencies are satisfied");
+        PluginSorter sorter = new PluginSorter(mods, this.namedMods);
+        
+        try
+        {
+            log.fine("Sorting mods into an ordered list");
+            mods = sorter.sort();
+            log.fine("Sorted mod list:");
+            for (ModPlugin mod : mods)
+            {
+                log.fine(String.format("\t%s: %s (%s)", mod.meta().name, mod.getSource().getName(), mod.getSortingRules()));
+            }
+        }
+        catch (IllegalArgumentException iae)
+        {
+            log.severe("A dependency cycle was detected in the input mod set so they cannot be loaded in order");
+            log.throwing("Loader", "sortModList", iae);
+            throw new LoaderException(iae);
+        }
     }
     
 }

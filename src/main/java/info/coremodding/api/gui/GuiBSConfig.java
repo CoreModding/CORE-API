@@ -30,45 +30,6 @@ public class GuiBSConfig extends GuiScreen
         this.guiTitle = "test";
     }
     
-    /**
-     * Adds the buttons (and other controls) to the screen in question.
-     */
-    
-    @SuppressWarnings({ "static-access" })
-    @Override
-    public void initGui()
-    {
-        this.buttonList.clear();
-        
-        /*
-         * this.buttonList.add(new GuiButton(1, this.width / 2 - 100,
-         * this.height - 38, I18n.format("gui.done")));
-         * this.buttonList.add(new GuiButton(2, this.width / 1 + 75, i + 72 +
-         * 12, "About"));
-         */
-        this.about = new GuiButton(2, this.width / 2 - 100, this.height - 38, 98, 20, "About");
-        this.Done = new GuiButton(1, this.width / 2 + 2, this.height - 38, 98, 20, I18n.format("gui.done", new Object[0]));
-        
-        this.buttonList.add(this.about);
-        this.buttonList.add(this.Done);
-        
-        for (ModPlugin mod : Loader.mods)
-        {
-            this.listWidth = Math.max(this.listWidth, getFontRenderer().getStringWidth(mod.getMeta().name) + 10);
-            this.listWidth = Math.max(this.listWidth, getFontRenderer().getStringWidth(mod.getMeta().version) + 10);
-        }
-        
-        this.listWidth = Math.min(this.listWidth, 150);
-        this.modList = new GuiSlotMod(this, Loader.mods, this.listWidth);
-        
-    }
-    
-    public FontRenderer getFontRenderer()
-    {
-        
-        return this.fontRendererObj;
-    }
-    
     @Override
     protected void actionPerformed(GuiButton par1GuiButton)
     {
@@ -88,32 +49,6 @@ public class GuiBSConfig extends GuiScreen
             default:
                 break;
         }
-    }
-    
-    public Minecraft getMinecraftInstance()
-    {
-        
-        return this.mc;
-    }
-    
-    @Override
-    protected void keyTyped(char c, int i)
-    {
-        
-    }
-    
-    @Override
-    protected void mouseClicked(int par1, int par2, int par3)
-    {
-        super.mouseClicked(par1, par2, par3);
-        
-    }
-    
-    @Override
-    public void updateScreen()
-    {
-        super.updateScreen();
-        // updateTimeoutMillisecondsTextBox.updateCursorCounter();
     }
     
     public int drawLine(String line, int offset, int shifty)
@@ -169,6 +104,69 @@ public class GuiBSConfig extends GuiScreen
         super.drawScreen(par1, par2, par3);
     }
     
+    public FontRenderer getFontRenderer()
+    {
+        
+        return this.fontRendererObj;
+    }
+    
+    public Minecraft getMinecraftInstance()
+    {
+        
+        return this.mc;
+    }
+    
+    /**
+     * Adds the buttons (and other controls) to the screen in question.
+     */
+    
+    @SuppressWarnings({ "static-access" })
+    @Override
+    public void initGui()
+    {
+        this.buttonList.clear();
+        
+        /*
+         * this.buttonList.add(new GuiButton(1, this.width / 2 - 100,
+         * this.height - 38, I18n.format("gui.done")));
+         * this.buttonList.add(new GuiButton(2, this.width / 1 + 75, i + 72 +
+         * 12, "About"));
+         */
+        this.about = new GuiButton(2, this.width / 2 - 100, this.height - 38, 98, 20, "About");
+        this.Done = new GuiButton(1, this.width / 2 + 2, this.height - 38, 98, 20, I18n.format("gui.done", new Object[0]));
+        
+        this.buttonList.add(this.about);
+        this.buttonList.add(this.Done);
+        
+        for (ModPlugin mod : Loader.mods)
+        {
+            this.listWidth = Math.max(this.listWidth, getFontRenderer().getStringWidth(mod.getMeta().name) + 10);
+            this.listWidth = Math.max(this.listWidth, getFontRenderer().getStringWidth(mod.getMeta().version) + 10);
+        }
+        
+        this.listWidth = Math.min(this.listWidth, 150);
+        this.modList = new GuiSlotMod(this, Loader.mods, this.listWidth);
+        
+    }
+    
+    @Override
+    protected void keyTyped(char c, int i)
+    {
+        
+    }
+    
+    public boolean modIndexSelected(int var1)
+    {
+        return var1 == this.selected;
+    }
+    
+    @Override
+    protected void mouseClicked(int par1, int par2, int par3)
+    {
+        super.mouseClicked(par1, par2, par3);
+        
+    }
+    
     public void selectModIndex(int var1)
     {
         this.selected = var1;
@@ -182,9 +180,11 @@ public class GuiBSConfig extends GuiScreen
         }
     }
     
-    public boolean modIndexSelected(int var1)
+    @Override
+    public void updateScreen()
     {
-        return var1 == this.selected;
+        super.updateScreen();
+        // updateTimeoutMillisecondsTextBox.updateCursorCounter();
     }
     
 }

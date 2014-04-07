@@ -16,15 +16,6 @@ public class TopologicalSortP
     {
         private final Map<T, Set<T>> graph = new HashMap<>();
         
-        public boolean addNode(T node)
-        {
-            // Ignore nodes already added
-            if (this.graph.containsKey(node)) { return false; }
-            
-            this.graph.put(node, new HashSet<T>());
-            return true;
-        }
-        
         public void addEdge(T from, T to)
         {
             if (!(this.graph.containsKey(from) && this.graph.containsKey(to))) { throw new NoSuchElementException("Missing nodes from graph"); }
@@ -32,11 +23,13 @@ public class TopologicalSortP
             this.graph.get(from).add(to);
         }
         
-        public void removeEdge(T from, T to)
+        public boolean addNode(T node)
         {
-            if (!(this.graph.containsKey(from) && this.graph.containsKey(to))) { throw new NoSuchElementException("Missing nodes from graph"); }
+            // Ignore nodes already added
+            if (this.graph.containsKey(node)) { return false; }
             
-            this.graph.get(from).remove(to);
+            this.graph.put(node, new HashSet<T>());
+            return true;
         }
         
         public boolean edgeExists(T from, T to)
@@ -53,10 +46,22 @@ public class TopologicalSortP
             return Collections.unmodifiableSet(this.graph.get(from));
         }
         
+        public boolean isEmpty()
+        {
+            return this.graph.isEmpty();
+        }
+        
         @Override
         public Iterator<T> iterator()
         {
             return this.graph.keySet().iterator();
+        }
+        
+        public void removeEdge(T from, T to)
+        {
+            if (!(this.graph.containsKey(from) && this.graph.containsKey(to))) { throw new NoSuchElementException("Missing nodes from graph"); }
+            
+            this.graph.get(from).remove(to);
         }
         
         public int size()
@@ -64,61 +69,11 @@ public class TopologicalSortP
             return this.graph.size();
         }
         
-        public boolean isEmpty()
-        {
-            return this.graph.isEmpty();
-        }
-        
         @Override
         public String toString()
         {
             return this.graph.toString();
         }
-    }
-    
-    /**
-     * Sort the input graph into a topologically sorted list
-     * 
-     * Uses the reverse depth first search as outlined in ...
-     * 
-     * @param graph
-     * @return
-     */
-    public static <T> List<T> topologicalSort(DirectedGraph<T> graph)
-    {
-        DirectedGraph<T> rGraph = reverse(graph);
-        List<T> sortedResult = new ArrayList<>();
-        Set<T> visitedNodes = new HashSet<>();
-        // A list of "fully explored" nodes. Leftovers in here indicate cycles
-        // in the graph
-        Set<T> expandedNodes = new HashSet<>();
-        
-        for (T node : rGraph)
-        {
-            explore(node, rGraph, sortedResult, visitedNodes, expandedNodes);
-        }
-        
-        return sortedResult;
-    }
-    
-    public static <T> DirectedGraph<T> reverse(DirectedGraph<T> graph)
-    {
-        DirectedGraph<T> result = new DirectedGraph<T>();
-        
-        for (T node : graph)
-        {
-            result.addNode(node);
-        }
-        
-        for (T from : graph)
-        {
-            for (T to : graph.edgesFrom(from))
-            {
-                result.addEdge(to, from);
-            }
-        }
-        
-        return result;
     }
     
     public static <T> void explore(T node, DirectedGraph<T> graph, List<T> sortedResult, Set<T> visitedNodes, Set<T> expandedNodes)
@@ -150,5 +105,50 @@ public class TopologicalSortP
         sortedResult.add(node);
         // And mark ourselves as explored
         expandedNodes.add(node);
+    }
+    
+    public static <T> DirectedGraph<T> reverse(DirectedGraph<T> graph)
+    {
+        DirectedGraph<T> result = new DirectedGraph<T>();
+        
+        for (T node : graph)
+        {
+            result.addNode(node);
+        }
+        
+        for (T from : graph)
+        {
+            for (T to : graph.edgesFrom(from))
+            {
+                result.addEdge(to, from);
+            }
+        }
+        
+        return result;
+    }
+    
+    /**
+     * Sort the input graph into a topologically sorted list
+     * 
+     * Uses the reverse depth first search as outlined in ...
+     * 
+     * @param graph
+     * @return
+     */
+    public static <T> List<T> topologicalSort(DirectedGraph<T> graph)
+    {
+        DirectedGraph<T> rGraph = reverse(graph);
+        List<T> sortedResult = new ArrayList<>();
+        Set<T> visitedNodes = new HashSet<>();
+        // A list of "fully explored" nodes. Leftovers in here indicate cycles
+        // in the graph
+        Set<T> expandedNodes = new HashSet<>();
+        
+        for (T node : rGraph)
+        {
+            explore(node, rGraph, sortedResult, visitedNodes, expandedNodes);
+        }
+        
+        return sortedResult;
     }
 }

@@ -7,13 +7,23 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface Info 
+public @interface Info
 {
-	String name();
-	String version();
-	boolean wantsPreInit() default false;
-	boolean wantsPostInit() default false;
-    public @interface PreInit {}
-    public @interface Init {}
-    public @interface PostInit {}
+    public @interface Init
+    {
+    }
+    
+    public @interface PostInit
+    {
+    }
+    
+    public @interface PreInit
+    {
+    }
+    
+    String name();
+    
+    String version();
+    boolean wantsPostInit() default false;
+    boolean wantsPreInit() default false;
 }

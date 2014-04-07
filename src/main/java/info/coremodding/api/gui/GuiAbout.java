@@ -27,15 +27,6 @@ public class GuiAbout extends GuiScreen
         this.listWidth = 20;
     }
     
-    /**
-     * Adds the buttons (and other controls) to the screen in question.
-     */
-    @Override
-    public void initGui()
-    {
-        this.buttonList.add(new GuiButton(6, this.width / 2 - 100, this.height - 38, I18n.format("gui.done")));
-    }
-    
     @Override
     protected void actionPerformed(GuiButton button)
     {
@@ -76,6 +67,14 @@ public class GuiAbout extends GuiScreen
         super.drawScreen(p_571_1_, p_571_2_, p_571_3_);
     }
     
+    FontRenderer getFontRenderer()
+    {
+        /**
+         * The FontRenderer used by GuiScreen
+         */
+        return this.fontRendererObj;
+    }
+    
     Minecraft getMinecraftInstance()
     {
         /**
@@ -84,12 +83,13 @@ public class GuiAbout extends GuiScreen
         return this.mc;
     }
     
-    FontRenderer getFontRenderer()
+    /**
+     * Adds the buttons (and other controls) to the screen in question.
+     */
+    @Override
+    public void initGui()
     {
-        /**
-         * The FontRenderer used by GuiScreen
-         */
-        return this.fontRendererObj;
+        this.buttonList.add(new GuiButton(6, this.width / 2 - 100, this.height - 38, I18n.format("gui.done")));
     }
     
 }

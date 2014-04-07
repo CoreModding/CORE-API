@@ -27,33 +27,9 @@ public class GuiSlotMod extends GuiScrollingList
     }
     
     @Override
-    protected int getSize()
-    {
-        return this.mods.size();
-    }
-    
-    @Override
-    protected void elementClicked(int var1, boolean var2)
-    {
-        this.parent.selectModIndex(var1);
-    }
-    
-    @Override
-    protected boolean isSelected(int var1)
-    {
-        return this.parent.modIndexSelected(var1);
-    }
-    
-    @Override
     protected void drawBackground()
     {
         this.parent.drawDefaultBackground();
-    }
-    
-    @Override
-    protected int getContentHeight()
-    {
-        return (this.getSize()) * 35 + 1;
     }
     
     @SuppressWarnings("static-access")
@@ -69,5 +45,29 @@ public class GuiSlotMod extends GuiScrollingList
         // "Metadata not found", listWidth - 10), this.left + 3 , var3 + 22,
         // 0xCCCCCC);
         
+    }
+    
+    @Override
+    protected void elementClicked(int var1, boolean var2)
+    {
+        this.parent.selectModIndex(var1);
+    }
+    
+    @Override
+    protected int getContentHeight()
+    {
+        return (this.getSize()) * 35 + 1;
+    }
+    
+    @Override
+    protected int getSize()
+    {
+        return this.mods.size();
+    }
+    
+    @Override
+    protected boolean isSelected(int var1)
+    {
+        return this.parent.modIndexSelected(var1);
     }
 }

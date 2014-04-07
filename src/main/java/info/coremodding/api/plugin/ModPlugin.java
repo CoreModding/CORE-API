@@ -5,115 +5,150 @@ import java.util.List;
 
 /**
  * @author RoboRAve
- *
+ * 
  **/
 
 public interface ModPlugin
 {
-	
-    public enum ModState {
-        UNLOADED("Unloaded"), LOADED("Loaded"), PREINITIALIZED("Pre-initialized"), INITIALIZED("Initialized"), POSTINITIALIZED("Post-initialized"), AVAILABLE("Available");
+    
+    public enum ModState
+    {
+        UNLOADED("Unloaded"), LOADED("Loaded"), PREINITIALIZED(
+                "Pre-initialized"), INITIALIZED("Initialized"),
+        POSTINITIALIZED("Post-initialized"), AVAILABLE("Available");
         private String label;
-
-        private ModState(String label) {
-            this.label=label;
+        
+        private ModState(String label)
+        {
+            this.label = label;
         }
-        public String toString() {
+        
+        @Override
+        public String toString()
+        {
             return this.label;
         }
     }
-
-   
     
-    PluginMetadata meta();
-    
-    PluginMetadata getMeta();
-    
-    PluginMetadata setMeta(PluginMetadata meta);
-    /**
-     * The enclosed Plugin wants to be called during pre-initialization.
-     * @return
-     */
-    boolean wantsPreInit();
-    /**
-     * The enclosed Plugin wants to be called during post-initialization.
-     * @return
-     */
-    boolean wantsPostInit();
-    /**
-     * Called when pre-initialization occurs.
-     */
-    void preInit();
-    /**
-     * Called when main initialization occurs.
-     */
-    void init();
-    /**
-     * Called when post-initialization occurs.
-     */
-    void postInit();
-    /**
-     * The state of the mod
-     * @return
-     */
-    ModState getModState();
-    /**
-     * Move to the next mod state
-     */
-    void nextState();
-    /**
-     * A tick has started
-     */
-    void tickStart(TickType tick, Object ... data);
-    /**
-     * A tick has ended
-     */
-    void tickEnd(TickType tick, Object ... data);
-    /**
-     * Does this mod match the supplied mod?
-     * @param mod
-     * @return
-     */
-    boolean matches(Object mod);
-    /**
-     * The source of this mod: the file on the file system
-     * @return
-     */
-    File getSource();
-    /**
-     * Returns the sorting rules as a string for printing
-     * @return
-     */
-    String getSortingRules();
-    /**
-     * The actual mod object itself
-     * @return
-     */
-    Object getMod();
-    /**
-     * Does this mod want to generate world data.
-     * @return
-     */
+    public enum TickType
+    {
+        WORLD, RENDER, GUI, WORLDGUI;
+    }
     
     /**
-     * The strong dependencies of this mod. If the named mods in this list are not present, the game will abort.
+     * The strong dependencies of this mod. If the named mods in this list are
+     * not present, the game will abort.
+     * 
      * @return
      */
     List<String> getDependencies();
+    
+    PluginMetadata getMeta();
+    
     /**
-     * Get a list of mods to load before this one. The special value "*" indicates to load <i>after</i> all other mods (except other "*" mods).
+     * The actual mod object itself
+     * 
      * @return
      */
-    List<String> getPreDepends();
+    Object getMod();
+    
     /**
-     * Get a list of mods to load after this one. The special value "*" indicates to load <i>before</i> all other mods (except other "*" mods).
+     * The state of the mod
+     * 
+     * @return
+     */
+    ModState getModState();
+    
+    /**
+     * Get a list of mods to load after this one. The special value "*"
+     * indicates to load <i>before</i> all other mods (except other "*" mods).
+     * 
      * @return
      */
     List<String> getPostDepends();
     
-    public enum TickType {
-        WORLD, RENDER, GUI, WORLDGUI;
-    }
-	
-
+    /**
+     * Get a list of mods to load before this one. The special value "*"
+     * indicates to load <i>after</i> all other mods (except other "*" mods).
+     * 
+     * @return
+     */
+    List<String> getPreDepends();
+    
+    /**
+     * Returns the sorting rules as a string for printing
+     * 
+     * @return
+     */
+    String getSortingRules();
+    
+    /**
+     * The source of this mod: the file on the file system
+     * 
+     * @return
+     */
+    File getSource();
+    
+    /**
+     * Called when main initialization occurs.
+     */
+    void init();
+    
+    /**
+     * Does this mod match the supplied mod?
+     * 
+     * @param mod
+     * @return
+     */
+    boolean matches(Object mod);
+    
+    PluginMetadata meta();
+    
+    /**
+     * Move to the next mod state
+     */
+    void nextState();
+    
+    /**
+     * Called when post-initialization occurs.
+     */
+    void postInit();
+    
+    /**
+     * Called when pre-initialization occurs.
+     */
+    void preInit();
+    
+    PluginMetadata setMeta(PluginMetadata meta);
+    
+    /**
+     * Does this mod want to generate world data.
+     * 
+     * @return
+     */
+    
+    /**
+     * A tick has ended
+     */
+    void tickEnd(TickType tick, Object... data);
+    
+    /**
+     * A tick has started
+     */
+    void tickStart(TickType tick, Object... data);
+    
+    /**
+     * The enclosed Plugin wants to be called during post-initialization.
+     * 
+     * @return
+     */
+    boolean wantsPostInit();
+    
+    /**
+     * The enclosed Plugin wants to be called during pre-initialization.
+     * 
+     * @return
+     */
+    boolean wantsPreInit();
+    
 }

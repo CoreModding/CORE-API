@@ -25,27 +25,27 @@ public class CoreAPI
      * The instance of this mod forge uses
      */
     @Instance(CoreAPI.ModID)
-    public static CoreAPI instance = null;
+    public static CoreAPI      instance = null;
     
     /**
      * The mod ID
      */
-    public static final String  ModID    = "Core-API";
+    public static final String ModID    = "Core-API";
     
     /**
      * The mod name
      */
-    public static final String  ModName  = "CoreModding API";
+    public static final String ModName  = "CoreModding API";
     
     /**
      * The mod version
      */
-    public static final String  ModVer   = "0.0.1";
+    public static final String ModVer   = "0.0.1";
     
     /**
      * Should the research API be enabled
      */
-    public static boolean       EnableResearch;
+    public static boolean      EnableResearch;
     
     /**
      * Enables the research API
@@ -65,22 +65,9 @@ public class CoreAPI
      */
     @SuppressWarnings("static-method")
     @EventHandler
-    public void preinit(FMLPreInitializationEvent evt)
-    {
-    	//To Make the Plugin list work
-        PluginLoader.addPlugin(new CoreAPIPlugin());
-        
-        GPSDownloader.doUpdate();
-    }
-    /**
-     * @param evt
-     *            The event that triggered the method
-     */
-    @SuppressWarnings("static-method")
-    @EventHandler
     public void init(FMLInitializationEvent evt)
     {
-    	 /**
+        /**
          * for the new PluginLoader
          * TODO MAke Automatic
          */
@@ -92,10 +79,23 @@ public class CoreAPI
         {
             System.out.println("Enabling research module for Core-API.");
             GameRegistry.registerBlock(new BlockResearchTable(), "Research Table");
-            GameRegistry.registerTileEntity(TileEntityResearchTable.class, "CAPI_Research_Table");           
+            GameRegistry.registerTileEntity(TileEntityResearchTable.class, "CAPI_Research_Table");
         }
-       
+        
     }
     
-   
+    /**
+     * @param evt
+     *            The event that triggered the method
+     */
+    @SuppressWarnings("static-method")
+    @EventHandler
+    public void preinit(FMLPreInitializationEvent evt)
+    {
+        // To Make the Plugin list work
+        PluginLoader.addPlugin(new CoreAPIPlugin());
+        
+        GPSDownloader.doUpdate();
+    }
+    
 }

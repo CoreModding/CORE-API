@@ -23,6 +23,7 @@ public class ResearchHandler
             this.integer = i2;
         }
     }
+    
     private static final ArrayList<Research>                       research = new ArrayList<>();
     
     private static final HashMap<Item, ArrayList<ItemWithInteger>> similar  = new HashMap<>();

@@ -9,14 +9,7 @@ public class CAPCommonHandler
      * The singleton
      */
     private static final CAPCommonHandler INSTANCE = new CAPCommonHandler();
-    /**
-     * We register our delegate here
-     * @param handler
-     */
-    public void registerSidedDelegate(IFMLSidedHandler handler)
-    {
-    }
-
+    
     /**
      * @return the instance
      */
@@ -24,14 +17,24 @@ public class CAPCommonHandler
     {
         return INSTANCE;
     }
-
+    
     /**
      * Is this a modloader mod?
+     * 
      * @param clazz
      * @return
      */
     public boolean isModLoaderMod(Class<?> clazz)
     {
         return Loader.mods.contains(clazz);
+    }
+    
+    /**
+     * We register our delegate here
+     * 
+     * @param handler
+     */
+    public void registerSidedDelegate(IFMLSidedHandler handler)
+    {
     }
 }
