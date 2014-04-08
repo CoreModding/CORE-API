@@ -22,17 +22,10 @@ public class ContainerResearchTable extends Container
      * @param tileEntity
      *            The tile entity to open with
      */
-    public ContainerResearchTable(InventoryPlayer inventory,
-            TileEntityResearchTable tileEntity)
+    public ContainerResearchTable(InventoryPlayer inventory, TileEntityResearchTable tileEntity)
     {
         this.te = tileEntity;
         this.bindPlayerInventory(inventory);
-    }
-    
-    @Override
-    public boolean canInteractWith(EntityPlayer var1)
-    {
-        return true;
     }
     
     /**
@@ -47,14 +40,19 @@ public class ContainerResearchTable extends Container
         {
             for (int j = 0; j < 9; j++)
             {
-                addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9,
-                        8 + j * 18, 84 + i * 18));
+                addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
         for (int i = 0; i < 9; i++)
         {
             addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
         }
+    }
+    
+    @Override
+    public boolean canInteractWith(EntityPlayer var1)
+    {
+        return true;
     }
     
     @Override

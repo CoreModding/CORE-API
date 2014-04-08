@@ -4,9 +4,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 
-import org.lwjgl.opengl.GL11;
-
-
 /**
  * @author cpw, Roborave
  * 
@@ -16,6 +13,7 @@ public class GuiAbout extends GuiScreen
     
     private final GuiScreen mainMenu;
     private final int       listWidth;
+    
     /**
      * @param mainMenu
      */
@@ -23,14 +21,6 @@ public class GuiAbout extends GuiScreen
     {
         this.mainMenu = mainMenu;
         this.listWidth = 20;
-    }
-    /**
-     * Adds the buttons (and other controls) to the screen in question.
-     */
-    @Override
-    public void initGui()
-    {
-        this.buttonList.add(new GuiButton(6, this.width / 2 - 100, this.height - 38, I18n.format("gui.done")));
     }
     
     @Override
@@ -41,7 +31,7 @@ public class GuiAbout extends GuiScreen
             switch (button.id)
             {
                 case 6:
-                   MinecraftHelper.displayGuiScreen(mc, this.mainMenu);
+                    MinecraftHelper.displayGuiScreen(mc, this.mainMenu);
                     return;
                 default:
                     break;
@@ -69,5 +59,14 @@ public class GuiAbout extends GuiScreen
         shifty = drawLine("this is a new system for loading addons for Core-API and othe mods", offset, shifty);
         shifty = drawLine("this was Created by RoboRave", offset, shifty);
         super.drawScreen(p_571_1_, p_571_2_, p_571_3_);
+    }
+    
+    /**
+     * Adds the buttons (and other controls) to the screen in question.
+     */
+    @Override
+    public void initGui()
+    {
+        this.buttonList.add(new GuiButton(6, this.width / 2 - 100, this.height - 38, I18n.format("gui.done")));
     }
 }

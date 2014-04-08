@@ -4,16 +4,11 @@ import info.coremodding.api.plugin.ModPlugin;
 import info.coremodding.api.plugin.annotation.Info;
 import info.coremodding.api.plugin.annotation.PluginMetadata;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 @Info(name = "Test2", version = "0.0.1")
 public class ModLoaderPlugin implements ModPlugin
 {
     
     private PluginMetadata meta;
-   
     
     @Override
     public PluginMetadata getMeta()

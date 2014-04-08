@@ -18,7 +18,8 @@ public class BlockResearchTable extends BlockContainer
     
     /**
      * The constructor
-     * @param name 
+     * 
+     * @param name
      */
     public BlockResearchTable(String name)
     {
@@ -37,9 +38,7 @@ public class BlockResearchTable extends BlockContainer
     }
     
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z,
-            EntityPlayer player, int metadata, float what, float these,
-            float are)
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are)
     {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity == null || player.isSneaking()) { return false; }

@@ -18,15 +18,13 @@ public class GUIResearchTable extends GuiContainer
      * @param container
      *            The container
      */
-    public GUIResearchTable(InventoryPlayer inventory,
-            TileEntityResearchTable tileEntity, ContainerResearchTable container)
+    public GUIResearchTable(InventoryPlayer inventory, TileEntityResearchTable tileEntity, ContainerResearchTable container)
     {
         super(container);
     }
     
     @Override
-    protected void drawGuiContainerBackgroundLayer(float var1, int var2,
-            int var3)
+    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
     {
         
     }

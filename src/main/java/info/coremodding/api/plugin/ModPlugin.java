@@ -2,9 +2,6 @@ package info.coremodding.api.plugin;
 
 import info.coremodding.api.plugin.annotation.PluginMetadata;
 
-import java.io.File;
-import java.util.List;
-
 /**
  * @author RoboRAve
  * 
@@ -46,7 +43,6 @@ public interface ModPlugin
      */
     Object getMod();
     
-
     /**
      * Called when main initialization occurs.
      */

@@ -24,37 +24,6 @@ public class ElementGetter
      *            The directory to scan for jars
      * @param annotation
      *            The annotation to use
-     * @return All methods in that jar with the given annotation
-     * @throws Exception
-     *             Something mucked up.
-     */
-    public static Set<Method> getMethodElements(String scanDir, Annotation annotation) throws Exception
-    {
-        Set<Method> _entries = new HashSet<>();
-        if (new File(scanDir).isDirectory())
-        {
-            File[] files = new File(scanDir).listFiles();
-            Reflections reflections = new Reflections();
-            for (File file : files)
-            {
-                if (file.exists())
-                {
-                    if (file.getName().endsWith(".cjar"))
-                    {
-                        reflections.scan(file.toURI().toURL());
-                        _entries.addAll(reflections.getMethodsAnnotatedWith(annotation));
-                    }
-                }
-            }
-        }
-        return _entries;
-    }
-    
-    /**
-     * @param scanDir
-     *            The directory to scan for jars
-     * @param annotation
-     *            The annotation to use
      * @return All constructors in that jar with the given annotation
      * @throws Exception
      *             Something mucked up.
@@ -105,6 +74,37 @@ public class ElementGetter
                     {
                         reflections.scan(file.toURI().toURL());
                         _entries.addAll(reflections.getFieldsAnnotatedWith(annotation));
+                    }
+                }
+            }
+        }
+        return _entries;
+    }
+    
+    /**
+     * @param scanDir
+     *            The directory to scan for jars
+     * @param annotation
+     *            The annotation to use
+     * @return All methods in that jar with the given annotation
+     * @throws Exception
+     *             Something mucked up.
+     */
+    public static Set<Method> getMethodElements(String scanDir, Annotation annotation) throws Exception
+    {
+        Set<Method> _entries = new HashSet<>();
+        if (new File(scanDir).isDirectory())
+        {
+            File[] files = new File(scanDir).listFiles();
+            Reflections reflections = new Reflections();
+            for (File file : files)
+            {
+                if (file.exists())
+                {
+                    if (file.getName().endsWith(".cjar"))
+                    {
+                        reflections.scan(file.toURI().toURL());
+                        _entries.addAll(reflections.getMethodsAnnotatedWith(annotation));
                     }
                 }
             }

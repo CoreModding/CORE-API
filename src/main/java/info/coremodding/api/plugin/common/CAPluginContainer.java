@@ -1,13 +1,10 @@
 package info.coremodding.api.plugin.common;
 
 import info.coremodding.api.plugin.ModPlugin;
-import info.coremodding.api.plugin.ModPlugin.ModState;
-import info.coremodding.api.plugin.ModPlugin.TickType;
 import info.coremodding.api.plugin.annotation.Info;
 import info.coremodding.api.plugin.annotation.PluginMetadata;
 
 import java.io.File;
-import java.util.List;
 
 public class CAPluginContainer implements ModPlugin
 {
@@ -16,6 +13,7 @@ public class CAPluginContainer implements ModPlugin
     {
         return new CAPluginContainer(clazz);
     }
+    
     public Info            modDescriptor;
     public Object          modInstance;
     private PluginMetadata meta;
@@ -46,7 +44,6 @@ public class CAPluginContainer implements ModPlugin
         this(new File(dummy));
     }
     
-
     @Override
     public PluginMetadata getMeta()
     {
@@ -58,7 +55,7 @@ public class CAPluginContainer implements ModPlugin
     {
         return this;
     }
-
+    
     @Override
     public void init()
     {

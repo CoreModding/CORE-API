@@ -17,9 +17,36 @@ public class TileEntityResearchTable extends TileEntity implements IInventory
     private ArrayList<ItemStack> inv;
     
     @Override
-    public void updateEntity()
+    public void closeInventory()
     {
         
+    }
+    
+    @Override
+    public ItemStack decrStackSize(int var1, int var2)
+    {
+        ItemStack item = this.inv.get(var1);
+        if (item.stackSize <= var2)
+        {
+            item = null;
+        }
+        else
+        {
+            item.stackSize -= var2;
+        }
+        return item;
+    }
+    
+    @Override
+    public String getInventoryName()
+    {
+        return "Research Table";
+    }
+    
+    @Override
+    public int getInventoryStackLimit()
+    {
+        return 5;
     }
     
     @Override
@@ -35,35 +62,9 @@ public class TileEntityResearchTable extends TileEntity implements IInventory
     }
     
     @Override
-    public ItemStack decrStackSize(int var1, int var2)
-    {
-        ItemStack item = this.inv.get(var1);
-        if (item.stackSize <= var2)
-        {
-            item = null;
-        } else
-        {
-            item.stackSize -= var2;
-        }
-        return item;
-    }
-    
-    @Override
     public ItemStack getStackInSlotOnClosing(int var1)
     {
         return this.inv.get(var1);
-    }
-    
-    @Override
-    public void setInventorySlotContents(int var1, ItemStack var2)
-    {
-        this.inv.set(var1, var2);
-    }
-    
-    @Override
-    public String getInventoryName()
-    {
-        return "Research Table";
     }
     
     @Override
@@ -73,9 +74,9 @@ public class TileEntityResearchTable extends TileEntity implements IInventory
     }
     
     @Override
-    public int getInventoryStackLimit()
+    public boolean isItemValidForSlot(int var1, ItemStack var2)
     {
-        return 5;
+        return true;
     }
     
     @Override
@@ -91,14 +92,14 @@ public class TileEntityResearchTable extends TileEntity implements IInventory
     }
     
     @Override
-    public void closeInventory()
+    public void setInventorySlotContents(int var1, ItemStack var2)
     {
-        
+        this.inv.set(var1, var2);
     }
     
     @Override
-    public boolean isItemValidForSlot(int var1, ItemStack var2)
+    public void updateEntity()
     {
-        return true;
+        
     }
 }

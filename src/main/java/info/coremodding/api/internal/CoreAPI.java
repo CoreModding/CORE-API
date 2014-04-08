@@ -72,7 +72,6 @@ public class CoreAPI
          * TODO Make Automatic
          */
         PluginMetadata.init();
-       
         
         if (EnableResearch)
         {
@@ -92,7 +91,7 @@ public class CoreAPI
     public void preinit(FMLPreInitializationEvent evt)
     {
         // To Make the Plugin list work
-    	Loader.instance().loadPlugins();
+        Loader.instance().loadPlugins();
         PluginLoader.addPlugin(new CoreAPIPlugin());
         
         GPSDownloader.doUpdate();

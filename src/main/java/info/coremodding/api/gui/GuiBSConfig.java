@@ -28,30 +28,7 @@ public class GuiBSConfig extends GuiScreen
     {
         this.parent = parent;
     }
-    /**
-     * Adds the buttons (and other controls) to the screen in question.
-     */
-    @Override
-    public void initGui()
-    {
-        this.buttonList.clear();
-        
-        this.about = new GuiButton(2, this.width / 2 - 100, this.height - 38, 98, 20, "About");
-        this.Done = new GuiButton(1, this.width / 2 + 2, this.height - 38, 98, 20, I18n.format("gui.done", new Object[0]));
-        
-        this.buttonList.add(this.about);
-        this.buttonList.add(this.Done);
-        
-        for (ModPlugin mod : Loader.instance().mods)
-        {
-            this.listWidth = Math.max(this.listWidth, getFontRenderer().getStringWidth(mod.getMeta().name) + 10);
-            this.listWidth = Math.max(this.listWidth, getFontRenderer().getStringWidth(mod.getMeta().version) + 10);
-        }
-        
-        this.listWidth = Math.min(this.listWidth, 150);
-        this.modList = new GuiSlotMod(this, Loader.instance().mods, this.listWidth);
-        
-    }
+    
     @Override
     protected void actionPerformed(GuiButton par1GuiButton)
     {
@@ -120,7 +97,33 @@ public class GuiBSConfig extends GuiScreen
         
         return this.mc;
     }
-   
+    
+    /**
+     * Adds the buttons (and other controls) to the screen in question.
+     */
+    @Override
+    public void initGui()
+    {
+        this.buttonList.clear();
+        
+        this.about = new GuiButton(2, this.width / 2 - 100, this.height - 38, 98, 20, "About");
+        this.Done = new GuiButton(1, this.width / 2 + 2, this.height - 38, 98, 20, I18n.format("gui.done", new Object[0]));
+        
+        this.buttonList.add(this.about);
+        this.buttonList.add(this.Done);
+        
+        Loader.instance();
+        for (ModPlugin mod : Loader.mods)
+        {
+            this.listWidth = Math.max(this.listWidth, getFontRenderer().getStringWidth(mod.getMeta().name) + 10);
+            this.listWidth = Math.max(this.listWidth, getFontRenderer().getStringWidth(mod.getMeta().version) + 10);
+        }
+        
+        this.listWidth = Math.min(this.listWidth, 150);
+        Loader.instance();
+        this.modList = new GuiSlotMod(this, Loader.mods, this.listWidth);
+        
+    }
     
     @Override
     protected void keyTyped(char c, int i)
@@ -143,9 +146,11 @@ public class GuiBSConfig extends GuiScreen
     public void selectModIndex(int var1)
     {
         this.selected = var1;
-        if (var1 >= 0 && var1 <= Loader.instance().mods.size())
+        Loader.instance();
+        if (var1 >= 0 && var1 <= Loader.mods.size())
         {
-            this.selectedMod = Loader.instance().mods.get(this.selected);
+            Loader.instance();
+            this.selectedMod = Loader.mods.get(this.selected);
         }
         else
         {
