@@ -18,14 +18,12 @@ public class BlockResearchTable extends BlockContainer
     
     /**
      * The constructor
-     * 
-     * @param name
      */
-    public BlockResearchTable(String name)
+    public BlockResearchTable()
     {
         super(Material.wood);
         this.setCreativeTab(CreativeTabs.tabDecorations);
-        this.setBlockName(name);
+        this.setBlockName("Research Table");
         this.setHardness(5.0F);
         this.setLightLevel(10);
         this.setResistance(3.0F);
