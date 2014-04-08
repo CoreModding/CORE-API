@@ -24,6 +24,8 @@ public @interface Info
     String name();
     
     String version();
+    
     boolean wantsPostInit() default false;
+    
     boolean wantsPreInit() default false;
 }

@@ -12,6 +12,7 @@ public class CAPluginContainer implements ModPlugin
     {
         return new CAPluginContainer(clazz);
     }
+    
     public Info            modDescriptor;
     public Object          modInstance;
     private File           source;
