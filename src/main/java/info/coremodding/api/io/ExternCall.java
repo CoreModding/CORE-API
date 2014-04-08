@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author James Load jars at runtime using this class
  */
-public class JarLoading
+public class ExternCall
 {
     
     private List<Class<?>> parameters;
@@ -49,7 +49,7 @@ public class JarLoading
      *            The parameter to add
      * @return The class (for stacked methods)
      */
-    public JarLoading addParameter(Object obj)
+    public ExternCall addParameter(Object obj)
     {
         this.parameters.add((Class<?>) obj);
         return this;
