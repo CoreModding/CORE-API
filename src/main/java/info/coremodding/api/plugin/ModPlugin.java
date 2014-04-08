@@ -1,5 +1,7 @@
 package info.coremodding.api.plugin;
 
+import info.coremodding.api.plugin.annotation.PluginMetadata;
+
 import java.io.File;
 import java.util.List;
 
@@ -35,14 +37,6 @@ public interface ModPlugin
         WORLD, RENDER, GUI, WORLDGUI;
     }
     
-    /**
-     * The strong dependencies of this mod. If the named mods in this list are
-     * not present, the game will abort.
-     * 
-     * @return
-     */
-    List<String> getDependencies();
-    
     PluginMetadata getMeta();
     
     /**
@@ -52,43 +46,7 @@ public interface ModPlugin
      */
     Object getMod();
     
-    /**
-     * The state of the mod
-     * 
-     * @return
-     */
-    ModState getModState();
-    
-    /**
-     * Get a list of mods to load after this one. The special value "*"
-     * indicates to load <i>before</i> all other mods (except other "*" mods).
-     * 
-     * @return
-     */
-    List<String> getPostDepends();
-    
-    /**
-     * Get a list of mods to load before this one. The special value "*"
-     * indicates to load <i>after</i> all other mods (except other "*" mods).
-     * 
-     * @return
-     */
-    List<String> getPreDepends();
-    
-    /**
-     * Returns the sorting rules as a string for printing
-     * 
-     * @return
-     */
-    String getSortingRules();
-    
-    /**
-     * The source of this mod: the file on the file system
-     * 
-     * @return
-     */
-    File getSource();
-    
+
     /**
      * Called when main initialization occurs.
      */
