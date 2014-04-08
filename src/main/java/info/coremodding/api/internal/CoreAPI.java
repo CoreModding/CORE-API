@@ -3,10 +3,6 @@ package info.coremodding.api.internal;
 import info.coremodding.api.internal.downloader.GPSDownloader;
 import info.coremodding.api.internal.research.BlockResearchTable;
 import info.coremodding.api.internal.research.TileEntityResearchTable;
-import info.coremodding.api.plugin.Loader;
-import info.coremodding.api.plugin.PluginLoader;
-import info.coremodding.api.plugin.annotation.PluginMetadata;
-import info.coremodding.api.plugin.main.CoreAPIPlugin;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -67,19 +63,12 @@ public class CoreAPI
     @EventHandler
     public void init(FMLInitializationEvent evt)
     {
-        /**
-         * for the new PluginLoader
-         * TODO Make Automatic
-         */
-        PluginMetadata.init();
-        
         if (EnableResearch)
         {
             System.out.println("Enabling research module for Core-API.");
             GameRegistry.registerBlock(new BlockResearchTable(), "Research Table");
             GameRegistry.registerTileEntity(TileEntityResearchTable.class, "CAPI_Research_Table");
         }
-        
     }
     
     /**
@@ -90,11 +79,6 @@ public class CoreAPI
     @EventHandler
     public void preinit(FMLPreInitializationEvent evt)
     {
-        // To Make the Plugin list work
-        Loader.instance().loadPlugins();
-        PluginLoader.addPlugin(new CoreAPIPlugin());
-        
         GPSDownloader.doUpdate();
     }
-    
 }
