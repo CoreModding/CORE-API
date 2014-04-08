@@ -1,21 +1,56 @@
-package info.coremodding.api.plugin.main;
+package info.coremodding.api.plugin.common;
 
 import info.coremodding.api.plugin.ModPlugin;
+import info.coremodding.api.plugin.ModPlugin.ModState;
+import info.coremodding.api.plugin.ModPlugin.TickType;
 import info.coremodding.api.plugin.annotation.Info;
 import info.coremodding.api.plugin.annotation.PluginMetadata;
 
-@Info(name = "Test", version = "0.0.1")
-public class CoreAPIPlugin implements ModPlugin
+import java.io.File;
+import java.util.List;
+
+public class CAPluginContainer implements ModPlugin
 {
     
+    public static ModPlugin buildFor(Class<?> clazz)
+    {
+        return new CAPluginContainer(clazz);
+    }
+    public Info            modDescriptor;
+    public Object          modInstance;
     private PluginMetadata meta;
     
-    private ModState       state;
+    public CAPluginContainer(Class<?> clazz)
+    {
+        
+        if (clazz == null) { return; }
+        
+        this.modDescriptor = clazz.getAnnotation(Info.class);
+        
+        try
+        {
+            this.modInstance = clazz.newInstance();
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
     
+    public CAPluginContainer(File source)
+    {
+    }
+    
+    public CAPluginContainer(String dummy)
+    {
+        this(new File(dummy));
+    }
+    
+
     @Override
     public PluginMetadata getMeta()
     {
-        return meta;
+        return null;
     }
     
     @Override
@@ -23,7 +58,7 @@ public class CoreAPIPlugin implements ModPlugin
     {
         return this;
     }
-    
+
     @Override
     public void init()
     {
@@ -39,22 +74,13 @@ public class CoreAPIPlugin implements ModPlugin
     @Override
     public PluginMetadata meta()
     {
-        return setMeta(new PluginMetadata(CoreAPIPlugin.class));
+        return this.meta;
     }
     
     @Override
     public void nextState()
     {
         
-        if (this.state == null)
-        {
-            this.state = ModState.UNLOADED;
-            return;
-        }
-        if (this.state.ordinal() + 1 < ModState.values().length)
-        {
-            this.state = ModState.values()[this.state.ordinal() + 1];
-        }
     }
     
     @Override
@@ -66,15 +92,13 @@ public class CoreAPIPlugin implements ModPlugin
     @Override
     public void preInit()
     {
-        setMeta(new PluginMetadata(CoreAPIPlugin.class));
-        getMeta().description = "Test";
+        
     }
     
     @Override
     public PluginMetadata setMeta(PluginMetadata meta)
     {
-        this.meta = meta;
-        return meta;
+        return null;
     }
     
     @Override
@@ -92,13 +116,13 @@ public class CoreAPIPlugin implements ModPlugin
     @Override
     public boolean wantsPostInit()
     {
-        return true;
+        return false;
     }
     
     @Override
     public boolean wantsPreInit()
     {
-        return true;
+        return false;
     }
     
 }

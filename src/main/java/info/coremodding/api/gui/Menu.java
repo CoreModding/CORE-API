@@ -16,6 +16,22 @@ public class Menu extends GuiScreen
     {
         this.parent = parent;
     }
+    //I Need this here because then the actionPerformed() method doesn't work.
+    /**
+     * Adds the buttons (and other controls) to the screen in question.
+     */
+    @Override
+    public void initGui()
+    {
+        this.buttonList.clear();
+        
+        this.plugins = new GuiButton(2, this.width / 2 - 100, this.height / 2, 98, 20, "Plugins");
+        this.Done = new GuiButton(1, this.width / 2 + 2, this.height / 2, 98, 20, I18n.format("gui.done", new Object[0]));
+        
+        this.buttonList.add(this.plugins);
+        this.buttonList.add(this.Done);
+        
+    }
     
     @Override
     protected void actionPerformed(GuiButton par1GuiButton)
@@ -62,23 +78,7 @@ public class Menu extends GuiScreen
         
         return this.mc;
     }
-    
-    /**
-     * Adds the buttons (and other controls) to the screen in question.
-     */
-    @Override
-    public void initGui()
-    {
-        this.buttonList.clear();
-        
-        this.plugins = new GuiButton(2, this.width / 2 - 100, this.height / 2, 98, 20, "Plugins");
-        this.Done = new GuiButton(1, this.width / 2 + 2, this.height / 2, 98, 20, I18n.format("gui.done", new Object[0]));
-        
-        this.buttonList.add(this.plugins);
-        this.buttonList.add(this.Done);
-        
-    }
-    
+ 
     @Override
     protected void keyTyped(char c, int i)
     {

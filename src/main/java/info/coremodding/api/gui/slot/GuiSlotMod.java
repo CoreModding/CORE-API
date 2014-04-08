@@ -4,6 +4,7 @@ import info.coremodding.api.gui.GuiBSConfig;
 import info.coremodding.api.plugin.Loader;
 import info.coremodding.api.plugin.ModPlugin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.renderer.Tessellator;
@@ -17,7 +18,7 @@ public class GuiSlotMod extends GuiScrollingList
 {
     
     private final GuiBSConfig     parent;
-    private final List<ModPlugin> mods;
+    private List<ModPlugin> mods;
     
     public GuiSlotMod(GuiBSConfig parent, List<ModPlugin> mods2, int listWidth)
     {
@@ -36,14 +37,10 @@ public class GuiSlotMod extends GuiScrollingList
     @Override
     protected void drawSlot(int listIndex, int var2, int var3, int var4, Tessellator var5)
     {
-        ModPlugin mc = Loader.mods.get(listIndex);
+        ModPlugin mc = Loader.instance().mods.get(listIndex);
         
         this.parent.getFontRenderer().drawString(this.parent.getFontRenderer().trimStringToWidth(mc.getMeta().name, this.listWidth - 10), this.left + 3, var3 + 2, 0xFFFFFF);
         this.parent.getFontRenderer().drawString(this.parent.getFontRenderer().trimStringToWidth(mc.getMeta().version, this.listWidth - 10), this.left + 3, var3 + 12, 0xCCCCCC);
-        // this.parent.getFontRenderer().drawString(this.parent.getFontRenderer().trimStringToWidth(mc.getMetadata()
-        // !=null ? mc.getMetadata().getChildModCountString() :
-        // "Metadata not found", listWidth - 10), this.left + 3 , var3 + 22,
-        // 0xCCCCCC);
         
     }
     

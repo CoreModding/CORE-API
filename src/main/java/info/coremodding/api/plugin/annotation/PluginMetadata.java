@@ -1,8 +1,6 @@
-package info.coremodding.api.plugin;
+package info.coremodding.api.plugin.annotation;
 
-import info.coremodding.api.plugin.common.Info;
-
-import com.google.gson.annotations.SerializedName;
+import info.coremodding.api.plugin.ModPlugin;
 
 public class PluginMetadata
 {

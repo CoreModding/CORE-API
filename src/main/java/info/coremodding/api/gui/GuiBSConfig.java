@@ -27,9 +27,31 @@ public class GuiBSConfig extends GuiScreen
     public GuiBSConfig(GuiScreen parent)
     {
         this.parent = parent;
-        this.guiTitle = "test";
     }
-    
+    /**
+     * Adds the buttons (and other controls) to the screen in question.
+     */
+    @Override
+    public void initGui()
+    {
+        this.buttonList.clear();
+        
+        this.about = new GuiButton(2, this.width / 2 - 100, this.height - 38, 98, 20, "About");
+        this.Done = new GuiButton(1, this.width / 2 + 2, this.height - 38, 98, 20, I18n.format("gui.done", new Object[0]));
+        
+        this.buttonList.add(this.about);
+        this.buttonList.add(this.Done);
+        
+        for (ModPlugin mod : Loader.instance().mods)
+        {
+            this.listWidth = Math.max(this.listWidth, getFontRenderer().getStringWidth(mod.getMeta().name) + 10);
+            this.listWidth = Math.max(this.listWidth, getFontRenderer().getStringWidth(mod.getMeta().version) + 10);
+        }
+        
+        this.listWidth = Math.min(this.listWidth, 150);
+        this.modList = new GuiSlotMod(this, Loader.instance().mods, this.listWidth);
+        
+    }
     @Override
     protected void actionPerformed(GuiButton par1GuiButton)
     {
@@ -41,7 +63,6 @@ public class GuiBSConfig extends GuiScreen
                 break;
             
             case 2:
-                // this.mc.displayGuiScreen(new GuiAbout(this));
                 this.updateScreen();
                 MinecraftHelper.displayGuiScreen(Minecraft.getMinecraft(), new GuiAbout(this));
                 
@@ -82,22 +103,6 @@ public class GuiBSConfig extends GuiScreen
             }
             shifty = drawLine(String.format("Description: %s", this.selectedMod.meta().description), offset, shifty);
             
-            // offset = ( this.listWidth + this.width ) / 2;
-            // this.drawCenteredString(this.fontRendererObj, selectedMod.name(),
-            // offset, 35, 0xFFFFFF);
-            // this.drawCenteredString(this.fontRendererObj,
-            // String.format("Version: %s",selectedMod.version()), offset, 45,
-            // 0xFFFFFF);
-            
-            // this.drawCenteredString(this.fontRendererObj,
-            // String.format("Mod State: %s",ModPlugin.getModState()), offset,
-            // 55, 0xFFFFFF);
-            // this.drawCenteredString(this.fontRendererObj,
-            // "No mod information found", offset, 65, 0xDDDDDD);
-            // this.drawCenteredString(this.fontRendererObj,
-            // "Ask your mod author to provide a mod mcmod.info file", offset,
-            // 75, 0xDDDDDD);
-            
         }
         GL11.glDisable(GL11.GL_BLEND);
         
@@ -115,39 +120,7 @@ public class GuiBSConfig extends GuiScreen
         
         return this.mc;
     }
-    
-    /**
-     * Adds the buttons (and other controls) to the screen in question.
-     */
-    
-    @SuppressWarnings({ "static-access" })
-    @Override
-    public void initGui()
-    {
-        this.buttonList.clear();
-        
-        /*
-         * this.buttonList.add(new GuiButton(1, this.width / 2 - 100,
-         * this.height - 38, I18n.format("gui.done")));
-         * this.buttonList.add(new GuiButton(2, this.width / 1 + 75, i + 72 +
-         * 12, "About"));
-         */
-        this.about = new GuiButton(2, this.width / 2 - 100, this.height - 38, 98, 20, "About");
-        this.Done = new GuiButton(1, this.width / 2 + 2, this.height - 38, 98, 20, I18n.format("gui.done", new Object[0]));
-        
-        this.buttonList.add(this.about);
-        this.buttonList.add(this.Done);
-        
-        for (ModPlugin mod : Loader.mods)
-        {
-            this.listWidth = Math.max(this.listWidth, getFontRenderer().getStringWidth(mod.getMeta().name) + 10);
-            this.listWidth = Math.max(this.listWidth, getFontRenderer().getStringWidth(mod.getMeta().version) + 10);
-        }
-        
-        this.listWidth = Math.min(this.listWidth, 150);
-        this.modList = new GuiSlotMod(this, Loader.mods, this.listWidth);
-        
-    }
+   
     
     @Override
     protected void keyTyped(char c, int i)
@@ -170,9 +143,9 @@ public class GuiBSConfig extends GuiScreen
     public void selectModIndex(int var1)
     {
         this.selected = var1;
-        if (var1 >= 0 && var1 <= Loader.mods.size())
+        if (var1 >= 0 && var1 <= Loader.instance().mods.size())
         {
-            this.selectedMod = Loader.mods.get(this.selected);
+            this.selectedMod = Loader.instance().mods.get(this.selected);
         }
         else
         {
@@ -184,7 +157,6 @@ public class GuiBSConfig extends GuiScreen
     public void updateScreen()
     {
         super.updateScreen();
-        // updateTimeoutMillisecondsTextBox.updateCursorCounter();
     }
     
 }

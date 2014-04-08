@@ -11,6 +11,6 @@ public class PluginLoader
         e.preInit();
         e.init();
         e.postInit();
-        Loader.mods.add(e);
+        Loader.instance().mods.add(e);
     }
 }

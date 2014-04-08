@@ -1,6 +1,6 @@
 [
 {
-  "modid": "CoreModding_LIB",
+  "modid": "CoreAPI",
   "name": "CoreModding API",
   "description": "CoreModding API",
   "version": "${version}",
@@ -8,8 +8,6 @@
   "url":  "coremodding.info",
   "updateUrl": "coremodding.info",
   "authors": ["CoreModding Team"],
-  "credits": "",
-  "screenshots": [],
-  "requiredMods": ["Forge"],
+  "requiredMods": ["Forge"]
 }
 ]

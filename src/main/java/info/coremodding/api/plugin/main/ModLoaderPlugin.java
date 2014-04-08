@@ -1,8 +1,8 @@
 package info.coremodding.api.plugin.main;
 
 import info.coremodding.api.plugin.ModPlugin;
-import info.coremodding.api.plugin.PluginMetadata;
-import info.coremodding.api.plugin.common.Info;
+import info.coremodding.api.plugin.annotation.Info;
+import info.coremodding.api.plugin.annotation.PluginMetadata;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -13,14 +13,7 @@ public class ModLoaderPlugin implements ModPlugin
 {
     
     private PluginMetadata meta;
-    
-    @Override
-    public List<String> getDependencies()
-    {
-        ArrayList<String> depends = new ArrayList<>();
-        depends.add("*");
-        return depends;
-    }
+   
     
     @Override
     public PluginMetadata getMeta()
@@ -32,39 +25,6 @@ public class ModLoaderPlugin implements ModPlugin
     public Object getMod()
     {
         return this;
-    }
-    
-    @Override
-    public ModState getModState()
-    {
-        return null;
-    }
-    
-    @Override
-    public List<String> getPostDepends()
-    {
-        return null;
-    }
-    
-    @Override
-    public List<String> getPreDepends()
-    {
-        ArrayList<String> depends = new ArrayList<>();
-        depends.add("*");
-        return depends;
-    }
-    
-    @Override
-    public String getSortingRules()
-    {
-        
-        return null;
-    }
-    
-    @Override
-    public File getSource()
-    {
-        return getSource();
     }
     
     @Override

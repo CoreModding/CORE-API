@@ -5,7 +5,7 @@ import info.coremodding.api.internal.research.BlockResearchTable;
 import info.coremodding.api.internal.research.TileEntityResearchTable;
 import info.coremodding.api.plugin.Loader;
 import info.coremodding.api.plugin.PluginLoader;
-import info.coremodding.api.plugin.PluginMetadata;
+import info.coremodding.api.plugin.annotation.PluginMetadata;
 import info.coremodding.api.plugin.main.CoreAPIPlugin;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -30,7 +30,7 @@ public class CoreAPI
     /**
      * The mod ID
      */
-    public static final String ModID    = "Core-API";
+    public static final String ModID    = "CoreAPI";
     
     /**
      * The mod name
@@ -69,11 +69,10 @@ public class CoreAPI
     {
         /**
          * for the new PluginLoader
-         * TODO MAke Automatic
+         * TODO Make Automatic
          */
         PluginMetadata.init();
-        Loader.instance().loadPlugins();
-        Loader.instance().initializePlugins();
+       
         
         if (EnableResearch)
         {
@@ -93,6 +92,7 @@ public class CoreAPI
     public void preinit(FMLPreInitializationEvent evt)
     {
         // To Make the Plugin list work
+    	Loader.instance().loadPlugins();
         PluginLoader.addPlugin(new CoreAPIPlugin());
         
         GPSDownloader.doUpdate();
