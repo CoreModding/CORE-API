@@ -13,7 +13,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 /**
  * The main mod class
  */
-@Mod(modid = CoreAPI.ModID, name = CoreAPI.ModName, version = CoreAPI.ModVer, guiFactory = "info.coremodding.api.gui.ModGuiFactoryHandler")
+@Mod(modid = CoreAPI.ModID, name = CoreAPI.ModName, version = CoreAPI.ModVer)
 public class CoreAPI
 {
     
