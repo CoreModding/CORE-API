@@ -1,9 +1,12 @@
 package info.coremodding.api.internal;
 
+import java.util.logging.Level;
+
 import info.coremodding.api.handlers.RegistrationHandler;
 import info.coremodding.api.internal.downloader.GPSDownloader;
 import info.coremodding.api.internal.research.BlockResearchTable;
 import info.coremodding.api.internal.research.TileEntityResearchTable;
+import info.coremodding.api.logging.LogHelper;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -66,7 +69,7 @@ public class CoreAPI
     {
         if (enableResearch)
         {
-            System.out.println("Enabling research module for Core-API.");
+            LogHelper.log("Enabling research module for Core-API.", Level.INFO);
             GameRegistry.registerBlock(new BlockResearchTable(), "Research Table");
             GameRegistry.registerTileEntity(TileEntityResearchTable.class, "CAPI_Research_Table");
         }
