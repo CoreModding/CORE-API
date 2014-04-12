@@ -1,5 +1,6 @@
 package info.coremodding.api.internal;
 
+import info.coremodding.api.handlers.RegistrationHandler;
 import info.coremodding.api.internal.downloader.GPSDownloader;
 import info.coremodding.api.internal.research.BlockResearchTable;
 import info.coremodding.api.internal.research.TileEntityResearchTable;
@@ -41,7 +42,7 @@ public class CoreAPI
     /**
      * Should the research API be enabled
      */
-    public static boolean      EnableResearch;
+    public static boolean      enableResearch;
     
     /**
      * Enables the research API
@@ -52,7 +53,7 @@ public class CoreAPI
      */
     public static void enableResearch(FMLPreInitializationEvent evt)
     {
-        EnableResearch = true;
+        enableResearch = true;
     }
     
     /**
@@ -63,12 +64,13 @@ public class CoreAPI
     @EventHandler
     public void init(FMLInitializationEvent evt)
     {
-        if (EnableResearch)
+        if (enableResearch)
         {
             System.out.println("Enabling research module for Core-API.");
             GameRegistry.registerBlock(new BlockResearchTable(), "Research Table");
             GameRegistry.registerTileEntity(TileEntityResearchTable.class, "CAPI_Research_Table");
         }
+        RegistrationHandler.handleRegistration();
     }
     
     /**

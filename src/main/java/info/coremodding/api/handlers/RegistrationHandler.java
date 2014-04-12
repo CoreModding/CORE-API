@@ -10,6 +10,7 @@ import net.minecraft.stats.Achievement;
 /**
  * @author MushroomLT
  * Handles blocks and items registration
+ * Every registration must be done in the Pre-Initialization method
  */
 public class RegistrationHandler
 {
