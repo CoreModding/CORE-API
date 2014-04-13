@@ -12,7 +12,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 /**
- * Handles extended player properties
+ * Handles extended player properties. <br>
+ * 
+ * Use getProperties to get handler for a specific player.
+ * 
+ * @author MushroomLT
  */
 public class ExtendedPlayerHandler implements IExtendedEntityProperties
 {
@@ -98,5 +102,17 @@ public class ExtendedPlayerHandler implements IExtendedEntityProperties
     public String get(String key)
     {
         return this.nbtDataMap.get(key);
+    }
+    
+    /**
+     * Gets ExtendedPlayerHandler for specified player
+     * 
+     * @param player
+     *            Player to get properties for
+     * @return Extended player properties
+     */
+    public static final ExtendedPlayerHandler getProperties(EntityPlayer player)
+    {
+        return (ExtendedPlayerHandler) player.getExtendedProperties(ExtendedPlayerHandler.EXT_PROP_NAME);
     }
 }

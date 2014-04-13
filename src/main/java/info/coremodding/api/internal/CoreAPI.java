@@ -2,7 +2,9 @@ package info.coremodding.api.internal;
 
 import java.util.logging.Level;
 
+import net.minecraftforge.common.MinecraftForge;
 import info.coremodding.api.handlers.RegistrationHandler;
+import info.coremodding.api.handlers.SubscribeEventHandler;
 import info.coremodding.api.internal.downloader.GPSDownloader;
 import info.coremodding.api.internal.research.BlockResearchTable;
 import info.coremodding.api.internal.research.TileEntityResearchTable;
@@ -74,6 +76,8 @@ public class CoreAPI
             GameRegistry.registerTileEntity(TileEntityResearchTable.class, "CAPI_Research_Table");
         }
         RegistrationHandler.handleRegistration();
+        
+        MinecraftForge.EVENT_BUS.register(new SubscribeEventHandler());
     }
     
     /**
