@@ -8,12 +8,15 @@ import net.minecraft.item.Item;
 import net.minecraft.stats.Achievement;
 
 /**
+ * Handles blocks and items registration. <br>
+ * Every registration must be done in the Pre-Initialization method
+ * 
  * @author MushroomLT
- *         Handles blocks and items registration
- *         Every registration must be done in the Pre-Initialization method
  */
 public class RegistrationHandler
 {
+    // TODO Add block registration
+    
     private static Map<String, Item>        items        = new HashMap<>();
     
     private static Map<String, Achievement> achievements = new HashMap<>();
