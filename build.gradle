@@ -95,7 +95,7 @@ task apiJar(type: Jar) {
        include "info/coremodding/api/*"
     }
    appendix = 'api'
-//}
+}
 
 // add the javadoc and api jars
 // don't have either yet
