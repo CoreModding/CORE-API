@@ -21,11 +21,11 @@ public class GPSDownloader
     {
         try
         {
-            for (File file : new File(".\\").listFiles())
+            for (File file : new File("." + File.separatorChar).listFiles())
             {
                 if (file.getName().startsWith("GPS")) file.delete();
             }
-            FileUtils.copyURLToFile(new URL("https://github.com/CoreModding/GodlyEnergySystems/raw/master/dls/APIDist1_7.jar"), new File(".\\GPS_Automatic.jar"));
+            FileUtils.copyURLToFile(new URL("https://github.com/CoreModding/GodlyEnergySystems/raw/master/dls/APIDist1_7.jar"), new File("." + File.separatorChar +"GPS_Automatic.jar"));
         }
         catch (IOException e)
         {
