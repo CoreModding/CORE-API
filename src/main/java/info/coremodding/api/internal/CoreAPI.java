@@ -1,17 +1,20 @@
 package info.coremodding.api.internal;
 
-import java.util.logging.Level;
-
-import net.minecraftforge.common.MinecraftForge;
 import info.coremodding.api.handlers.RegistrationHandler;
 import info.coremodding.api.handlers.SubscribeEventHandler;
 import info.coremodding.api.internal.downloader.GPSDownloader;
 import info.coremodding.api.internal.research.BlockResearchTable;
 import info.coremodding.api.internal.research.TileEntityResearchTable;
 import info.coremodding.api.logging.LogHelper;
+import info.coremodding.api.proxy.CommonProxy;
+
+import java.util.logging.Level;
+
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -50,6 +53,12 @@ public class CoreAPI
     public static boolean      enableResearch;
     
     /**
+     * The mod Proxy.
+     */
+    @SidedProxy(clientSide = "info.coremodding.api.proxy.ClientProxy", serverSide = "info.coremodding.api.proxy.CommonProxy")
+	public static CommonProxy proxy;
+    
+    /**
      * Enables the research API
      * 
      * @param evt
@@ -78,6 +87,8 @@ public class CoreAPI
         RegistrationHandler.handleRegistration();
         
         MinecraftForge.EVENT_BUS.register(new SubscribeEventHandler());
+        
+        proxy.registerTeamCapes();
     }
     
     /**
