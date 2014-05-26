@@ -3,12 +3,13 @@ package info.coremodding.api.config;
 import java.io.File;
 
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 /**
  * Some forge config utilities
  */
-public class ConfigManager
+public class ConfigManager extends Configuration
 {
     
     /**
@@ -32,20 +33,64 @@ public class ConfigManager
     }
     
     /**
-     * Gets a value
+     * Creates a boolean property.
+     * 
+     * @param name Name of the property.
+     * @param category Category of the property.
+     * @param defaultValue Default value of the property.
+     * @param comment A brief description what the property does.
+     * @return The value of the new boolean property.
      */
-    @SuppressWarnings("javadoc")
-    public static void get(String category, String key, boolean[] defaultValue, String comment)
+    public boolean getBoolean(String name, String category, boolean defaultValue, String comment)
     {
-        config.get(category, key, defaultValue, comment);
+        Property prop = this.get(category, name, defaultValue);
+        prop.comment = comment + " [default: " + defaultValue + "]";
+        return prop.getBoolean(defaultValue);
+    }
+    
+    
+
+	/**
+     * Creates a integer property.
+     * 
+     * @param name Name of the property.
+     * @param category Category of the property.
+     * @param defaultValue Default value of the property.
+     * @param minValue Minimum value of the property.
+     * @param maxValue Maximum value of the property.
+     * @param comment A brief description what the property does.
+     * @return The value of the new integer property.
+     */
+    public int getInt(String name, String category, int defaultValue, int minValue, int maxValue, String comment)
+    {
+        Property prop = this.get(category, name, defaultValue);
+        prop.comment = comment + " [range: " + minValue + " ~ " + maxValue + ", default: " + defaultValue + "]";
+        return prop.getInt(defaultValue) < minValue ? minValue : (prop.getInt(defaultValue) > maxValue ? maxValue : prop.getInt(defaultValue));
     }
     
     /**
-     * Gets a value
+     * Creates a float property.
+     * 
+     * @param name Name of the property.
+     * @param category Category of the property.
+     * @param defaultValue Default value of the property.
+     * @param minValue Minimum value of the property.
+     * @param maxValue Maximum value of the property.
+     * @param comment A brief description what the property does.
+     * @return The value of the new float property.
      */
-    @SuppressWarnings("javadoc")
-    public static void get(String category, String key, String defaultValue, String comment)
+    public float getFloat(String name, String category, float defaultValue, float minValue, float maxValue, String comment)
     {
-        config.get(category, key, defaultValue, comment);
+        Property prop = this.get(category, name, Float.toString(defaultValue));
+        prop.comment = comment + " [range: " + minValue + " ~ " + maxValue + ", default: " + defaultValue + "]";
+        try
+        {
+            return Float.parseFloat(prop.getString()) < minValue ? minValue : (Float.parseFloat(prop.getString()) > maxValue ? maxValue : Float.parseFloat(prop.getString()));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return defaultValue;
     }
 }
