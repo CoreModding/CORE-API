@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.util.ResourceLocation;
+import cpw.mods.fml.relauncher.Side;
 
 /**
  * @author ethan
@@ -27,5 +28,13 @@ public class ClientProxy extends CommonProxy{
     	for (String username : teamMembers) {
     		Minecraft.getMinecraft().renderEngine.loadTexture(new ResourceLocation("cloaks/" + username), (ITextureObject) capeImage);
     	}
+	}
+	
+	/**
+	 * @return If the current instance is server or client side.
+	 */
+	@Override()
+	public Side getSide() {
+		return Side.CLIENT;
 	}
 }

@@ -5,6 +5,7 @@ package info.coremodding.api.proxy;
 
 import java.util.logging.Level;
 
+import cpw.mods.fml.relauncher.Side;
 import info.coremodding.api.logging.LogHelper;
 
 /**
@@ -19,5 +20,11 @@ public class CommonProxy {
 		
 		LogHelper.log("Server Side. Not adding capes.", Level.INFO);
 		
+	}
+	/**
+	 * @return If the current instance is server or client side.
+	 */
+	public Side getSide() {
+		return Side.SERVER;
 	}
 }
