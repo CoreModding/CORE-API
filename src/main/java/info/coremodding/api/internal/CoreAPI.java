@@ -55,7 +55,7 @@ public class CoreAPI
     /**
      * The mod Proxy.
      */
-    @SidedProxy(clientSide = "info.coremodding.api.proxy.ClientProxy", serverSide = "info.coremodding.api.proxy.CommonProxy", modId = CoreAPI.ModID)
+    @SidedProxy(clientSide = "info.coremodding.api.proxy.ClientProxy", serverSide = "info.coremodding.api.proxy.CommonProxy")
 	public static CommonProxy proxy;
     
     /**

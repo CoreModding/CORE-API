@@ -1,16 +1,6 @@
 package info.coremodding.api.render;
 
-import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
-import static org.lwjgl.opengl.GL11.GL_LIGHTING;
-import static org.lwjgl.opengl.GL11.GL_QUADS;
-import static org.lwjgl.opengl.GL11.glBegin;
-import static org.lwjgl.opengl.GL11.glColor4d;
-import static org.lwjgl.opengl.GL11.glDisable;
-import static org.lwjgl.opengl.GL11.glEnable;
-import static org.lwjgl.opengl.GL11.glEnd;
-import static org.lwjgl.opengl.GL11.glPopMatrix;
-import static org.lwjgl.opengl.GL11.glPushMatrix;
-import static org.lwjgl.opengl.GL11.glVertex2d;
+import org.lwjgl.opengl.GL11;
 
 /**
  * @author James
@@ -35,19 +25,19 @@ public class ShapeUtils
      */
     public static void drawRectangle(Color color, double x, double y, int height, int length)
     {
-        glDisable(GL_LIGHTING);
-        glDisable(GL_DEPTH_TEST);
-        glPushMatrix(); 
-        	glColor4d(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
-        	glBegin(GL_QUADS); 
-        		glVertex2d(x, y);
-        		glVertex2d(x + length, y);
-        		glVertex2d(x + length, y + height);
-        		glVertex2d(x, y + height);
-        	glEnd();
-        glPopMatrix();
-        glEnable(GL_LIGHTING);
-        glEnable(GL_DEPTH_TEST);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glPushMatrix();
+        GL11.glColor4d(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+        GL11.glBegin(GL11.GL_QUADS);
+        GL11.glVertex2d(x, y);
+        GL11.glVertex2d(x + length, y);
+        GL11.glVertex2d(x + length, y + height);
+        GL11.glVertex2d(x, y + height);
+        GL11.glEnd();
+        GL11.glPopMatrix();
+        GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
     }
     
     /**
