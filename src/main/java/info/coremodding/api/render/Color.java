@@ -37,6 +37,29 @@ public class Color
     }
     
     /**
+     * @param r
+     *            The red amount
+     * @param g
+     *            The green amount
+     * @param b
+     *            The blue amount
+     * @param a
+     *            The alpha amount
+     * @throws InvalidValueException
+     *             A number value was incorrect
+     * 
+     *             All values must be between 0 and 255.
+     */
+    public Color(int r, int g, int b, int a) throws InvalidValueException
+    {
+        setRed((float)r/255f);
+        setGreen((float)g/255f);
+        setBlue((float)b/255f);
+        setAlpha((float)a/255f);
+    }
+    
+    
+    /**
      * @return The value of the alpha
      */
     public double getAlpha()
