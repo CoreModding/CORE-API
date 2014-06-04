@@ -1,0 +1,3 @@
+Todo:
+    Create code for adding tons of default similarities
+    Make similarities to something also bind a similarity so that if one thing is similar to another, it is as similar to another similar thing as both's distance from the original thing

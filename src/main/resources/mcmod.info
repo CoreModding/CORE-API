@@ -1,0 +1,13 @@
+[
+{
+  "modid": "CoreAPI",
+  "name": "CoreModding API",
+  "description": "CoreModding API",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url":  "coremodding.info",
+  "updateUrl": "coremodding.info",
+  "authors": ["CoreModding Team"],
+  "requiredMods": ["Forge"]
+}
+]

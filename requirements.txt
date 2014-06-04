@@ -1,0 +1,4 @@
+Requires:
+    - commons-io
+    - commons-net
+    - commons-email
