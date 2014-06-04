@@ -7,32 +7,32 @@ import net.minecraft.world.World;
  */
 public class Location
 {
-    
+
     /**
      * The direction
      */
-    private Direction dir   = Direction.none;
-    
+    private Direction dir = Direction.none;
+
     /**
      * The world
      */
-    private World     world = null;
-    
+    private World world = null;
+
     /**
      * The x postion
      */
-    private int       x     = 0;
-    
+    private int x = 0;
+
     /**
      * The y position
      */
-    private int       y     = -1;
-    
+    private int y = -1;
+
     /**
      * The z position
      */
-    private int       z     = 0;
-    
+    private int z = 0;
+
     /**
      * @param x
      *            The x position
@@ -44,7 +44,7 @@ public class Location
         this.setZ(z);
         this.setX(x);
     }
-    
+
     /**
      * @param x
      *            The x position
@@ -59,7 +59,7 @@ public class Location
         this.setX(x);
         this.setDir(dir);
     }
-    
+
     /**
      * @param x
      *            The x position
@@ -77,7 +77,7 @@ public class Location
         this.setDir(dir);
         this.setWorld(world);
     }
-    
+
     /**
      * @param x
      *            The x position
@@ -92,7 +92,7 @@ public class Location
         this.setZ(z);
         this.setX(x);
     }
-    
+
     /**
      * @param x
      *            The x position
@@ -110,7 +110,7 @@ public class Location
         this.setX(x);
         this.setDir(dir);
     }
-    
+
     /**
      * @param x
      *            The x position
@@ -131,7 +131,7 @@ public class Location
         this.setDir(dir);
         this.setWorld(world);
     }
-    
+
     /**
      * @param x
      *            The x position
@@ -149,7 +149,7 @@ public class Location
         this.setX(x);
         this.setWorld(world);
     }
-    
+
     /**
      * @param x
      *            The x position
@@ -164,7 +164,7 @@ public class Location
         this.setX(x);
         this.setWorld(world);
     }
-    
+
     /**
      * @return The direction
      */
@@ -172,7 +172,7 @@ public class Location
     {
         return this.dir;
     }
-    
+
     /**
      * @return The world
      */
@@ -180,7 +180,7 @@ public class Location
     {
         return this.world;
     }
-    
+
     /**
      * @return The x position
      */
@@ -188,7 +188,7 @@ public class Location
     {
         return this.x;
     }
-    
+
     /**
      * @return The y position
      */
@@ -196,7 +196,7 @@ public class Location
     {
         return this.y;
     }
-    
+
     /**
      * @return The z position
      */
@@ -204,7 +204,7 @@ public class Location
     {
         return this.z;
     }
-    
+
     /**
      * @param dir
      *            The direction
@@ -213,7 +213,7 @@ public class Location
     {
         this.dir = dir;
     }
-    
+
     /**
      * @param world
      *            The world
@@ -222,7 +222,7 @@ public class Location
     {
         this.world = world;
     }
-    
+
     /**
      * @param x
      *            The x position
@@ -231,7 +231,7 @@ public class Location
     {
         this.x = x;
     }
-    
+
     /**
      * @param y
      *            The y position
@@ -240,7 +240,7 @@ public class Location
     {
         this.y = y;
     }
-    
+
     /**
      * @param z
      *            The z position

@@ -20,14 +20,39 @@ import net.minecraftforge.common.IExtendedEntityProperties;
  */
 public class ExtendedPlayerHandler implements IExtendedEntityProperties
 {
-    
+
     /**
      * Extended property name
      */
-    public final static String  EXT_PROP_NAME = "CoreModAttributes";
-    
+    public final static String EXT_PROP_NAME = "CoreModAttributes";
+
+    /**
+     * Gets ExtendedPlayerHandler for specified player
+     * 
+     * @param player
+     *            Player to get properties for
+     * @return Extended player properties
+     */
+    public static final ExtendedPlayerHandler getProperties(EntityPlayer player)
+    {
+        return (ExtendedPlayerHandler) player
+                .getExtendedProperties(ExtendedPlayerHandler.EXT_PROP_NAME);
+    }
+
+    /**
+     * Registers the ExtendedEntityProperties handler for the specified player
+     * 
+     * @param player
+     *            Player to register
+     */
+    public static final void register(EntityPlayer player)
+    {
+        player.registerExtendedProperties(ExtendedPlayerHandler.EXT_PROP_NAME,
+                new ExtendedPlayerHandler(player));
+    }
+
     private Map<String, String> nbtDataMap;
-    
+
     /**
      * The constructor
      * 
@@ -38,47 +63,37 @@ public class ExtendedPlayerHandler implements IExtendedEntityProperties
     {
         this.nbtDataMap = new HashMap<>();
     }
-    
+
     /**
-     * Registers the ExtendedEntityProperties handler for the specified player
+     * Gets a value from the NBT data map
      * 
-     * @param player
-     *            Player to register
+     * @param key
+     *            Key to look for
+     * @return Value
      */
-    public static final void register(EntityPlayer player)
+    public String get(String key)
     {
-        player.registerExtendedProperties(ExtendedPlayerHandler.EXT_PROP_NAME, new ExtendedPlayerHandler(player));
+        return this.nbtDataMap.get(key);
     }
-    
+
     @Override
-    public void saveNBTData(NBTTagCompound compound)
+    public void init(Entity entity, World world)
     {
-        NBTTagList properties = new NBTTagList();
-        
-        for (String key : this.nbtDataMap.keySet())
-            properties.appendTag(new NBTTagString(key + "$SPLIT$" + this.nbtDataMap.get(key)));
-        
-        compound.setTag(EXT_PROP_NAME, properties);
+
     }
-    
+
     @Override
     public void loadNBTData(NBTTagCompound compound)
     {
         NBTTagList properties = (NBTTagList) compound.getTag(EXT_PROP_NAME);
-        
+
         for (int i = 0; i < properties.tagCount(); i++)
         {
             String tag[] = properties.getStringTagAt(i).split("$SPLIT$");
             this.nbtDataMap.put(tag[0], tag[1]);
         }
     }
-    
-    @Override
-    public void init(Entity entity, World world)
-    {
-        
-    }
-    
+
     /**
      * Puts a key/value to the player NBT data
      * 
@@ -91,28 +106,16 @@ public class ExtendedPlayerHandler implements IExtendedEntityProperties
     {
         this.nbtDataMap.put(key, value);
     }
-    
-    /**
-     * Gets a value from the NBT data map
-     * 
-     * @param key
-     *            Key to look for
-     * @return Value
-     */
-    public String get(String key)
+
+    @Override
+    public void saveNBTData(NBTTagCompound compound)
     {
-        return this.nbtDataMap.get(key);
-    }
-    
-    /**
-     * Gets ExtendedPlayerHandler for specified player
-     * 
-     * @param player
-     *            Player to get properties for
-     * @return Extended player properties
-     */
-    public static final ExtendedPlayerHandler getProperties(EntityPlayer player)
-    {
-        return (ExtendedPlayerHandler) player.getExtendedProperties(ExtendedPlayerHandler.EXT_PROP_NAME);
+        NBTTagList properties = new NBTTagList();
+
+        for (String key : this.nbtDataMap.keySet())
+            properties.appendTag(new NBTTagString(key + "$SPLIT$"
+                    + this.nbtDataMap.get(key)));
+
+        compound.setTag(EXT_PROP_NAME, properties);
     }
 }

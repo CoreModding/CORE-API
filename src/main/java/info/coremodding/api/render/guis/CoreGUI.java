@@ -9,22 +9,22 @@ import net.minecraft.util.ResourceLocation;
  */
 public class CoreGUI extends GuiScreen
 {
-    
-    /**
-     * How wide the GUI is
-     */
-    public int              xSize;
-    
-    /**
-     * How tall the GUI is
-     */
-    public int              ySize;
-    
+
     /**
      * The picture to draw
      */
     public ResourceLocation backgroundimage;
-    
+
+    /**
+     * How wide the GUI is
+     */
+    public int xSize;
+
+    /**
+     * How tall the GUI is
+     */
+    public int ySize;
+
     /**
      * @param width
      *            The width of the GUI
@@ -39,13 +39,13 @@ public class CoreGUI extends GuiScreen
         this.ySize = height;
         this.backgroundimage = background;
     }
-    
+
     @Override
     public boolean doesGuiPauseGame()
     {
         return false;
     }
-    
+
     @Override
     public void drawScreen(int par1, int _par2, float par3)
     {

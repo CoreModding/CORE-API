@@ -20,6 +20,9 @@ public class SubscribeEventHandler
     @SubscribeEvent
     public void onEntityConstructing(EntityConstructing event)
     {
-        if (event.entity instanceof EntityPlayer && ExtendedPlayerHandler.getProperties((EntityPlayer) event.entity) == null) ExtendedPlayerHandler.register((EntityPlayer) event.entity);
+        if (event.entity instanceof EntityPlayer
+                && ExtendedPlayerHandler
+                        .getProperties((EntityPlayer) event.entity) == null)
+            ExtendedPlayerHandler.register((EntityPlayer) event.entity);
     }
 }

@@ -9,7 +9,7 @@ import java.util.logging.Level;
  */
 public class LogHelper
 {
-    
+
     /**
      * Logs a message
      * 
@@ -21,9 +21,10 @@ public class LogHelper
     public static void log(String msg, Level lvl)
     {
         String time = new Date().toString();
-        System.out.println("[" + time + "]" + " [" + lvl.getName() + "] " + ": " + msg);
+        System.out.println("[" + time + "]" + " [" + lvl.getName() + "] "
+                + ": " + msg);
     }
-    
+
     /**
      * logging functionality
      * 
@@ -41,7 +42,8 @@ public class LogHelper
         if (bdl)
         {
             String time = new Date().toString();
-            System.out.println("[" + time + "]" + " [" + lvl + "] " + ":" + msg);
+            System.out
+                    .println("[" + time + "]" + " [" + lvl + "] " + ":" + msg);
         }
     }
 }

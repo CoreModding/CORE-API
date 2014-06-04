@@ -12,7 +12,7 @@ import java.io.ObjectOutputStream;
  */
 public class Serializer
 {
-    
+
     /**
      * @param bytes
      *            The bytes to deserialize
@@ -22,13 +22,14 @@ public class Serializer
      * @throws ClassNotFoundException
      *             Something screwed up
      */
-    public static Object deserialize(byte[] bytes) throws IOException, ClassNotFoundException
+    public static Object deserialize(byte[] bytes) throws IOException,
+            ClassNotFoundException
     {
         ByteArrayInputStream b = new ByteArrayInputStream(bytes);
         ObjectInputStream o = new ObjectInputStream(b);
         return o.readObject();
     }
-    
+
     /**
      * @param obj
      *            The object to serialize
