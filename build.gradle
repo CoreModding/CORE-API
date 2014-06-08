@@ -89,6 +89,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 
 // creates an API jar
 // this basically is an api, so we don't need this
+/*
 task apiJar(type: Jar) {
     from(sourceSets.main.java)
    {
@@ -96,10 +97,10 @@ task apiJar(type: Jar) {
     }
    appendix = 'api'
 }
-
+*/
 // add the javadoc and api jars
 // don't have either yet
 artifacts {
       archives javadocJar
-      archives apiJar
+    //  archives apiJar
 }
