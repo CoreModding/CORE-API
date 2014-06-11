@@ -45,7 +45,7 @@ public class CoreAPI
     /**
      * The mod version
      */
-    public static final String ModVer   = "0.0.1";
+    public static final String ModVer   = "0.0.2";
     
     /**
      * Should the research API be enabled
