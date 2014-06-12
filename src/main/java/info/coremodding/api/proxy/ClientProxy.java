@@ -21,7 +21,7 @@ public class ClientProxy extends CommonProxy{
 	public void registerTeamCapes() {
 		final String capeURL = "http://www.mccapes.com/GalleryImages6x/0c1865261d2d0247fb6b776bdc5d6730.png"; // Temporary. Can someone make us a proper cape? We should be able to have a HD one I think!
 		
-		String[] teamMembers = {"nxsupert, ProfessorVennie","roborave","InternetAthiest"}; // Please add your minecraft user names here. You will get a cape if you do so!
+		String[] teamMembers = {"nxsupert, ProfessorVennie","roborave","InternetAthiest", "MushroomLT"}; // Please add your minecraft user names here. You will get a cape if you do so!
 
     	ThreadDownloadImageData capeImage = new ThreadDownloadImageData(capeURL, null, null);
 
