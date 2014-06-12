@@ -24,9 +24,10 @@ public class ClientProxy extends CommonProxy{
 		String[] teamMembers = {"nxsupert, ProfessorVennie","roborave","InternetAthiest", "MushroomLT"}; // Please add your minecraft user names here. You will get a cape if you do so!
 
     	ThreadDownloadImageData capeImage = new ThreadDownloadImageData(capeURL, null, null);
+    	Minecraft mcInstance = Minecraft.getMinecraft();
 
     	for (String username : teamMembers) {
-    		Minecraft.getMinecraft().renderEngine.loadTexture(new ResourceLocation("cloaks/" + username), (ITextureObject) capeImage);
+    		mcInstance.renderEngine.loadTexture(new ResourceLocation("cloaks/" + username), (ITextureObject) capeImage);
     	}
 	}
 	
