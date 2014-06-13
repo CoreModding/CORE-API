@@ -81,7 +81,6 @@ processResources {
 }
 
 // creates a javadoc jar
-// don't need jds right now
 task javadocJar(type: Jar, dependsOn: javadoc) {
     from 'build/docs/javadoc'
     appendix = 'javadoc'
@@ -99,7 +98,6 @@ task apiJar(type: Jar) {
 }
 */
 // add the javadoc and api jars
-// don't have either yet
 artifacts {
       archives javadocJar
     //  archives apiJar
