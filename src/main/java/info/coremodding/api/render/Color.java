@@ -1,19 +1,17 @@
 package info.coremodding.api.render;
 
-import info.coremodding.api.exceptions.InvalidValueException;
-
 /**
  * @author James
  *         A color
  */
 public class Color
 {
-    
-    private double red;
-    private double green;
-    private double blue;
+
     private double alpha;
-    
+    private double blue;
+    private double green;
+    private double red;
+
     /**
      * @param r
      *            The red amount
@@ -23,19 +21,19 @@ public class Color
      *            The blue amount
      * @param a
      *            The alpha amount
-     * @throws InvalidValueException
+     * @throws Exception
      *             A number value was incorrect
      * 
      *             All values must be 1 or less and 0 or more.
      */
-    public Color(double r, double g, double b, double a) throws InvalidValueException
+    public Color(double r, double g, double b, double a) throws Exception
     {
         setRed(r);
         setGreen(g);
         setBlue(b);
         setAlpha(a);
     }
-    
+
     /**
      * @param r
      *            The red amount
@@ -45,20 +43,19 @@ public class Color
      *            The blue amount
      * @param a
      *            The alpha amount
-     * @throws InvalidValueException
+     * @throws Exception
      *             A number value was incorrect
      * 
      *             All values must be between 0 and 255.
      */
-    public Color(int r, int g, int b, int a) throws InvalidValueException
+    public Color(int r, int g, int b, int a) throws Exception
     {
-        setRed((float)r/255f);
-        setGreen((float)g/255f);
-        setBlue((float)b/255f);
-        setAlpha((float)a/255f);
+        setRed(r / 255f);
+        setGreen(g / 255f);
+        setBlue(b / 255f);
+        setAlpha(a / 255f);
     }
-    
-    
+
     /**
      * @return The value of the alpha
      */
@@ -66,7 +63,7 @@ public class Color
     {
         return this.alpha;
     }
-    
+
     /**
      * @return The value of the blue
      */
@@ -74,7 +71,7 @@ public class Color
     {
         return this.blue;
     }
-    
+
     /**
      * @return The value of the green
      */
@@ -82,7 +79,7 @@ public class Color
     {
         return this.green;
     }
-    
+
     /**
      * @return The value of the red
      */
@@ -90,52 +87,60 @@ public class Color
     {
         return this.red;
     }
-    
+
     /**
      * @param a
      *            The alpha to set to
-     * @throws InvalidValueException
+     * @throws Exception
      *             The number value was incorrect
      */
-    public void setAlpha(double a) throws InvalidValueException
+    public void setAlpha(double a) throws Exception
     {
-        if (a > 1 || a < 0) throw new InvalidValueException("Invalid color value. Must be between (or exactly) 0 or 1.");
+        if (a > 1 || a < 0)
+            throw new Exception(
+                    "Invalid color value. Must be between (or exactly) 0 or 1.");
         this.alpha = a;
     }
-    
+
     /**
      * @param b
      *            The blue to set to
-     * @throws InvalidValueException
+     * @throws Exception
      *             The number value was incorrect
      */
-    public void setBlue(double b) throws InvalidValueException
+    public void setBlue(double b) throws Exception
     {
-        if (b > 1 || b < 0) throw new InvalidValueException("Invalid color value. Must be between (or exactly) 0 or 1.");
+        if (b > 1 || b < 0)
+            throw new Exception(
+                    "Invalid color value. Must be between (or exactly) 0 or 1.");
         this.blue = b;
     }
-    
+
     /**
      * @param g
      *            The green to set to
-     * @throws InvalidValueException
+     * @throws Exception
      *             The number value was incorrect
      */
-    public void setGreen(double g) throws InvalidValueException
+    public void setGreen(double g) throws Exception
     {
-        if (g > 1 || g < 0) throw new InvalidValueException("Invalid color value. Must be between (or exactly) 0 or 1.");
+        if (g > 1 || g < 0)
+            throw new Exception(
+                    "Invalid color value. Must be between (or exactly) 0 or 1.");
         this.green = g;
     }
-    
+
     /**
      * @param r
      *            The red to set to
-     * @throws InvalidValueException
+     * @throws Exception
      *             The number value was incorrect
      */
-    public void setRed(double r) throws InvalidValueException
+    public void setRed(double r) throws Exception
     {
-        if (r > 1 || r < 0) throw new InvalidValueException("Invalid color value. Must be between (or exactly) 0 or 1.");
+        if (r > 1 || r < 0)
+            throw new Exception(
+                    "Invalid color value. Must be between (or exactly) 0 or 1.");
         this.red = r;
     }
 }

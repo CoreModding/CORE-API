@@ -1,0 +1,6 @@
+I'm letting CoreModding use bits of ZeusLib source in their code.
+I will continue to add more. However, all I demand is that as long as it's
+there, there must be NO CHANGING OF THE PACKAGES OR @AUTHOR TAGS.
+
+Thanks,
+- Zeus

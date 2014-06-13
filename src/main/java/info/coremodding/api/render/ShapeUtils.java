@@ -18,7 +18,7 @@ import static org.lwjgl.opengl.GL11.glVertex2d;
  */
 public class ShapeUtils
 {
-    
+
     /**
      * Draw a rectangle
      * 
@@ -33,23 +33,25 @@ public class ShapeUtils
      * @param length
      *            The length of the rectangle
      */
-    public static void drawRectangle(Color color, double x, double y, int height, int length)
+    public static void drawRectangle(Color color, double x, double y,
+            int height, int length)
     {
         glDisable(GL_LIGHTING);
         glDisable(GL_DEPTH_TEST);
-        glPushMatrix(); 
-        	glColor4d(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
-        	glBegin(GL_QUADS); 
-        		glVertex2d(x, y);
-        		glVertex2d(x + length, y);
-        		glVertex2d(x + length, y + height);
-        		glVertex2d(x, y + height);
-        	glEnd();
+        glPushMatrix();
+        glColor4d(color.getRed(), color.getGreen(), color.getBlue(),
+                color.getAlpha());
+        glBegin(GL_QUADS);
+        glVertex2d(x, y);
+        glVertex2d(x + length, y);
+        glVertex2d(x + length, y + height);
+        glVertex2d(x, y + height);
+        glEnd();
         glPopMatrix();
         glEnable(GL_LIGHTING);
         glEnable(GL_DEPTH_TEST);
     }
-    
+
     /**
      * Draw a square
      * 

@@ -1,3 +1,5 @@
 Requires:
     - commons-io
     - commons-net
+    - zip4j
+    - jarchivelib
