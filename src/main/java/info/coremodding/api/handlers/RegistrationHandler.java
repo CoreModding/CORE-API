@@ -15,10 +15,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
  */
 public class RegistrationHandler
 {
-    // TODO Add block registration
 
     private static Map<String, Achievement> achievements = new HashMap<>();
-
     private static Map<String, Item> items = new HashMap<>();
 
     /**
