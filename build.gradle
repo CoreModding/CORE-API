@@ -29,7 +29,6 @@ ext.env = System.getenv()
 ext.configFile = file "build.properties"
 
 configFile.withReader {
-    // read config.  it shall from now on be referenced as simply config or as project.config
     def prop = new Properties()
     prop.load(it)
     ext.config = new ConfigSlurper().parse prop
@@ -38,17 +37,12 @@ configFile.withReader {
 // parsing build numbers to use in the version
 // set build "number" to release if building local
 ext.buildNumber = "release"
-// drone.io
-if (env.DRONE_BUILD_NUMBER)
-    ext.buildNumber = env.DRONE_BUILD_NUMBER
 
 // jenkins
 else if (env.BUILD_NUMBER)
     ext.buildNumber = env.BUILD_NUMBER
 
 apply plugin: 'forge'
-
-// we want to build on 1.7
 targetCompatibility = JavaVersion.VERSION_1_7
 
 version = "${config.minecraft_version}-${config.mod_version}.${buildNumber}"
@@ -73,7 +67,7 @@ processResources {
         expand 'version': config.mod_version, 'mcversion': config.minecraft_version
     }
 
-    // copy everything else, except the ones we already did
+    // copy everything else
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
         exclude 'version.properties'
@@ -86,19 +80,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     appendix = 'javadoc'
 }
 
-// creates an API jar
-// this basically is an api, so we don't need this
-/*
-task apiJar(type: Jar) {
-    from(sourceSets.main.java)
-   {
-       include "info/coremodding/api/*"
-    }
-   appendix = 'api'
-}
-*/
-// add the javadoc and api jars
+// add the javadoc
 artifacts {
       archives javadocJar
-    //  archives apiJar
 }
