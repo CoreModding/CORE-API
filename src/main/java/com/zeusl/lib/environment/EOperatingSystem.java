@@ -6,32 +6,29 @@ package com.zeusl.lib.environment;
  */
 public enum EOperatingSystem
 {
+    
     /**
      * The linux operating system
-     * Somewhat common, kicks ass
      */
     Linux("Linux"),
 
     /**
      * The mac operating system
-     * It's pretty uncommon, because it sucks balls
      */
     Mac("MacIntosh"),
 
     /**
-     * What the fuck are you running man?
+     * An unknown operating system
      */
     Other("Other"),
 
     /**
-     * What the fuck is solaris anyway?
+     * The oracle Solaris operating system
      */
     Solaris("Solaris"),
 
     /**
      * The windows operating system
-     * The most common and best known operating system
-     * It's pretty good
      */
     Windows("Windows");
 
