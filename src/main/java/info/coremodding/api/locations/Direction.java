@@ -26,8 +26,7 @@ public enum Direction
     /**
      * No side
      */
-    none("None", new String[]
-        { "Null", "NA", "N/A", "Invalid" }),
+    none("None"),
 
     /**
      * The direction is north
@@ -57,12 +56,8 @@ public enum Direction
      *            all
      *            bottom
      *            east
-     *            invalid
      *            none
      *            north
-     *            null
-     *            na
-     *            n/a
      *            south
      *            top
      *            west
@@ -76,18 +71,10 @@ public enum Direction
         {
             if (edirection.toString().equalsIgnoreCase(name))
                 return edirection;
-            ArrayList<String> alts = edirection.getAlts();
-            for (String alt : alts)
-            {
-                if (alt.equalsIgnoreCase(name))
-                    return edirection;
-            }
         }
-        throw new Exception("Invalid direction");
+        return Direction.none;
     }
-
-    private final ArrayList<String> alts = new ArrayList<>();
-
+    
     private String StringValue;
 
     private Direction(String name)
@@ -96,27 +83,9 @@ public enum Direction
         addEDirection();
     }
 
-    private Direction(String name, String[] alts)
-    {
-        this.StringValue = name;
-        for (String alt : alts)
-        {
-            this.alts.add(alt);
-        }
-        addEDirection();
-    }
-
     private void addEDirection()
     {
         Direction.edirections.add(this);
-    }
-
-    /**
-     * @return The alternate names of this
-     */
-    public ArrayList<String> getAlts()
-    {
-        return this.alts;
     }
 
     @Override

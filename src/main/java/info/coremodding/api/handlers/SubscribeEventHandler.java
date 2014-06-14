@@ -11,6 +11,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 @SuppressWarnings("static-method")
 public class SubscribeEventHandler
 {
+    
     /**
      * Registers Extended Player Handler for all players
      * 
