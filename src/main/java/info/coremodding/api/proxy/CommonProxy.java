@@ -11,7 +11,7 @@ import cpw.mods.fml.relauncher.Side;
  */
 public class CommonProxy
 {
-    
+
     /**
      * @return If the current instance is server or client side.
      */

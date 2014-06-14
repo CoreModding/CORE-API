@@ -6,7 +6,7 @@ package com.zeusl.lib.environment;
  */
 public enum EOperatingSystem
 {
-    
+
     /**
      * The linux operating system
      */

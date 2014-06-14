@@ -2,7 +2,7 @@ package info.coremodding.api.locations;
 
 /**
  * @author Zeus
- * A location with 3 coordinates
+ *         A location with 3 coordinates
  */
 public class Loc3 extends Loc2
 {
@@ -11,11 +11,14 @@ public class Loc3 extends Loc2
      * The Z location in this location
      */
     public double z;
-    
+
     /**
-     * @param x The X location
-     * @param y The Y location
-     * @param z The Z location
+     * @param x
+     *            The X location
+     * @param y
+     *            The Y location
+     * @param z
+     *            The Z location
      */
     public Loc3(double x, double y, double z)
     {
@@ -25,31 +28,38 @@ public class Loc3 extends Loc2
     /**
      * @return The Z location
      */
-    public double getZ(){
+    public double getZ()
+    {
         return this.z;
     }
-    
+
     /**
-     * @param z The new Z location
+     * @param z
+     *            The new Z location
      */
-    public void setZ(double z){
+    public void setZ(double z)
+    {
         this.z = z;
     }
-    
+
     /**
-     * @param z The amount to add to the Z coordinate
+     * @param z
+     *            The amount to add to the Z coordinate
      * @return The new Z coordinate
      */
-    public double addZ(double z){
+    public double addZ(double z)
+    {
         this.z += z;
         return this.z;
     }
-    
+
     /**
-     * @param z The amount to subtract from the Z coordinate
+     * @param z
+     *            The amount to subtract from the Z coordinate
      * @return The new Z coordinate
      */
-    public double subZ(double z){
+    public double subZ(double z)
+    {
         this.z -= z;
         return this.z;
     }

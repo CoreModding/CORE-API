@@ -74,7 +74,7 @@ public enum Direction
         }
         return Direction.none;
     }
-    
+
     private String StringValue;
 
     private Direction(String name)
