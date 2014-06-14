@@ -1,6 +1,3 @@
-/**
- * 
- */
 package info.coremodding.api.proxy;
 
 import info.coremodding.api.logging.LogHelper;
@@ -10,11 +7,11 @@ import java.util.logging.Level;
 import cpw.mods.fml.relauncher.Side;
 
 /**
- * @author ethan
- * 
+ * The common proxy for both sides
  */
 public class CommonProxy
 {
+    
     /**
      * @return If the current instance is server or client side.
      */

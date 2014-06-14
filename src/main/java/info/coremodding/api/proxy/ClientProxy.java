@@ -1,6 +1,3 @@
-/**
- * 
- */
 package info.coremodding.api.proxy;
 
 import net.minecraft.client.Minecraft;
@@ -9,8 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 
 /**
- * @author Ethan
- *         The Core-API client proxy
+ * The Core-API client proxy
  */
 public class ClientProxy extends CommonProxy{
 	
