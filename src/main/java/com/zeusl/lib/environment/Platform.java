@@ -44,7 +44,7 @@ public class Platform
     }
 
     /**
-     * @return Is the user fucking retarded
+     * @return Is the user running mac
      */
     public static boolean isMac()
     {
