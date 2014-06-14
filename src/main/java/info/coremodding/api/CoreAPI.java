@@ -17,11 +17,6 @@ public class CoreAPI
 {
 
     /**
-     * Should the research API be enabled
-     */
-    public static boolean enableResearch;
-
-    /**
      * The instance of this mod forge uses
      */
     @Instance(CoreAPI.ModID)
@@ -57,7 +52,6 @@ public class CoreAPI
     public void init(FMLInitializationEvent evt)
     {
         MinecraftForge.EVENT_BUS.register(new SubscribeEventHandler());
-
         proxy.registerTeamCapes();
     }
 }
