@@ -35,7 +35,7 @@ public class CoreAPI
     /**
      * The mod version
      */
-    public static final String ModVer = "0.0.3.1";
+    public static final String ModVer = "0.0.3.2";
 
     /**
      * The mod Proxy.
